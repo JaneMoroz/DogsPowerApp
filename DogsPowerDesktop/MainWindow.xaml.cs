@@ -23,6 +23,8 @@ namespace DogsPowerDesktop
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new WindowViewModel(this);
         }
     }
 }

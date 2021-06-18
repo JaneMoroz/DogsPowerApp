@@ -6,4 +6,36 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\Background\PawsBackground.png" />
+    <None Remove="Images\Logo\icon.png" />
+    <None Remove="Images\Logo\menuLogoAndText.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fody" Version="6.5.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DogsPowerDesktop.Library\DogsPowerDesktop.Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\Samples\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Background\PawsBackground.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Logo\icon.png" />
+    <Resource Include="Images\Logo\menuLogo.png" />
+    <Resource Include="Images\Logo\menuLogoAndText.png" />
+  </ItemGroup>
+
 </Project>

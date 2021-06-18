@@ -5,8 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DogsPowerDesktop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="600" 
+        Width="900"
+        MinHeight="400"
+        MinWidth="800"
+        WindowStartupLocation="CenterScreen" 
+        WindowStyle="None"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Icon="Images/Logo/menuLogo.png"
+        >
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32"
+                      ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+    </WindowChrome.WindowChrome>
+
     <Grid>
 
+        <Grid.RowDefinitions>
+            <!--Title Bar-->
+            <RowDefinition Height="32" />
+            <!--Main Content-->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Title Bar-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <!--Title-->
+                <ColumnDefinition Width="*" />
+                <!--Window Buttons-->
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--Title-->
+            <TextBlock Grid.ColumnSpan="2" 
+                       Text="Dog's Power" 
+                       Foreground="{StaticResource PrimaryHueMidBrush }" 
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" FontSize="20" />
+            
+            <!--Window Buttons-->
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Grid.Column="1"
+                    Style="{StaticResource WindowControlButton}"
+                    ToolTip="MaterialDesignFlatButton"
+                    Content="{materialDesign:PackIcon Kind=WindowMinimize}"
+                    Command="{Binding MinimizeCommand}" />
+
+                <Button Grid.Column="2"
+                    Style="{StaticResource WindowControlButton}"
+                    ToolTip="MaterialDesignFlatButton"
+                    Content="{materialDesign:PackIcon Kind=WindowMaximize}"
+                    Command="{Binding MaximizeCommand}"/>
+
+                <Button Grid.Column="3"
+                    Style="{StaticResource WindowControlButton}"
+                    ToolTip="MaterialDesignFlatButton"
+                    Content="{materialDesign:PackIcon Kind=WindowClose}"
+                    Command="{Binding CloseCommand}"/>
+            </StackPanel>
+        </Grid>
+
+        <Border Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!--Background image-->
+                <Grid.Background>
+                    <ImageBrush TileMode="Tile" Opacity="0.2" ViewportUnits="Absolute" Viewport="0 0 1000 1000" ImageSource="/Images/Background/PawsBackground.png"/>
+                </Grid.Background>
+
+            </Grid>
+        </Border>
     </Grid>
 </Window>
