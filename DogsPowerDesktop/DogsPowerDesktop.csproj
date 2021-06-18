@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Images\Samples\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
 
   <ItemGroup>
