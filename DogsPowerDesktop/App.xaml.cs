@@ -13,5 +13,18 @@ namespace DogsPowerDesktop
     /// </summary>
     public partial class App : Application
     {
+        /// <summary>
+        /// Custom startup
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // Let the base application do what it needs
+            base.OnStartup(e);
+
+            // Show the main window
+            Current.MainWindow = new MainWindow();
+            Current.MainWindow.Show();
+        }
     }
 }
