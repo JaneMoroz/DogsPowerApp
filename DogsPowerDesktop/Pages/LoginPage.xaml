@@ -20,7 +20,7 @@
                     TextBlock.TextAlignment="Center">
 
             <!--Login main content white box-->
-            <Border Background="{StaticResource PrimaryHueLightBrush}"
+            <Border Background="{StaticResource MaterialDesignBackground}"
                     CornerRadius="10" 
                     Padding="15 50 15 15"
                     Width="330"
@@ -29,7 +29,7 @@
 
                     <Image Width="200">
                         <Image.Source>
-                            <BitmapImage UriSource="/Images/Logo/menuLogoAndText.png" />
+                            <BitmapImage UriSource="/Images/Logo/newLogo.png" />
                         </Image.Source>
                     </Image>
 
@@ -56,7 +56,8 @@
                     </StackPanel>
 
                     <!--Login Button-->
-                    <Button Content="Login"
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                            Content="Login"
                             IsDefault="True"
                             Command="{Binding LoginCommand}"
                             CommandParameter="{Binding ElementName=Page}"

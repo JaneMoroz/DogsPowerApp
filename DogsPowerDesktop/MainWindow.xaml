@@ -82,7 +82,7 @@
 
                 <!--Background image-->
                 <Grid.Background>
-                    <ImageBrush TileMode="Tile" Opacity="0.1" ViewportUnits="Absolute" Viewport="0 0 1000 1000" ImageSource="/Images/Background/PawsBackground.png"/>
+                    <ImageBrush TileMode="Tile" Opacity="0.4" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Background/AnotherBackground.png"/>
                 </Grid.Background>
 
                 <Frame Grid.Column="1" x:Name="MainFrame" 

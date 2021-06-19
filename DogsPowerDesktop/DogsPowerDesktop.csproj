@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\Background\AnotherBackground.png" />
     <None Remove="Images\Background\PawsBackground.png" />
     <None Remove="Images\Logo\icon.png" />
     <None Remove="Images\Logo\menuLogoAndText.png" />
+    <None Remove="Images\Logo\newIcon.png" />
+    <None Remove="Images\Logo\NewLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,12 +34,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\Background\AnotherBackground.png" />
     <Resource Include="Images\Background\PawsBackground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\Logo\icon.png" />
     <Resource Include="Images\Logo\menuLogo.png" />
     <Resource Include="Images\Logo\menuLogoAndText.png" />
+    <Resource Include="Images\Logo\newIcon.png" />
+    <Resource Include="Images\Logo\newLogo.png" />
   </ItemGroup>
 
 </Project>

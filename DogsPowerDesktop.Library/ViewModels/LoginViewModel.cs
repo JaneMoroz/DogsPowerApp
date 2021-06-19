@@ -58,6 +58,11 @@ namespace DogsPowerDesktop.Library
             {
                 // TODO: Fake a login...
                 await Task.Delay(1000);
+
+                var login = Login;
+
+                // IMPORTANT: Never store unsecure password in variable like this
+                var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
             });
         }
     }
