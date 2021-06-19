@@ -85,6 +85,10 @@
                     <ImageBrush TileMode="Tile" Opacity="0.1" ViewportUnits="Absolute" Viewport="0 0 1000 1000" ImageSource="/Images/Background/PawsBackground.png"/>
                 </Grid.Background>
 
+                <Frame Grid.Column="1" x:Name="MainFrame" 
+                       Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" 
+                       Background="Transparent" />
+
             </Grid>
         </Border>
     </Grid>
