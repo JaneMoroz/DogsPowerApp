@@ -1,13 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="MediumPurple">#FF6537AB</Color>
-    <SolidColorBrush x:Key="MediumPurpleBrush" Color="{StaticResource MediumPurple}" />
+    <Color x:Key="MainText">#FFFFA6A6</Color> 
+    <SolidColorBrush x:Key="MainTextBrush" Color="{StaticResource MainText}" />
 
-    <Color x:Key="LightPurple">#FF915EDE</Color>
-    <SolidColorBrush x:Key="LightPurpleBrush" Color="{StaticResource LightPurple}" />
+    <Color x:Key="SecondaryGrey">#FF9FA1A1</Color>
+    <SolidColorBrush x:Key="SecondaryGreyBrush" Color="{StaticResource SecondaryGrey}" />
 
-    <Color x:Key="DarkBluishPurple">#FF6500FF</Color>
-    <SolidColorBrush x:Key="DarkBluishBrush" Color="{StaticResource DarkBluishPurple}" />
+    <Color x:Key="MainGrey">#FF4D4D4D</Color>
+    <SolidColorBrush x:Key="MainGreyBrush" Color="{StaticResource MainGrey}" />
 
 </ResourceDictionary>

@@ -57,7 +57,7 @@ namespace DogsPowerDesktop.Library
             await RunCommandAsync(() => LoginIsRunning, async () =>
             {
                 // TODO: Fake a login...
-                await Task.Delay(1000);
+                await Task.Delay(5000);
 
                 var login = Login;
 

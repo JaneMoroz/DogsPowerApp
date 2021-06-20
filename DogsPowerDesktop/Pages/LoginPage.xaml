@@ -7,7 +7,7 @@
       xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
       mc:Ignorable="d"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      TextElement.Foreground="{DynamicResource MaterialDesignBody}"         
+      TextElement.Foreground="{StaticResource MainGreyBrush}"         
       TextElement.FontWeight="Medium"
       TextElement.FontSize="14"
       FontFamily="{materialDesign:MaterialDesignFont}"          
@@ -27,7 +27,7 @@
                     Margin="50 50 50 0">
                 <StackPanel>
 
-                    <Image Width="200">
+                    <Image Width="200" Opacity="0.7">
                         <Image.Source>
                             <BitmapImage UriSource="/Images/Logo/newLogo.png" />
                         </Image.Source>
@@ -39,6 +39,7 @@
                                                  VerticalAlignment="Bottom"
                                                  Margin="5"/>
                         <TextBox Text="{Binding Login}"
+                             materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
                              materialDesign:HintAssist.Hint="Login"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              VerticalAlignment="Center" Width="250" />
@@ -50,21 +51,30 @@
                                                  VerticalAlignment="Bottom"
                                                  Margin="5"/>
                         <PasswordBox x:Name="PasswordText"
+                                     materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
                                      materialDesign:HintAssist.Hint="Password"
                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                      VerticalAlignment="Center" Width="250"/>
                     </StackPanel>
 
                     <!--Login Button-->
-                    <Button Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="Login"
+                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            Height="35"
+                            Width="100"
+                            materialDesign:ButtonProgressAssist.Value="-1"
+                            materialDesign:ButtonProgressAssist.IsIndicatorVisible="{Binding LoginIsRunning}"
+                            materialDesign:ButtonProgressAssist.IsIndeterminate="{Binding LoginIsRunning}"
+                            materialDesign:ButtonProgressAssist.IndicatorBackground="{StaticResource MaterialDesignPaper}"
+                            materialDesign:ButtonProgressAssist.IndicatorForeground="{StaticResource MaterialDesignBodyLight}"
                             IsDefault="True"
                             Command="{Binding LoginCommand}"
                             CommandParameter="{Binding ElementName=Page}"
                             HorizontalAlignment="Center"
-                            Background="{StaticResource MaterialDesignPaper}"
-                            BorderBrush="{StaticResource MaterialDesignPaper}"
-                            Foreground="{StaticResource PrimaryHueMidBrush}"/>
+                            Foreground="{StaticResource MainTextBrush}" 
+                            Background="{StaticResource MaterialDesignPaper}" 
+                            BorderBrush="{StaticResource MainTextBrush}">
+                        <TextBlock Text="Login" FontSize="20" Visibility="{Binding LoginIsRunning, Converter={local:InvertBooleanToVisiblityConverter}}" />
+                    </Button>
 
                 </StackPanel>
             </Border>
