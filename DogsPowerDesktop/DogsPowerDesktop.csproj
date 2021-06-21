@@ -12,6 +12,9 @@
     <None Remove="Images\Logo\icon.png" />
     <None Remove="Images\Logo\newIcon.png" />
     <None Remove="Images\Logo\NewLogo.png" />
+    <None Remove="Images\Samples\Groomer1.png" />
+    <None Remove="Images\Samples\Groomer2.png" />
+    <None Remove="Images\Samples\Groomer3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\Samples\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\Background\AnotherBackground.png" />
     <Resource Include="Images\Background\PawsBackground.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -39,6 +38,9 @@
     <Resource Include="Images\Logo\icon.png" />
     <Resource Include="Images\Logo\newIcon.png" />
     <Resource Include="Images\Logo\newLogo.png" />
+    <Resource Include="Images\Samples\Groomer1.png" />
+    <Resource Include="Images\Samples\Groomer2.png" />
+    <Resource Include="Images\Samples\Groomer3.png" />
   </ItemGroup>
 
 </Project>

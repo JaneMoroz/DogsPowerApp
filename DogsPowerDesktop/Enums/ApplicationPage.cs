@@ -12,6 +12,11 @@ namespace DogsPowerDesktop
         /// <summary>
         /// The initial login page
         /// </summary>
-        Login = 0
+        Login = 0,
+
+        /// <summary>
+        /// The main page
+        /// </summary>
+        Main = 1
     }
 }

@@ -10,4 +10,10 @@
     <Color x:Key="MainGrey">#FF4D4D4D</Color>
     <SolidColorBrush x:Key="MainGreyBrush" Color="{StaticResource MainGrey}" />
 
+    <Color x:Key="LightGreen">#FFD4EBE5</Color>
+    <SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
+
+    <Color x:Key="DarkGreen">#FF80D9C2</Color>
+    <SolidColorBrush x:Key="DarkGreenBrush" Color="{StaticResource DarkGreen}" />
+
 </ResourceDictionary>
