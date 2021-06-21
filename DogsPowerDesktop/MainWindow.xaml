@@ -18,7 +18,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Icon="Images/Logo/menuLogo.png"
+        Icon="Images/Logo/newIcon.png"
         >
 
     <WindowChrome.WindowChrome>
@@ -88,6 +88,9 @@
                 <Frame Grid.Column="1" x:Name="MainFrame" 
                        Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" 
                        Background="Transparent" />
+
+                <!--Side Menu-->
+                <local:SideMenuControl />
 
             </Grid>
         </Border>

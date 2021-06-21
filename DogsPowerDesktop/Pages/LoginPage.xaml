@@ -24,9 +24,10 @@
                     CornerRadius="10" 
                     Padding="15 50 15 15"
                     Width="330"
-                    Margin="50 50 50 0">
+                    Margin="50 0 50 0">
                 <StackPanel>
 
+                    <!--Image-->
                     <Image Width="200" Opacity="0.7">
                         <Image.Source>
                             <BitmapImage UriSource="/Images/Logo/newLogo.png" />
@@ -58,7 +59,7 @@
                     </StackPanel>
 
                     <!--Login Button-->
-                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    <Button Style="{StaticResource RegularButton}"
                             Height="35"
                             Width="100"
                             materialDesign:ButtonProgressAssist.Value="-1"
@@ -68,11 +69,7 @@
                             materialDesign:ButtonProgressAssist.IndicatorForeground="{StaticResource MaterialDesignBodyLight}"
                             IsDefault="True"
                             Command="{Binding LoginCommand}"
-                            CommandParameter="{Binding ElementName=Page}"
-                            HorizontalAlignment="Center"
-                            Foreground="{StaticResource MainTextBrush}" 
-                            Background="{StaticResource MaterialDesignPaper}" 
-                            BorderBrush="{StaticResource MainTextBrush}">
+                            CommandParameter="{Binding ElementName=Page}">
                         <TextBlock Text="Login" FontSize="20" Visibility="{Binding LoginIsRunning, Converter={local:InvertBooleanToVisiblityConverter}}" />
                     </Button>
 
