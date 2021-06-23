@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:DogsPowerDesktop"
              xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
+             d:DesignWidth="300">
     <Grid DataContext="{x:Static library:GroomersListDesignModel.Instance}" Background="Transparent">
         <ItemsControl ItemsSource="{Binding Groomers}">
             <!--Orientation-->

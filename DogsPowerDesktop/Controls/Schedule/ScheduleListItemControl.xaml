@@ -22,7 +22,7 @@
                             <Border CornerRadius="7" Width="350" HorizontalAlignment="Left" >
                                 <!--Background color and its opacity-->
                                 <Border.Background>
-                                    <SolidColorBrush Color="{StaticResource MainText}" Opacity="0.4" />
+                                    <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
                                 </Border.Background>
 
                                 <!--Schedule Item-->
@@ -62,7 +62,7 @@
                                     </StackPanel>
                                     
                                     <!--Buttons-->
-                                    <StackPanel Grid.Column="2" x:Name="buttons"  Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30 5 5 5">
+                                    <StackPanel Opacity="0" Grid.Column="2" x:Name="buttons"  Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30 5 5 5">
                                         <!--Edit Button-->
                                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                                 Background="{StaticResource MaterialDesignPaper}"
