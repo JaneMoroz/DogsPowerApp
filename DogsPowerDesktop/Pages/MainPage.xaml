@@ -9,7 +9,19 @@
       d:DesignHeight="700" d:DesignWidth="700"
       Title="MainPage">
 
-    <Grid Height="130" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50 20 0 0">
-        <local:GroomersListControl />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="50 20 0 0">
+            <local:GroomersListControl />
+        </Grid>
+
+        <Grid Grid.Row="1" VerticalAlignment="Top" Margin="50 20 0 0">
+            <local:ScheduleListControl  />
+        </Grid>
     </Grid>
+    
 </local:BasePage>

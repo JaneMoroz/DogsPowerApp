@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DogsPowerDesktop.GroomersListControl"
+﻿<UserControl x:Class="DogsPowerDesktop.ScheduleListControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,26 +6,26 @@
              xmlns:local="clr-namespace:DogsPowerDesktop"
              xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="300">
-    <Grid DataContext="{x:Static library:GroomersListDesignModel.Instance}" Background="Transparent">
-        <ItemsControl ItemsSource="{Binding Groomers}">
+             d:DesignHeight="200" d:DesignWidth="900">
+    <Grid DataContext="{x:Static library:ScheduleListDesignModel.Instance}" Background="Transparent">
+        <ItemsControl ItemsSource="{Binding List}">
             <!--Orientation-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Horizontal" />
+                    <VirtualizingStackPanel Orientation="Vertical" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <!-- Scroll Bar -->
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">
-                    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
                         <ItemsPresenter/>
                     </ScrollViewer>
                 </ControlTemplate>
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:GroomersListItemControl />
+                    <local:ScheduleListItemControl />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
