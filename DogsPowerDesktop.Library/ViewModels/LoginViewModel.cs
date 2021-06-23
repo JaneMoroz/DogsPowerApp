@@ -59,10 +59,13 @@ namespace DogsPowerDesktop.Library
                 // TODO: Fake a login...
                 await Task.Delay(5000);
 
-                var login = Login;
+                // Go to chat page
+                IoC.ApplicationViewModel.GoToPage(ApplicationPage.Main);
+
+                // var login = Login;
 
                 // IMPORTANT: Never store unsecure password in variable like this
-                var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
+                // var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
             });
         }
     }

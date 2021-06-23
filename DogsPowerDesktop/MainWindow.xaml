@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DogsPowerDesktop"
+        xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="600" 
@@ -11,6 +12,7 @@
         MinHeight="400"
         MinWidth="800"
         WindowStartupLocation="CenterScreen" 
+        x:Name="AppWindow"
         WindowStyle="None"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -86,7 +88,9 @@
                 </Grid.Background>
 
                 <Frame Grid.Column="1" x:Name="MainFrame" 
-                       Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}" 
+                       Content="{Binding ApplicationViewModel.CurrentPage, 
+                                         Source={x:Static library:ViewModelLocator.Instance},  
+                                         Converter={local:ApplicationPageValueConverter}}" 
                        Background="Transparent" />
 
                 <!--Side Menu-->

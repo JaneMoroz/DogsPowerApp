@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DogsPowerDesktop.Library;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -14,13 +15,16 @@ namespace DogsPowerDesktop
     public partial class App : Application
     {
         /// <summary>
-        /// Custom startup
+        /// Custom startup so we load our IoC immediately before anything else
         /// </summary>
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
         {
             // Let the base application do what it needs
             base.OnStartup(e);
+
+            // Setup IoC
+            IoC.Setup();
 
             // Show the main window
             Current.MainWindow = new MainWindow();

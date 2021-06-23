@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DogsPowerDesktop
+namespace DogsPowerDesktop.Library
 {
     /// <summary>
     /// The page of the application

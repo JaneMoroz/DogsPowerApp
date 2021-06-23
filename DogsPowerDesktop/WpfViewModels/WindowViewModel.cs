@@ -20,10 +20,6 @@ namespace DogsPowerDesktop
 
         #region Public Properties
 
-        /// <summary>
-        /// The current page of the application
-        /// </summary>
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.Main;
 
         #endregion
 
