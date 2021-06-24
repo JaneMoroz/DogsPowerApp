@@ -43,6 +43,10 @@ namespace DogsPowerDesktop
         /// </summary>
         public BasePage()
         {
+            // Don't bother animating in design time
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
             // If we are animating in, hide to begin with
             if (PageLoadAnimation != PageAnimation.None)
                 Visibility = Visibility.Collapsed;
