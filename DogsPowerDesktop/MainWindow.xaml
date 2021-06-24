@@ -87,11 +87,12 @@
                     <ImageBrush TileMode="Tile" Opacity="0.4" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Background/AnotherBackground.png"/>
                 </Grid.Background>
 
-                <Frame Grid.Column="1" x:Name="MainFrame" 
-                       Content="{Binding ApplicationViewModel.CurrentPage, 
-                                         Source={x:Static library:ViewModelLocator.Instance},  
-                                         Converter={local:ApplicationPageValueConverter}}" 
-                       Background="Transparent" />
+                <local:PageHost Grid.Column="1"
+                                d:DataContext=""
+                                DataContext="{Binding ApplicationViewModel.CurrentPage, 
+                                Source={x:Static library:ViewModelLocator.Instance},  
+                                Converter={local:ApplicationPageValueConverter}}"
+                                CurrentPage="{Binding}" />
 
                 <!--Side Menu-->
                 <local:SideMenuControl Width="260" local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, 

@@ -7,20 +7,10 @@ using System.Windows.Controls;
 namespace DogsPowerDesktop
 {
     /// <summary>
-    /// Base page for all pages to gain base fynctionality
+    /// The base page for all pages to gain base functionality
     /// </summary>
-    public class BasePage<VM> : Page
-        where VM : BaseViewModel, new()
+    public class BasePage : Page
     {
-        #region Private Member
-
-        /// <summary>
-        /// The View Model associated with this page
-        /// </summary>
-        private VM _viewModel;
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -44,58 +34,32 @@ namespace DogsPowerDesktop
         /// </summary>
         public bool ShouldAnimateOut { get; set; }
 
-        /// <summary>
-        /// The View Model associated with this page
-        /// </summary>
-        public VM ViewModel
-        {
-            get => _viewModel;
-            set
-            {
-                // If nothing has changed, return
-                if (_viewModel == value)
-                    return;
-
-                // Update the value
-                _viewModel = value;
-
-                // Set the data context for this page
-                DataContext = _viewModel;
-            }
-        }
-
         #endregion
 
         #region Constructor
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public BasePage()
         {
-            // Don't bother animating in design time
-            if (DesignerProperties.GetIsInDesignMode(this))
-                return;
-
             // If we are animating in, hide to begin with
             if (PageLoadAnimation != PageAnimation.None)
-            {
                 Visibility = Visibility.Collapsed;
-            }
 
             // Listen out for the page loading
             Loaded += BasePage_LoadedAsync;
-
-            // Create a default view model
-            ViewModel = new VM();
         }
 
         #endregion
+
+        #region Animation Load / Unload
 
         /// <summary>
         /// Once the page is loaded, perform any required animation
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        #region Animation Load / Unload
-
         private async void BasePage_LoadedAsync(object sender, RoutedEventArgs e)
         {
             // If we are setup to animate out on load
@@ -103,13 +67,13 @@ namespace DogsPowerDesktop
                 // Animate out the page
                 await AnimateOutAsync();
             // Otherwise...
-
-            // Animate the page in
-            await AnimateInAsync();
+            else
+                // Animate the page in
+                await AnimateInAsync();
         }
 
         /// <summary>
-        /// Animates in this page
+        /// Animates the page in
         /// </summary>
         /// <returns></returns>
         public async Task AnimateInAsync()
@@ -148,6 +112,59 @@ namespace DogsPowerDesktop
 
                     break;
             }
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// A base page with added ViewModel support
+    /// </summary>
+    public class BasePage<VM> : BasePage
+        where VM : BaseViewModel, new()
+    {
+        #region Private Member
+
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
+        private VM _viewModel;
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
+        public VM ViewModel
+        {
+            get => _viewModel;
+            set
+            {
+                // If nothing has changed, return
+                if (_viewModel == value)
+                    return;
+
+                // Update the value
+                _viewModel = value;
+
+                // Set the data context for this page
+                DataContext = _viewModel;
+            }
+        }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public BasePage() : base()
+        {
+            // Create a default view model
+            ViewModel = new VM();
         }
 
         #endregion
