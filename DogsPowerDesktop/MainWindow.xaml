@@ -94,7 +94,8 @@
                        Background="Transparent" />
 
                 <!--Side Menu-->
-                <local:SideMenuControl />
+                <local:SideMenuControl Width="260" local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, 
+                                             Source={x:Static library:ViewModelLocator.Instance}}" />
 
             </Grid>
         </Border>
