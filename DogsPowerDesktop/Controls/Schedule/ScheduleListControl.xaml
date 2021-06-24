@@ -9,12 +9,31 @@
              d:DesignHeight="200" d:DesignWidth="900">
     <Grid DataContext="{x:Static library:ScheduleListDesignModel.Instance}" Background="Transparent">
         <ItemsControl ItemsSource="{Binding List}">
-            <!--Orientation-->
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical" />
+                    <!--Uniform Grid Design-->
+                    <UniformGrid Rows="2">
+                        <UniformGrid.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="-90" />
+                                <ScaleTransform ScaleY="-1" />
+                            </TransformGroup>
+                        </UniformGrid.LayoutTransform>
+                    </UniformGrid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" />
+                                <RotateTransform Angle="90" />
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
             <!-- Scroll Bar -->
             <ItemsControl.Template>
                 <ControlTemplate TargetType="ItemsControl">

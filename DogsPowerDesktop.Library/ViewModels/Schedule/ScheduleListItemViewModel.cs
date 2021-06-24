@@ -30,6 +30,45 @@ namespace DogsPowerDesktop.Library
         public string Time => $"{StartTime.UtcDateTime:HH:mm} - {EndTime.UtcDateTime:HH:mm}";
 
         /// <summary>
+        /// Time Now
+        /// </summary>
+        public DateTimeOffset CurrentTime => DateTimeOffset.Now;
+        /// <summary>
+        /// Determines whether the appointment is being taken place
+        /// </summary>
+        public bool InProgress => CurrentTime.CompareTo(StartTime) >= 0 && CurrentTime.CompareTo(EndTime) <= 0;
+
+        /// <summary>
+        /// Determines whether the appointment has finished 
+        /// </summary>
+        public bool IsOver => CurrentTime.CompareTo(EndTime) == 1;
+
+        /// <summary>
+        /// The RGB values (in hex) for the background color of the appointment
+        /// </summary>  
+        public string BackgroundRGB
+        {
+            get 
+            {
+                if (InProgress)
+                    return "FFA6A6";
+                else if (IsOver)
+                    return "9FA1A1";
+                else
+                    return "80D9C2";
+            }
+        }
+
+        private int myVar;
+
+        public int MyProperty
+        {
+            get { return myVar; }
+            set { myVar = value; }
+        }
+
+
+        /// <summary>
         /// Customers first name
         /// </summary>
         public string FirstName { get; set; }

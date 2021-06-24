@@ -17,7 +17,7 @@ namespace DogsPowerDesktop
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class MainPage : BasePage<LoginViewModel>
+    public partial class MainPage : BasePage<MainViewModel>
     {
         public MainPage()
         {

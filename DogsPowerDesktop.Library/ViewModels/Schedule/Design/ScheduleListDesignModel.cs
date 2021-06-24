@@ -29,7 +29,7 @@ namespace DogsPowerDesktop.Library
             {
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 0, 0, TimeSpan.Zero),
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 9, 0, 0, TimeSpan.Zero),
                     ServiceDuration = new TimeSpan(1, 30, 0),
                     FirstName = "Lucy",
                     LastName = "King",
@@ -39,7 +39,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTime.Now.ToLocalTime().Year, DateTime.Now.ToLocalTime().Month, DateTime.Now.ToLocalTime().Day, 11, 0, 0, TimeSpan.Zero),
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 11, 0, 0, TimeSpan.Zero),
                     ServiceDuration = new TimeSpan(1, 15, 0),
                     FirstName = "Peter",
                     LastName = "Clark",
@@ -49,7 +49,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTime.Now.ToLocalTime().Year, DateTime.Now.ToLocalTime().Month, DateTime.Now.ToLocalTime().Day, 13, 0, 0, TimeSpan.Zero),
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 13, 0, 0, TimeSpan.Zero),
                     ServiceDuration = new TimeSpan(2, 0, 0),
                     FirstName = "Anna",
                     LastName = "Florance",
@@ -59,13 +59,43 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTime.Now.ToLocalTime().Year, DateTime.Now.ToLocalTime().Month, DateTime.Now.ToLocalTime().Day, 15, 0, 0, TimeSpan.Zero),
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 15, 0, 0, TimeSpan.Zero),
                     ServiceDuration = new TimeSpan(2, 30, 0),
                     FirstName = "Ted",
                     LastName = "O'Conel",
                     PetName = "Phil",
                     ServiceName = "Basic Full Groom",
                     Weight = "90.0 - 104.9"
+                },
+                 new ScheduleListItemViewModel
+                {
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 17, 40, 0, TimeSpan.Zero),
+                    ServiceDuration = new TimeSpan(1, 30, 0),
+                    FirstName = "Jay",
+                    LastName = "Smith",
+                    PetName = "Suuny",
+                    ServiceName = "Basic Full Groom",
+                    Weight = "120.0 - 134.9"
+                },
+                new ScheduleListItemViewModel
+                {
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 19, 30, 0, TimeSpan.Zero),
+                    ServiceDuration = new TimeSpan(1, 15, 0),
+                    FirstName = "Carry",
+                    LastName = "Russel",
+                    PetName = "Chanel",
+                    ServiceName = "Basic Full Groom",
+                    Weight = "15 - 29.9"
+                },
+                new ScheduleListItemViewModel
+                {
+                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 20, 50, 0, TimeSpan.Zero),
+                    ServiceDuration = new TimeSpan(2, 0, 0),
+                    FirstName = "Matt",
+                    LastName = "Mattews",
+                    PetName = "Ro",
+                    ServiceName = "Basic Full Groom",
+                    Weight = "60.0 - 74.9"
                 }
             };
         }

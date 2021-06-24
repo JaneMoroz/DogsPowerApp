@@ -12,7 +12,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// The current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Main;
 
         /// <summary>
         /// True if the side menu should be shown

@@ -22,7 +22,7 @@
                             <Border CornerRadius="7" Width="350" HorizontalAlignment="Left" >
                                 <!--Background color and its opacity-->
                                 <Border.Background>
-                                    <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
+                                    <SolidColorBrush Color="{Binding BackgroundRGB, Converter={local:StringRGBToBrushConverter}}" Opacity="0.4" />
                                 </Border.Background>
 
                                 <!--Schedule Item-->
