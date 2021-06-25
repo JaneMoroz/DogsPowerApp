@@ -47,7 +47,7 @@
 
         <!--Schedule-->
         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="50 20 0 0">
-            <local:ScheduleListControl DataContext="{Binding}"  />
+            <local:ScheduleListControl x:Name="ScheduleList" DataContext="{Binding}"  />
         </Grid>
         
         <!--Buttons-->
