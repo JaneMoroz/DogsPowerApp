@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace DogsPowerDesktop.Library
@@ -26,6 +27,11 @@ namespace DogsPowerDesktop.Library
         /// True if the side menu should be shown
         /// </summary>
         public bool SideMenuVisible { get; set; } = false;
+
+        /// <summary>
+        /// Today's date
+        /// </summary>
+        public string TodaysDate => $"{DateTimeOffset.Now.ToString("dddd, MMMM dd", new CultureInfo("en-US"))}";
 
         /// <summary>
         /// Navigates to the specified page

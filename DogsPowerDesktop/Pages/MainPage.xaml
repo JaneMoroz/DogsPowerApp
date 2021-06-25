@@ -34,7 +34,8 @@
                     <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
                 </Border.Background>
             </Border>
-            <TextBlock Text="Thursday, June 24"
+            <TextBlock Text="{Binding  ApplicationViewModel.TodaysDate, 
+                                       Source={x:Static library:ViewModelLocator.Instance}}"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="20" Margin="0 5"/>
