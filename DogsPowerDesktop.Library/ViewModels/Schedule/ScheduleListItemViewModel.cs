@@ -33,15 +33,18 @@ namespace DogsPowerDesktop.Library
         /// Time Now
         /// </summary>
         public DateTimeOffset CurrentTime => DateTimeOffset.Now;
+
         /// <summary>
         /// Determines whether the appointment is being taken place
         /// </summary>
-        public bool InProgress => CurrentTime.CompareTo(StartTime) >= 0 && CurrentTime.CompareTo(EndTime) <= 0;
+        public bool InProgress => ((CurrentTime.Hour == StartTime.Hour && CurrentTime.Minute > StartTime.Minute) || (CurrentTime.Hour >= StartTime.Hour))
+            && ((CurrentTime.Hour == EndTime.Hour && CurrentTime.Minute < EndTime.Minute) || CurrentTime.Hour < EndTime.Hour);
 
         /// <summary>
         /// Determines whether the appointment has finished 
         /// </summary>
-        public bool IsOver => CurrentTime.CompareTo(EndTime) == 1;
+        public bool IsOver => (CurrentTime.Hour == EndTime.Hour && CurrentTime.Minute > EndTime.Minute)
+            || (CurrentTime.Hour > EndTime.Hour);
 
         /// <summary>
         /// The RGB values (in hex) for the background color of the appointment
