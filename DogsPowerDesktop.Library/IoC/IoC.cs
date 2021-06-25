@@ -18,9 +18,9 @@ namespace DogsPowerDesktop.Library
         public static IKernel Kernel { get; private set; } = new StandardKernel();
 
         /// <summary>
-        /// A shortcut to access the <see cref="ApplicationViewModel"/>
+        /// A shortcut to access the <see cref="Application"/>
         /// </summary>
-        public static ApplicationViewModel ApplicationViewModel => Get<ApplicationViewModel>();
+        public static ApplicationViewModel Application => Get<ApplicationViewModel>();
 
         #endregion
 

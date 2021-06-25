@@ -11,6 +11,15 @@ namespace DogsPowerDesktop
     /// </summary>
     public class BasePage : Page
     {
+        #region Private Member
+
+        /// <summary>
+        /// The View Model associated with this page
+        /// </summary>
+        private object _viewModel;
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -33,6 +42,23 @@ namespace DogsPowerDesktop
         /// Useful for when we are moving the page to another frame
         /// </summary>
         public bool ShouldAnimateOut { get; set; }
+
+        public object ViewModelObject
+        {
+            get => _viewModel;
+            set
+            {
+                // If nothing has changed, return
+                if (_viewModel == value)
+                    return;
+
+                // Update the value
+                _viewModel = value;
+
+                // Set the data context for this page
+                DataContext = _viewModel;
+            }
+        }
 
         #endregion
 
@@ -98,6 +124,14 @@ namespace DogsPowerDesktop
         }
 
         /// <summary>
+        /// Fired when the view model changes
+        /// </summary>
+        protected virtual void OnViewModelChanged()
+        {
+
+        }
+
+        /// <summary>
         /// Animates the page out
         /// </summary>
         /// <returns></returns>
@@ -119,6 +153,7 @@ namespace DogsPowerDesktop
         }
 
         #endregion
+
     }
 
     /// <summary>
@@ -127,15 +162,6 @@ namespace DogsPowerDesktop
     public class BasePage<VM> : BasePage
         where VM : BaseViewModel, new()
     {
-        #region Private Member
-
-        /// <summary>
-        /// The View Model associated with this page
-        /// </summary>
-        private VM _viewModel;
-
-        #endregion
-
         #region Public Properties
 
         /// <summary>
@@ -143,19 +169,8 @@ namespace DogsPowerDesktop
         /// </summary>
         public VM ViewModel
         {
-            get => _viewModel;
-            set
-            {
-                // If nothing has changed, return
-                if (_viewModel == value)
-                    return;
-
-                // Update the value
-                _viewModel = value;
-
-                // Set the data context for this page
-                DataContext = _viewModel;
-            }
+            get => (VM)ViewModelObject;
+            set => ViewModelObject = value;
         }
 
         #endregion
@@ -168,7 +183,22 @@ namespace DogsPowerDesktop
         public BasePage() : base()
         {
             // Create a default view model
-            ViewModel = new VM();
+            ViewModel = IoC.Get<VM>();
+        }
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        /// <param name="specificViewModel">The specific view model to use, if any</param>
+        public BasePage(VM specificViewModel = null) : base()
+        {
+            // Set specific view model
+            if (specificViewModel != null)
+                ViewModel = specificViewModel;
+            else
+            {
+                ViewModel = IoC.Get<VM>();
+            }
         }
 
         #endregion

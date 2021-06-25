@@ -9,6 +9,9 @@ namespace DogsPowerDesktop.Library
     /// </summary>
     public class ScheduleListViewModel : BaseViewModel
     {
+        /// <summary>
+        ///  List of appointments
+        /// </summary>
         public List<ScheduleListItemViewModel> List { get; set; }
     }
 }

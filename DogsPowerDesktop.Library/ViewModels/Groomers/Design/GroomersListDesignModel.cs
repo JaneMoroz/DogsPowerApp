@@ -33,8 +33,7 @@ namespace DogsPowerDesktop.Library
                 {
                     FirstName = "Mary",
                     LastName = "Parker",
-                    Image = "/Images/Samples/Groomer1.png",
-                    IsSelected = true
+                    Image = "/Images/Samples/Groomer1.png"
                 },
                 new GroomersListItemViewModel
                 {

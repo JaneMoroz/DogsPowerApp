@@ -60,7 +60,7 @@ namespace DogsPowerDesktop.Library
                 await Task.Delay(5000);
 
                 // Go to chat page
-                IoC.ApplicationViewModel.GoToPage(ApplicationPage.Main);
+                IoC.Application.GoToPage(ApplicationPage.Main);
 
                 // var login = Login;
 

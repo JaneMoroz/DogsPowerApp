@@ -18,8 +18,8 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ContentControl}">
-                        <Grid Margin="0 5 0 5">
-                            <Border CornerRadius="7" Width="350" HorizontalAlignment="Left" >
+                        <Grid Margin="5 5 5 5">
+                            <Border CornerRadius="7" HorizontalAlignment="Left" >
                                 <!--Background color and its opacity-->
                                 <Border.Background>
                                     <SolidColorBrush Color="{Binding BackgroundRGB, Converter={local:StringRGBToBrushConverter}}" Opacity="0.4" />
@@ -39,7 +39,7 @@
                                     </Border>
 
                                     <!--Details-->
-                                    <StackPanel Grid.Column="1" Margin="10 5 0 0" Orientation="Vertical">
+                                    <StackPanel Grid.Column="1" Margin="10 5 15 0" Orientation="Vertical">
                                         <!--Customer's name-->
                                         <StackPanel Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Account" />
@@ -62,7 +62,7 @@
                                     </StackPanel>
                                     
                                     <!--Buttons-->
-                                    <StackPanel Opacity="0" Grid.Column="2" x:Name="buttons"  Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30 5 5 5">
+                                    <StackPanel Opacity="0"  Grid.Column="2" x:Name="buttons"  Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 3 3">
                                         <!--Edit Button-->
                                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                                 Background="{StaticResource MaterialDesignPaper}"

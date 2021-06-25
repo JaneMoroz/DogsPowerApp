@@ -88,11 +88,10 @@
                 </Grid.Background>
 
                 <local:PageHost Grid.Column="1"
-                                d:DataContext=""
-                                DataContext="{Binding ApplicationViewModel.CurrentPage, 
-                                Source={x:Static library:ViewModelLocator.Instance},  
-                                Converter={local:ApplicationPageValueConverter}}"
-                                CurrentPage="{Binding}" />
+                                CurrentPage="{Binding  ApplicationViewModel.CurrentPage, 
+                                    Source={x:Static library:ViewModelLocator.Instance}}"
+                                CurrentPageViewModel="{Binding  ApplicationViewModel.CurrentPageViewModel, 
+                                    Source={x:Static library:ViewModelLocator.Instance}}"/>
 
                 <!--Side Menu-->
                 <local:SideMenuControl Width="260" local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, 

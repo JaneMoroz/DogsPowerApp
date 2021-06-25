@@ -19,7 +19,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// The application view model
         /// </summary>
-        public static ApplicationViewModel ApplicationViewModel => IoC.ApplicationViewModel;
+        public static ApplicationViewModel ApplicationViewModel => IoC.Application;
 
         #endregion
     }

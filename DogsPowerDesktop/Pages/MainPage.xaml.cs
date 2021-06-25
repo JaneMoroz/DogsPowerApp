@@ -17,9 +17,17 @@ namespace DogsPowerDesktop
     /// <summary>
     /// Логика взаимодействия для MainPage.xaml
     /// </summary>
-    public partial class MainPage : BasePage<MainViewModel>
+    public partial class MainPage : BasePage<ScheduleListViewModel>
     {
         public MainPage()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// Constructor with specific view model
+        /// </summary>
+        public MainPage(ScheduleListViewModel specificViewModel) : base(specificViewModel)
         {
             InitializeComponent();
         }
