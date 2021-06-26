@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="DogsPowerDesktop.CustomerDetailsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DogsPowerDesktop"
+             xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="20"
+             TextElement.Foreground="{StaticResource MainGreyBrush}"
+             Background="{StaticResource MaterialDesignPaper}"
+             FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Enter Details:-->
+            <RowDefinition Height="Auto" />
+            <!--Phone and email-->
+            <RowDefinition Height="Auto" />
+            <!--Names-->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--Enter details:-->
+        <TextBlock Grid.Row="0" Text="Enter details:" />
+
+        <!--Phone and email-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <TextBox 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Width="256" 
+                     Height="60"
+                     Margin="0 10 0 0"
+                     materialDesign:HintAssist.Hint="Phone"
+                     TextWrapping="Wrap">
+                
+            </TextBox>
+            <TextBox 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Width="256"
+                     Height="60"
+                     Margin="30 10 0 0"
+                     materialDesign:HintAssist.Hint="Email"
+                     TextWrapping="Wrap">
+
+            </TextBox>
+        </StackPanel>
+        <!--Names-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <TextBox 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     MinWidth="256"
+                     Height="60"
+                     Margin="0 10 0 0"
+                     materialDesign:HintAssist.Hint="First Name"
+                     TextWrapping="Wrap">
+
+            </TextBox>
+            <TextBox 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Width="256" 
+                     Height="60" 
+                     Margin="30 10 0 0"
+                     materialDesign:HintAssist.Hint="Last Name"
+                     TextWrapping="Wrap">
+
+            </TextBox>
+            <TextBox 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Width="256" 
+                     Height="60" 
+                     Margin="30 10 10 0"
+                     materialDesign:HintAssist.Hint="Pet's name"
+                     TextWrapping="Wrap">
+
+            </TextBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

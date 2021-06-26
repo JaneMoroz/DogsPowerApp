@@ -54,17 +54,18 @@
         <!--Buttons-->
         <Grid Grid.Row="3">
             <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 20">
-                <!--Edit Button-->
+                <!--Search Button-->
                 <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                               Background="{StaticResource MaterialDesignPaper}"
-                                               BorderBrush="{StaticResource MainGreyBrush}" 
-                                               Margin="0 0 4 0">
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}" 
+                        Margin="0 0 4 0">
                     <materialDesign:PackIcon Kind="Search" Foreground="{StaticResource MainGreyBrush}" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
-                <!--Delete Button-->
-                <Button  Style="{StaticResource MaterialDesignFloatingActionButton}" 
-                                                Background="{StaticResource MaterialDesignPaper}"
-                                                BorderBrush="{StaticResource MainGreyBrush}">
+                <!--Add Appointment Button-->
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" 
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}"
+                        Command="{Binding ApplicationViewModel.OpenAppointmentCommand, Source={x:Static library:ViewModelLocator.Instance}}">
                     <materialDesign:PackIcon Kind="Plus" Foreground="{StaticResource MainGreyBrush}" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </Button>
             </StackPanel>

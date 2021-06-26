@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="DogsPowerDesktop.AppointmentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DogsPowerDesktop"
+             xmlns:libary="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="20"
+             TextElement.Foreground="{StaticResource MainGreyBrush}"
+             Background="{StaticResource MaterialDesignPaper}"
+             FontFamily="{materialDesign:MaterialDesignFont}">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--Return Button-->
+            <Grid Grid.Row="0" Height="50">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0">
+                    <materialDesign:PackIcon Kind="ArrowBack" Height="30" Width="30" />
+                </Button>
+            </Grid>
+
+            <!--Form-->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <!--Select service and date:-->
+                    <RowDefinition Height="Auto" />
+                    <!--Two Combo boxes, textblock, date picker-->
+                    <RowDefinition Height="Auto" />
+                    <!--Available time-->
+                    <RowDefinition Height="Auto" />
+                    <!--Enter detailes:-->
+                    <RowDefinition Height="Auto" />
+                    <!--Button-->
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
+                <!--Select a Service and sate:-->
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Select a service and a date:" Margin="10 5 0 0" />
+                </Grid>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <!--Service-->
+                    <ComboBox x:Name="service" Grid.Column="0" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 5 0 0">
+                        <ComboBoxItem IsSelected="True" Content="Basic Full Groom" />
+                        <ComboBoxItem Content="Just A Bath (Coat Length 1''-4'')" />
+                        <ComboBoxItem Content="Just A Bath (Coat Length 5''+)" />
+                        <ComboBoxItem Content="Premium Full Groom" />
+                    </ComboBox>
+                    <!--Other details and price-->
+                    <ComboBox x:Name="weight" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 5 0 0">
+                        <ComboBoxItem IsSelected="True" Content="14.9 lbs. And Under" />
+                        <ComboBoxItem Content="15.0-29.9 lbs." />
+                        <ComboBoxItem Content="30-44.9 lbs." />
+                        <ComboBoxItem Content="45.0 - 59.9 lbs." />
+                    </ComboBox>
+                    <!--Price and time-->
+                    <StackPanel Grid.Column="2" Orientation="Vertical" Margin="20 5 0 0" VerticalAlignment="Center">
+                        <TextBlock Text="$60" />
+                        <TextBlock Text="1 hr 15 mins" />
+                    </StackPanel>
+                    <!--Date-->
+                    <Grid Grid.Column="3">
+                        <DatePicker materialDesign:HintAssist.Hint="Pick Date" Height="57" Margin="15 5 0 0" VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                    </Grid>
+                </Grid>
+                
+                <!--Button or time options-->
+                <Grid Grid.Row="2">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <!--Search Button-->
+                    <Button Grid.RowSpan="2" Opacity="0" Style="{StaticResource MaterialDesignIconButton}" Background="{DynamicResource MaterialDesignTextFieldBoxBackground}" Height="70" Width="70" Margin="0 10 0 0" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <materialDesign:PackIcon Kind="Search" Height="40" Width="40" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Button>
+                    <!--Choose time:-->
+                    <TextBlock Grid.Row="0" Text="Choose time:" Margin="10 10 0 0" />
+                    <!--Availbale Time-->
+                    <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="10 5 0 0">
+                        <local:TimeOptionsListControl />
+                    </Grid>
+                </Grid>
+                
+                <!--Enter details:-->
+                <Grid Grid.Row="3">
+                    <local:CustomerDetailsControl Margin="10 10 5 10"/>
+                </Grid>
+                
+                <!--Button-->
+                <Button Grid.Row="4" Style="{StaticResource MaterialDesignFlatButton}"
+                        Width="200"
+                        Height="50"
+                        Content="Book appointment" FontSize="20"
+                        Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+                        Foreground="{StaticResource MainGreyBrush}"
+                        Margin="0 5 0 10"/>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

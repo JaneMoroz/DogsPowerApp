@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="DogsPowerDesktop.TimeOptionsListItemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DogsPowerDesktop"
+             xmlns:libary="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="16"
+             TextElement.Foreground="{StaticResource MainGreyBrush}"
+             FontFamily="{materialDesign:MaterialDesignFont}">
+
+    <UserControl.Resources>
+        <Style x:Key="ContentStyle" TargetType="{x:Type ContentControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ContentControl}">
+                        <Grid Margin="1">
+                            <Border x:Name="border" Background="#FFB7B7B7" CornerRadius="7" HorizontalAlignment="Left" Margin="10" >
+                                <TextBlock Text="{Binding Time}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30 15"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ContentControl d:DataContext="{x:Static libary:TimeOptionsListItemDesignModel.Instance}"
+                    Style="{StaticResource ContentStyle}" />
+
+</UserControl>

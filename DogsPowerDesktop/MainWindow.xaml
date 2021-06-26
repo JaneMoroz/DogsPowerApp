@@ -97,6 +97,12 @@
                 <local:SideMenuControl Width="260" local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, 
                                              Source={x:Static library:ViewModelLocator.Instance}}" />
 
+                <!--Appointmant Page-->
+                <local:AppointmentControl Panel.ZIndex="10"
+                                          Grid.ColumnSpan="2"
+                                          local:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.AppointmentVisible,
+                                          Source={x:Static library:ViewModelLocator.Instance}}" />
+
             </Grid>
         </Border>
     </Grid>

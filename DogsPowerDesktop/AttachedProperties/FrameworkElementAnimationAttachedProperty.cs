@@ -82,4 +82,57 @@ namespace DogsPowerDesktop
                 await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, FirstLoad ? 0 : 0.8f, keepMargin: false);
         }
     }
+
+    /// <summary>
+    /// Animates a framework element sliding it in from the right on show
+    /// and sliding out to the right on hide
+    /// </summary>
+    public class AnimateSlideInFromRightProperty : AnimateBaseProperty<AnimateSlideInFromRightProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                // Animate in
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Right, FirstLoad, FirstLoad ? 0 : 0.8f, keepMargin: false);
+            else
+                // Animate out
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, FirstLoad ? 0 : 0.8f, keepMargin: false);
+        }
+    }
+
+    /// <summary>
+    /// Animates a framework element sliding up from the bottom on show
+    /// and sliding out to the bottom on hide
+    /// </summary>
+    public class AnimateSlideInFromBottomProperty : AnimateBaseProperty<AnimateSlideInFromBottomProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                // Animate in
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, FirstLoad, FirstLoad ? 0 : 0.8f, keepMargin: false);
+            else
+                // Animate out
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, FirstLoad ? 0 : 0.8f, keepMargin: false);
+        }
+    }
+
+    /// <summary>
+    /// Animates a framework element sliding up from the bottom on show
+    /// and sliding out to the bottom on hide
+    /// NOTE: Keeps the margin
+    /// </summary>
+    public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                // Animate in
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, FirstLoad, FirstLoad ? 0 : 0.8f, keepMargin: true);
+            else
+                // Animate out
+                await element.SlideAndFadeOutAsync(AnimationSlideInDirection.Bottom, FirstLoad ? 0 : 0.8f, keepMargin: true);
+        }
+    }
+
 }

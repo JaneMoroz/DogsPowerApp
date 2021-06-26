@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="DogsPowerDesktop.TimeOptionsListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DogsPowerDesktop"
+             xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="20"
+             TextElement.Foreground="{StaticResource MainGreyBrush}"
+             Background="{StaticResource MaterialDesignPaper}"
+             FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid DataContext="{x:Static library:TimeOptionsListDesignModel.Instance}" Background="Transparent">
+        <ItemsControl ItemsSource="{Binding List}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!--Uniform Grid Design-->
+                    <UniformGrid Rows="4">
+                        <UniformGrid.LayoutTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="-90" />
+                                <ScaleTransform ScaleY="-1" />
+                            </TransformGroup>
+                        </UniformGrid.LayoutTransform>
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="LayoutTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1" />
+                                <RotateTransform Angle="90" />
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <!-- Scroll Bar -->
+            <ItemsControl.Template>
+                <ControlTemplate TargetType="ItemsControl">
+                    <ScrollViewer VerticalScrollBarVisibility="Visible">
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <local:TimeOptionsListItemControl />
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
