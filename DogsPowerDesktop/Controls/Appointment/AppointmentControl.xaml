@@ -8,21 +8,25 @@
              mc:Ignorable="d"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.FontWeight="Medium"
-             TextElement.FontSize="20"
+             TextElement.FontSize="15"
              TextElement.Foreground="{StaticResource MainGreyBrush}"
              Background="{StaticResource MaterialDesignPaper}"
              FontFamily="{materialDesign:MaterialDesignFont}">
     <Border>
-        <Grid>
+        <Grid Margin="20 5 20 10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             
             <!--Return Button-->
-            <Grid Grid.Row="0" Height="50">
-                <Button Style="{StaticResource MaterialDesignFlatButton}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 0 0 0">
-                    <materialDesign:PackIcon Kind="ArrowBack" Height="30" Width="30" />
+            <Grid Grid.Row="0" Margin="-10 0 0 5" Height="40">
+                <Button Style="{StaticResource MaterialDesignFlatButton}" Width="60" 
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Command="{Binding ApplicationViewModel.CloseAppointmentCommand, Source={x:Static libary:ViewModelLocator.Instance}}">
+                    <materialDesign:PackIcon Kind="ArrowBack" Height="30" Width="30"
+                                             Foreground="{StaticResource MainTextBrush}"
+                                             HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 </Button>
             </Grid>
 
@@ -43,7 +47,7 @@
                 
                 <!--Select a Service and sate:-->
                 <Grid Grid.Row="0">
-                    <TextBlock Text="Select a service and a date:" Margin="10 5 0 0" />
+                    <TextBlock Text="Select a service and a date:" Margin="10 5 0 0" FontSize="20" Foreground="{StaticResource MainTextBrush}" />
                 </Grid>
                 
                 <Grid Grid.Row="1">
@@ -54,14 +58,14 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <!--Service-->
-                    <ComboBox x:Name="service" Grid.Column="0" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 5 0 0">
+                    <ComboBox x:Name="service" Grid.Column="0" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 5 0 0">
                         <ComboBoxItem IsSelected="True" Content="Basic Full Groom" />
                         <ComboBoxItem Content="Just A Bath (Coat Length 1''-4'')" />
                         <ComboBoxItem Content="Just A Bath (Coat Length 5''+)" />
                         <ComboBoxItem Content="Premium Full Groom" />
                     </ComboBox>
                     <!--Other details and price-->
-                    <ComboBox x:Name="weight" Grid.Column="1" Style="{StaticResource MaterialDesignOutlinedComboBox}" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 5 0 0">
+                    <ComboBox x:Name="weight" Grid.Column="1" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 5 0 0">
                         <ComboBoxItem IsSelected="True" Content="14.9 lbs. And Under" />
                         <ComboBoxItem Content="15.0-29.9 lbs." />
                         <ComboBoxItem Content="30-44.9 lbs." />
@@ -74,8 +78,11 @@
                     </StackPanel>
                     <!--Date-->
                     <Grid Grid.Column="3">
-                        <DatePicker materialDesign:HintAssist.Hint="Pick Date" Height="57" Margin="15 5 0 0" VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                        <DatePicker materialDesign:HintAssist.Hint="Pick Date"
+                                    HorizontalAlignment="Left"
+                                    MaxWidth="300"
+                                    Margin="15 0 0 0" 
+                                    VerticalAlignment="Center"/>
                     </Grid>
                 </Grid>
                 
@@ -105,13 +112,12 @@
                 </Grid>
                 
                 <!--Button-->
-                <Button Grid.Row="4" Style="{StaticResource MaterialDesignFlatButton}"
+                <Button Grid.Row="4" Style="{StaticResource RegularButton}"
                         Width="200"
                         Height="50"
                         Content="Book appointment" FontSize="20"
-                        Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
-                        Foreground="{StaticResource MainGreyBrush}"
-                        Margin="0 5 0 10"/>
+                        Margin="0 10 0 10"
+                        IsDefault="True"/>
             </Grid>
         </Grid>
     </Border>

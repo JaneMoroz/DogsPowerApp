@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.FontWeight="Medium"
-             TextElement.FontSize="20"
+             TextElement.FontSize="15"
              TextElement.Foreground="{StaticResource MainGreyBrush}"
              Background="{StaticResource MaterialDesignPaper}"
              FontFamily="{materialDesign:MaterialDesignFont}">
@@ -23,25 +23,27 @@
         </Grid.RowDefinitions>
 
         <!--Enter details:-->
-        <TextBlock Grid.Row="0" Text="Enter details:" />
+        <TextBlock Grid.Row="0" Text="Enter details:" FontSize="20" 
+                   Foreground="{StaticResource MainTextBrush}" 
+                   Margin="0 0 0 5" />
 
         <!--Phone and email-->
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Width="256" 
-                     Height="60"
+                     Width="256"
                      Margin="0 10 0 0"
                      materialDesign:HintAssist.Hint="Phone"
+                     materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"
                      TextWrapping="Wrap">
                 
             </TextBox>
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256"
-                     Height="60"
                      Margin="30 10 0 0"
                      materialDesign:HintAssist.Hint="Email"
+                     materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"
                      TextWrapping="Wrap">
 
             </TextBox>
@@ -51,27 +53,27 @@
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      MinWidth="256"
-                     Height="60"
                      Margin="0 10 0 0"
                      materialDesign:HintAssist.Hint="First Name"
+                     materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"
                      TextWrapping="Wrap">
 
             </TextBox>
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256" 
-                     Height="60" 
                      Margin="30 10 0 0"
                      materialDesign:HintAssist.Hint="Last Name"
+                     materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"
                      TextWrapping="Wrap">
 
             </TextBox>
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256" 
-                     Height="60" 
                      Margin="30 10 10 0"
                      materialDesign:HintAssist.Hint="Pet's name"
+                     materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"
                      TextWrapping="Wrap">
 
             </TextBox>

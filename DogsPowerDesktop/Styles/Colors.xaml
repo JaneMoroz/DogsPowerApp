@@ -4,6 +4,9 @@
     <Color x:Key="MainText">#FFFFA6A6</Color> 
     <SolidColorBrush x:Key="MainTextBrush" Color="{StaticResource MainText}" />
 
+    <Color x:Key="LightGrey">#FFB7B7B7</Color>
+    <SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
+
     <Color x:Key="SecondaryGrey">#FF9FA1A1</Color>
     <SolidColorBrush x:Key="SecondaryGreyBrush" Color="{StaticResource SecondaryGrey}" />
 
