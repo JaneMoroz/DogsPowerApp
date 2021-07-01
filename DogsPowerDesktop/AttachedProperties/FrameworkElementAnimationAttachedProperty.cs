@@ -135,4 +135,21 @@ namespace DogsPowerDesktop
         }
     }
 
+    /// <summary>
+    /// Animates a framework element fading in on show
+    /// and fading out on hide
+    /// </summary>
+    public class AnimateFadeInProperty : AnimateBaseProperty<AnimateFadeInProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                // Animate in
+                await element.FadeInAsync(FirstLoad, FirstLoad ? 0 : 0.3f);
+            else
+                // Animate out
+                await element.FadeOutAsync(FirstLoad ? 0 : 0.3f);
+        }
+    }
+
 }

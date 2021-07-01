@@ -21,6 +21,8 @@
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         Icon="Images/Logo/newIcon.png"
+        Deactivated="AppWindow_Deactivated"
+        Activated="AppWindow_Activated"
         >
 
     <WindowChrome.WindowChrome>
@@ -86,6 +88,15 @@
                 <Grid.Background>
                     <ImageBrush TileMode="Tile" Opacity="0.4" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Background/AnotherBackground.png"/>
                 </Grid.Background>
+
+                <!-- Dimmed overlay -->
+                <Border Grid.ColumnSpan="2"
+                    Panel.ZIndex="10"
+                    Opacity="0.5">
+                    <Border Background="{StaticResource SecondaryGreyBrush}"
+                        local:AnimateFadeInProperty.Value="{Binding DimmableOverlayVisible}"
+                        />
+                </Border>
 
                 <local:PageHost Grid.Column="1"
                                 CurrentPage="{Binding  ApplicationViewModel.CurrentPage, 
