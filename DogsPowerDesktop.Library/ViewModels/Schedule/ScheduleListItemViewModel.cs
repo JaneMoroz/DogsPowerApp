@@ -106,12 +106,12 @@ namespace DogsPowerDesktop.Library
         #region Public Commands
 
         /// <summary>
-        /// Puts the control into edit mode
+        /// The command for when the user wants to edit an appointment
         /// </summary>
         public ICommand EditCommand { get; set; }
 
         /// <summary>
-        /// Cancels out of edit mode
+        /// The command for when the user wants to delete an appointment
         /// </summary>
         public ICommand DeleteCommand { get; set; }
 
@@ -133,7 +133,7 @@ namespace DogsPowerDesktop.Library
         #region Command Methods
 
         /// <summary>
-        /// Puts the control into edit mode
+        /// Edits an appointment
         /// </summary>
         public void Edit()
         {
@@ -141,11 +141,17 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
-        /// Cancels out of edit mode
+        /// Deletes an appointment
         /// </summary>
         public void Delete()
         {
-            
+            IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+            {
+                Title = "Delete",
+                OkText = "Yes",
+                NotOkText = "No",
+                Message = "Are you sure you want to delete this appointment?"
+            });
         }
 
         #endregion

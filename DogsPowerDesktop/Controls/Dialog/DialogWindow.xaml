@@ -1,4 +1,4 @@
-﻿<Window x:Class="DogsPowerDesktop.MainWindow"
+﻿<Window x:Class="DogsPowerDesktop.DialogWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,23 +6,22 @@
         xmlns:local="clr-namespace:DogsPowerDesktop"
         xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="600" 
-        Width="900"
-        MinHeight="{Binding WindowMinimumHeight}"
-        MinWidth="{Binding WindowMinimumWidth}"
-        WindowStartupLocation="CenterScreen" 
-        x:Name="AppWindow"
+        Title="{Binding Title}"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        MinWidth= "{Binding WindowMinimumWidth}"
+        MinHeight="{Binding WindowMinimumHeight}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Icon="Images/Logo/newIcon.png"
+        Icon="/Images/Logo/newIcon.png"
         >
-
+    
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="{Binding TitleHeight}"
                       ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
@@ -48,11 +47,11 @@
 
             <!--Title-->
             <TextBlock Grid.ColumnSpan="2" 
-                       Text="Dog's Power" 
+                       Text="{Binding Title}" 
                        Foreground="{StaticResource PrimaryHueMidBrush }" 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" FontSize="20" />
-            
+                       VerticalAlignment="Center" FontSize="20" Margin="0 0 5 0" />
+
             <!--Window Buttons-->
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Grid.Column="1"
@@ -75,35 +74,10 @@
             </StackPanel>
         </Grid>
 
-        <Border Grid.Row="1">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <Border Grid.Row="1" Padding="10">
 
-                <!--Background image-->
-                <Grid.Background>
-                    <ImageBrush TileMode="Tile" Opacity="0.4" ViewportUnits="Absolute" Viewport="0 0 500 500" ImageSource="/Images/Background/AnotherBackground.png"/>
-                </Grid.Background>
+            <ContentControl Content="{Binding Content}" />
 
-                <local:PageHost Grid.Column="1"
-                                CurrentPage="{Binding  ApplicationViewModel.CurrentPage, 
-                                    Source={x:Static library:ViewModelLocator.Instance}}"
-                                CurrentPageViewModel="{Binding  ApplicationViewModel.CurrentPageViewModel, 
-                                    Source={x:Static library:ViewModelLocator.Instance}}"/>
-
-                <!--Side Menu-->
-                <local:SideMenuControl Width="260" local:AnimateSlideInFromLeftProperty.Value="{Binding ApplicationViewModel.SideMenuVisible, 
-                                             Source={x:Static library:ViewModelLocator.Instance}}" />
-
-                <!--Appointmant Page-->
-                <local:AppointmentControl Panel.ZIndex="10"
-                                          Grid.ColumnSpan="2"
-                                          local:AnimateSlideInFromBottomMarginProperty.Value="{Binding ApplicationViewModel.AppointmentVisible,
-                                          Source={x:Static library:ViewModelLocator.Instance}}" />
-
-            </Grid>
         </Border>
     </Grid>
 </Window>

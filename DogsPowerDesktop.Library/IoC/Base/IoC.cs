@@ -22,6 +22,11 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public static ApplicationViewModel Application => Get<ApplicationViewModel>();
 
+        /// <summary>
+        /// A shortcut to access the <see cref="IUIManager"/>
+        /// </summary>
+        public static IUIManager UI => Get<IUIManager>();
+
         #endregion
 
         #region Construction

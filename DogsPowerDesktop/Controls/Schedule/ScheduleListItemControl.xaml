@@ -75,7 +75,8 @@
                                         <!--Delete Button-->
                                         <Button  Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" 
                                                  Background="{StaticResource MaterialDesignPaper}"
-                                                 BorderBrush="{StaticResource MainGreyBrush}" 
+                                                 BorderBrush="{StaticResource MainGreyBrush}"
+                                                 Command="{Binding DeleteCommand}"
                                                  Height="30" 
                                                  Width="30">
                                             <materialDesign:PackIcon Kind="Trash" Foreground="{StaticResource MainGreyBrush}" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" />
