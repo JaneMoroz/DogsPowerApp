@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DogsPowerAPI.Library
+namespace DogsPowerDesktop.API
 {
     /// <summary>
     /// The credentials for  an API client to register on the server 

@@ -13,4 +13,8 @@
     <PackageReference Include="PropertyChanged.Fody" Version="3.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DogsPowerDesktop.API\DogsPowerDesktop.API.csproj" />
+  </ItemGroup>
+
 </Project>

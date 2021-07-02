@@ -14,7 +14,7 @@
              FontFamily="{materialDesign:MaterialDesignFont}">
     
     <StackPanel d:DataContext="{x:Static library:MessageBoxDialogDesignModel.Instance}" >
-        <TextBlock Text="{Binding Message}" Padding="5" />
+        <TextBlock Text="{Binding Message}" Padding="5" TextWrapping="Wrap" MaxWidth="300" />
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 

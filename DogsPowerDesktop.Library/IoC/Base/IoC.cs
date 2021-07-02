@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using DogsPowerDesktop.API;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,6 +28,10 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public static IUIManager UI => Get<IUIManager>();
 
+        /// <summary>
+        /// A shortcut to access the <see cref="IAPIHelper"/>
+        /// </summary>
+        public static IAPIHelper APIHelper => Get<IAPIHelper>();
         #endregion
 
         #region Construction
@@ -49,6 +54,7 @@ namespace DogsPowerDesktop.Library
         {
             // Bind to a single instance of Application view model
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel()); // .ToSelf().InSingletonScope();
+            Kernel.Bind<IAPIHelper>().ToConstant(new APIHelper());
         }
 
         #endregion

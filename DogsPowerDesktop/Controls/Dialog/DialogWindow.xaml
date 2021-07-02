@@ -47,31 +47,18 @@
 
             <!--Title-->
             <TextBlock Grid.ColumnSpan="2" 
-                       Text="{Binding Title}" 
+                       Text="{Binding Title}"
                        Foreground="{StaticResource PrimaryHueMidBrush }" 
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center" FontSize="20" Margin="0 0 5 0" />
+                       VerticalAlignment="Center" FontSize="20" />
 
-            <!--Window Buttons-->
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <Button Grid.Column="1"
-                    Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
-                    Content="{materialDesign:PackIcon Kind=WindowMinimize}"
-                    Command="{Binding MinimizeCommand}" />
-
-                <Button Grid.Column="2"
-                    Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
-                    Content="{materialDesign:PackIcon Kind=WindowMaximize}"
-                    Command="{Binding MaximizeCommand}"/>
-
-                <Button Grid.Column="3"
-                    Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
-                    Content="{materialDesign:PackIcon Kind=WindowClose}"
-                    Command="{Binding CloseCommand}"/>
-            </StackPanel>
+            <!--Window Button-->
+            <Button Grid.Column="1"
+                Style="{StaticResource WindowControlButton}"
+                Content="{materialDesign:PackIcon Kind=WindowClose}"
+                Command="{Binding CloseCommand}"
+                HorizontalAlignment="Right" 
+                />
         </Grid>
 
         <Border Grid.Row="1" Padding="10">

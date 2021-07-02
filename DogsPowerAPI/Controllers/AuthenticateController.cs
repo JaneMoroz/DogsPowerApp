@@ -1,5 +1,4 @@
-﻿using DogsPowerAPI.Library;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -58,8 +57,28 @@ namespace DogsPowerAPI
         /// <returns></returns>
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginCredentialsModel loginCredentials)
+        public async Task<ApiResponse<AuthenticatedUserModel>> Login([FromBody] LoginCredentialsApiModel loginCredentials)
         {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "Invalid username or password";
+
+            // The error response for a failed login
+            var errorResponse = new ApiResponse<AuthenticatedUserModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            // Make sure we have a user name
+            if (loginCredentials?.UsernameOrEmail == null || string.IsNullOrWhiteSpace(loginCredentials.UsernameOrEmail))
+            {
+                // Return error message to user
+                return errorResponse;
+            }
+
+            // Validate if the user credentials are correct...
+
             // Is it an email?
             var isEmail = loginCredentials.UsernameOrEmail.Contains("@");
 
@@ -70,46 +89,27 @@ namespace DogsPowerAPI
                 // Find by username
                 await _userManager.FindByNameAsync(loginCredentials.UsernameOrEmail);
 
+            // If user exists and password is right
             if (user != null && await _userManager.CheckPasswordAsync(user, loginCredentials.Password))
             {
+                // Get user roles
                 var userRoles = await _userManager.GetRolesAsync(user);
 
-                // Set our tokens claims
-                var authClaims = new List<Claim>
+                // Return token to user
+                return new ApiResponse<AuthenticatedUserModel>
                 {
-                    // The username using the Identity name so it fills out the HttpContext.User.Identity.Name value
-                    new Claim(ClaimTypes.Name, user.UserName),
-                    // Unique ID for this token
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    // Pass back the user details and the token
+                    Response = new AuthenticatedUserModel
+                    {
+                        Access_Token = user.GenerateJwtToken(userRoles, _configuration),
+                        UserName = user.UserName
+                    }
                 };
 
-                foreach (var userRole in userRoles)
-                {
-                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-                }
-
-                // Get the secret key from configuration
-                var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:SecretKey"]));
-
-                // Generate the Jwt Token
-                var token = new JwtSecurityToken(
-                    issuer: _configuration["Jwt:Issuer"],
-                    audience: _configuration["Jwt:Audience"],
-                    claims: authClaims,
-                    signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256),
-                    // Expire if not used for 9 hours
-                    expires: DateTime.Now.AddHours(9)
-                    );
-
-                return Ok(new
-                {
-                    // Return the generated token
-                    token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
-                });
             }
 
-            return Unauthorized();
+            // In other cases return error
+            return errorResponse;
         }
         #endregion
 
@@ -122,7 +122,7 @@ namespace DogsPowerAPI
         /// <returns></returns>
         [HttpPost]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterCredentialsModel registerCredentials)
+        public async Task<IActionResult> Register([FromBody] RegisterCredentialsApiModel registerCredentials)
         {
             // Check for the existence of username and email
             // if such user exists, return error message
@@ -160,7 +160,7 @@ namespace DogsPowerAPI
         /// <returns></returns>
         [HttpPost]
         [Route("register-admin")]
-        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterCredentialsModel registerCredentials)
+        public async Task<IActionResult> RegisterAdmin([FromBody] RegisterCredentialsApiModel registerCredentials)
         {
             // Check for the existence of username and email
             // if such user exists, return error message

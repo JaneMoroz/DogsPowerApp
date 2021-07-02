@@ -59,19 +59,16 @@
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <Button Grid.Column="1"
                     Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
                     Content="{materialDesign:PackIcon Kind=WindowMinimize}"
                     Command="{Binding MinimizeCommand}" />
 
                 <Button Grid.Column="2"
                     Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
                     Content="{materialDesign:PackIcon Kind=WindowMaximize}"
                     Command="{Binding MaximizeCommand}"/>
 
                 <Button Grid.Column="3"
                     Style="{StaticResource WindowControlButton}"
-                    ToolTip="MaterialDesignFlatButton"
                     Content="{materialDesign:PackIcon Kind=WindowClose}"
                     Command="{Binding CloseCommand}"/>
             </StackPanel>

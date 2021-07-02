@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DogsPowerAPI.Library
+namespace DogsPowerAPI
 {
     public class Response
     {
