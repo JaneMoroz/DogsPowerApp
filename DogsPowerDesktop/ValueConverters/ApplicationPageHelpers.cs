@@ -28,6 +28,9 @@ namespace DogsPowerDesktop
                 case ApplicationPage.Main:
                     return new MainPage(viewModel as ScheduleListViewModel);
 
+                case ApplicationPage.UserManager:
+                    return new UserManagerPage(viewModel as UserManagerViewModel);
+
                 default:
                     Debugger.Break();
                     return null;
@@ -47,6 +50,9 @@ namespace DogsPowerDesktop
 
             if (page is LoginPage)
                 return ApplicationPage.Login;
+
+            if (page is UserManagerPage)
+                return ApplicationPage.UserManager;
 
             // Alert developer of issue
             Debugger.Break();

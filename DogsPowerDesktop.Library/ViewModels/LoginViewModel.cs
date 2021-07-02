@@ -17,7 +17,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// The login of the user
         /// </summary>
-        public string Login { get; set; }
+        public string Login { get; set; } = "moroz";
 
         /// <summary>
         /// A flag indicating if the login command is running

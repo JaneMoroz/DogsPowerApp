@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:DogsPowerDesktop"
+             xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
              mc:Ignorable="d"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              TextElement.Foreground="{StaticResource SecondaryGreyBrush}"         
@@ -25,6 +26,9 @@
                 <ListView Margin="0 10 0 0">
                     <!--Schedule An Appointment-->
                     <ListViewItem Margin="0 5">
+                        <ListViewItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding ApplicationViewModel.OpenAppointmentCommand, Source={x:Static library:ViewModelLocator.Instance}}" />
+                        </ListViewItem.InputBindings>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="CalendarAccount" VerticalAlignment="Bottom" Margin="5" Height="30" Width="30" Foreground="{StaticResource MainTextBrush}"/>
                             <TextBlock Text="Schedule An Appointment" VerticalAlignment="Bottom" FontSize="17" Margin="0 0 0 7" Foreground="{StaticResource MainGreyBrush}" />
@@ -53,6 +57,9 @@
                     </ListViewItem>
                     <!--User Manager-->
                     <ListViewItem Margin="0 5">
+                        <ListViewItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding UserManagerViewModel.OpenUserManagerCommand, Source={x:Static library:ViewModelLocator.Instance}}" />
+                        </ListViewItem.InputBindings>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="AccountBoxMultipleOutline" VerticalAlignment="Bottom" Margin="5" Height="30" Width="30" Foreground="{StaticResource MainTextBrush}"/>
                             <TextBlock Text="User Manager" VerticalAlignment="Bottom" FontSize="17" Margin="0 0 0 7" Foreground="{StaticResource MainGreyBrush}" />

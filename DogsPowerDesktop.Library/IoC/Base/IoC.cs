@@ -24,6 +24,11 @@ namespace DogsPowerDesktop.Library
         public static ApplicationViewModel Application => Get<ApplicationViewModel>();
 
         /// <summary>
+        /// A shortcut to access the <see cref="UserManager"/>
+        /// </summary>
+        public static UserManagerViewModel UserManager => Get<UserManagerViewModel>();
+
+        /// <summary>
         /// A shortcut to access the <see cref="IUIManager"/>
         /// </summary>
         public static IUIManager UI => Get<IUIManager>();
@@ -54,6 +59,7 @@ namespace DogsPowerDesktop.Library
         {
             // Bind to a single instance of Application view model
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel()); // .ToSelf().InSingletonScope();
+            Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel());
             Kernel.Bind<IAPIHelper>().ToConstant(new APIHelper());
         }
 

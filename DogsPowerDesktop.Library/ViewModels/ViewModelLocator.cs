@@ -21,6 +21,11 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public static ApplicationViewModel ApplicationViewModel => IoC.Application;
 
+        /// <summary>
+        /// The user manager view model
+        /// </summary>
+        public static UserManagerViewModel UserManagerViewModel => IoC.UserManager;
+
         #endregion
     }
 }

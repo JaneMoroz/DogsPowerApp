@@ -17,6 +17,11 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// The main page
         /// </summary>
-        Main = 1
+        Main = 1,
+
+        /// <summary>
+        /// The user manager page
+        /// </summary>
+        UserManager = 2,
     }
 }

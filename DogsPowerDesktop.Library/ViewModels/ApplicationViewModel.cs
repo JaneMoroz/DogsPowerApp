@@ -106,7 +106,8 @@ namespace DogsPowerDesktop.Library
             OnPropertyChanged(nameof(CurrentPage));
 
             // Show side menu or not?
-            SideMenuVisible = page == ApplicationPage.Main;
+            if (page == ApplicationPage.Main || page == ApplicationPage.UserManager)
+                SideMenuVisible = true;
 
         }
     }
