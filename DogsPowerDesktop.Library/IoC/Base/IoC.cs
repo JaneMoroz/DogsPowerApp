@@ -37,6 +37,11 @@ namespace DogsPowerDesktop.Library
         /// A shortcut to access the <see cref="IAPIHelper"/>
         /// </summary>
         public static IAPIHelper APIHelper => Get<IAPIHelper>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="IUserEndpoint"/>
+        /// </summary>
+        public static IUserEndpoint UserEndpoint => Get<IUserEndpoint>();
         #endregion
 
         #region Construction
@@ -59,8 +64,9 @@ namespace DogsPowerDesktop.Library
         {
             // Bind to a single instance of Application view model
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel()); // .ToSelf().InSingletonScope();
-            Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel());
             Kernel.Bind<IAPIHelper>().ToConstant(new APIHelper());
+            Kernel.Bind<IUserEndpoint>().ToConstant(new UserEndpoint(APIHelper));
+            Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel(UserEndpoint));
         }
 
         #endregion

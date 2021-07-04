@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace DogsPowerDesktop.Library
@@ -12,12 +13,18 @@ namespace DogsPowerDesktop.Library
     /// </summary>
     public class UserManagerViewModel : BaseViewModel
     {
+        #region Private Properties
+
+        private readonly IUserEndpoint _userEndpoint;
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
         /// List of users
         /// </summary>
-        public List<UserDetailsModel> Users { get; set; }
+        public List<UserDetailsModel> Users { get; set; } = new List<UserDetailsModel>();
 
         /// <summary>
         /// Selected user
@@ -27,7 +34,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of all roles
         /// </summary>
-        public List<string> Roles { get; set; } = new List<string> { "Admin", "Manager", "Groomer" };
+        public List<string> Roles { get; set; } = new List<string>();
 
         /// <summary>
         /// List of selected user roles
@@ -51,7 +58,6 @@ namespace DogsPowerDesktop.Library
         /// List of other available roles to user
         /// </summary>
         public List<string> AvailableRoles => Roles.Except(UserRoles).ToList();
-
         /// <summary>
         /// List of available roles to user in one line
         /// </summary>
@@ -142,7 +148,9 @@ namespace DogsPowerDesktop.Library
         #endregion
 
         #region Constructor
-
+        /// <summary>
+        /// Default constructor for design model
+        /// </summary>
         public UserManagerViewModel()
         {
             // Create the commands
@@ -152,6 +160,12 @@ namespace DogsPowerDesktop.Library
             DeleteRoleCommand = new RelayCommand(DeleteRole);
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
+        }
+
+        public UserManagerViewModel(IUserEndpoint userEndpoint) : this()
+        {
+
+            _userEndpoint = userEndpoint;
         }
 
         #endregion
@@ -194,8 +208,26 @@ namespace DogsPowerDesktop.Library
         public void Confirm()
         {
             Editing = false;
-            AddingRole = false;
-            DeletingRole = false;
+            if(AddingRole == true)
+            {
+                var selectedUser = SelectedUser;
+                var roleToAdd = SelectedRoleToAdd;
+
+                _userEndpoint.AddUserToRole(selectedUser.Id, roleToAdd);
+
+                AddingRole = false;
+            }
+            else
+            {
+                var selectedUser = SelectedUser;
+                var roleToDelete = SelectedRoleToDelete;
+
+                _userEndpoint.RemoveUserFromRole(selectedUser.Id, roleToDelete);
+
+
+                DeletingRole = false;
+            }
+
         }
 
         // Cancel add or delete a role action
@@ -204,6 +236,16 @@ namespace DogsPowerDesktop.Library
             Editing = false;
             AddingRole = false;
             DeletingRole = false;
+        }
+
+        // Load data after successful login
+        public async Task LoadAsync()
+        {
+            // Load users
+            Users = await _userEndpoint.GetAll();
+
+            // Load roles
+            Roles = await _userEndpoint.GetAllRoles();
         }
 
         #endregion

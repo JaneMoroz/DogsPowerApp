@@ -10,11 +10,21 @@ namespace DogsPowerDesktop.API
 {
     public class APIHelper : IAPIHelper
     {
-        private HttpClient _apiClient { get; set; }
+        // private readonly IConfiguration _config;
+        private HttpClient _apiClient;
 
         public APIHelper()
         {
+            // _config = config;
             InitializeClient();
+        }
+
+        public HttpClient ApiClient
+        {
+            get
+            {
+                return _apiClient;
+            }
         }
         private void InitializeClient()
         {
@@ -25,6 +35,12 @@ namespace DogsPowerDesktop.API
             _apiClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
+        /// <summary>
+        /// Try to login user with given username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public async Task<ApiResponse<AuthenticatedUserModel>> Authenticate(string username, string password)
         {
             var loginCredentials = new LoginCredentialsModel

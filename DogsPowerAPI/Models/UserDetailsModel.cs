@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
-namespace DogsPowerDesktop.API
+namespace DogsPowerAPI
 {
     /// <summary>
     /// Information about user
@@ -11,7 +11,7 @@ namespace DogsPowerDesktop.API
     public class UserDetailsModel
     {
         /// <summary>
-        /// User's id
+        /// User's Id
         /// </summary>
         public string Id { get; set; }
         /// <summary>
@@ -22,19 +22,7 @@ namespace DogsPowerDesktop.API
         // User's last name
         public string LastName { get; set; }
 
-        // User's full name
-        public string FullName => $"{FirstName} {LastName}";
-
         // User's roles
         public List<string> Roles { get; set; } = new List<string>();
-
-        // User's roles in one line
-        public string RoleList
-        {
-            get
-            {
-                return string.Join(", ", Roles);
-            }
-        }
     }
 }

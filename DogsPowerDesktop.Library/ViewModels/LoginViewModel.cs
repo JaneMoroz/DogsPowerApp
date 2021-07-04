@@ -97,6 +97,8 @@ namespace DogsPowerDesktop.Library
                     }
 
                     // All is OK
+                    // Load User Manager data
+                    await IoC.UserManager.LoadAsync();
                     // Go to main page
                     IoC.Application.GoToPage(ApplicationPage.Main);
                 }

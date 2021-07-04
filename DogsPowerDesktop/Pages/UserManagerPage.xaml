@@ -13,7 +13,7 @@
       FontFamily="{materialDesign:MaterialDesignFont}"          
       d:DesignHeight="700" d:DesignWidth="700"
       Title="UserManagerPage"
-      DataContext="{x:Static library:UserManagerDesignModel.Instance}">
+      d:DataContext="{x:Static library:UserManagerDesignModel.Instance}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -122,7 +122,7 @@
                 
                 <!--List of user roles or role combo box with buttons-->
                 <!--List of user roles-->
-                <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=UserRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left"/>
+                <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=UserRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
                 <!--Combo box of available roles to add-->
                 <ComboBox Visibility="{Binding AddingRole, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding AvailableRoles}" SelectedItem="{Binding Path=SelectedRoleToAdd, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
                 <!--Combo box of user roles to delete-->
