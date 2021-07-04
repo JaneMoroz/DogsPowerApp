@@ -67,7 +67,7 @@ namespace DogsPowerDesktop.Library
                 {
                     FirstName = "Terry",
                     LastName = "Preacher",
-                    Roles = new List<string>{"Manager"}
+                    Roles = new List<string>{"Manager", "Groomer", "Admin"}
                 },
 
                 new UserDetailsModel
