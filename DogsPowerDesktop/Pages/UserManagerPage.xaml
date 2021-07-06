@@ -131,7 +131,7 @@
                  <!--Available roles-->
                 <TextBlock Text="Available Roles:" FontSize="20" Margin="0 5 0 5" />
                 <!--List of availbale roles-->
-                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding AvailbaleRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailbaleRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
             </StackPanel>
         </Grid>
         <!--Back to todat's schedule button-->

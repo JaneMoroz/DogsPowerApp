@@ -50,7 +50,7 @@ namespace DogsPowerDesktop.Library
             {
                 if (UserRoles.Count > 0)
                     return string.Join(", ", UserRoles);
-                else return "No roles availble left";
+                else return "No roles availble";
             }
         }
 
@@ -215,6 +215,11 @@ namespace DogsPowerDesktop.Library
 
                 _userEndpoint.AddUserToRole(selectedUser.Id, roleToAdd);
 
+                SelectedUser.Roles.Add(roleToAdd);
+
+                OnPropertyChanged(nameof(UserRolesList));
+                OnPropertyChanged(nameof(AvailbaleRolesList));
+
                 AddingRole = false;
             }
             else
@@ -224,6 +229,10 @@ namespace DogsPowerDesktop.Library
 
                 _userEndpoint.RemoveUserFromRole(selectedUser.Id, roleToDelete);
 
+                SelectedUser.Roles.Remove(roleToDelete);
+
+                OnPropertyChanged(nameof(UserRolesList));
+                OnPropertyChanged(nameof(AvailbaleRolesList));
 
                 DeletingRole = false;
             }
