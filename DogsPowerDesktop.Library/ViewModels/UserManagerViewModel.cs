@@ -111,6 +111,11 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public bool DeletingRole { get; set; }
 
+        /// <summary>
+        /// Indicates if the user manager page is opened already
+        /// </summary>
+        public bool UserManagerIsOpen { get; set; }
+
         #endregion
 
         #region Public Commands
@@ -177,8 +182,21 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public void OpenUserManager()
         {
-            // Open user manager page
-            IoC.Application.GoToPage(ApplicationPage.UserManager);
+            // If user manager is not opened
+            if (UserManagerIsOpen == false)
+            {
+                // Open user manager page
+                IoC.Application.GoToPage(ApplicationPage.UserManager);
+                // Set boolean to true
+                UserManagerIsOpen = true;
+            }
+            // Else../
+            else
+            {
+                // Do nothing
+                return;
+            }
+            
         }
 
         /// <summary>
@@ -186,8 +204,14 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public void CloseUserManager()
         {
-            // Close user manager page
-            IoC.Application.GoToPage(ApplicationPage.Main);
+            // If user manager page is already open
+            if (UserManagerIsOpen == true)
+            {
+                // Close user manager page
+                IoC.Application.GoToPage(ApplicationPage.Main);
+                // Set boolean to false
+                UserManagerIsOpen = false;
+            }
         }
 
         // Start adding a role

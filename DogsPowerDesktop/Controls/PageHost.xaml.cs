@@ -96,8 +96,11 @@ namespace DogsPowerDesktop
             if (newPageFrame.Content is BasePage page &&
                 page.ToApplicationPage() == currentPage)
             {
-                // Just update the view model
-                page.ViewModelObject = currentPageViewModel;
+                if (currentPageViewModel != null)
+                {
+                    // Just update the view model
+                    page.ViewModelObject = currentPageViewModel;
+                }
 
                 return value;
             }
