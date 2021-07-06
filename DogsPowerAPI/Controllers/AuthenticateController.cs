@@ -116,44 +116,6 @@ namespace DogsPowerAPI
         #region Register
 
         /// <summary>
-        /// Tries to register for a new account on the server
-        /// </summary>
-        /// <param name="registerCredentials">The registration details</param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterCredentialsApiModel registerCredentials)
-        {
-            // Check for the existence of username and email
-            // if such user exists, return error message
-            var usernameExists = await _userManager.FindByNameAsync(registerCredentials.Username);
-            var emailExists = await _userManager.FindByEmailAsync(registerCredentials.Username);
-
-            if (usernameExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User with this username already exists!" });
-            else if (emailExists != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User with this email already exists!" });
-
-            // Create the desired user from the given details
-            ApplicationUser user = new ApplicationUser()
-            {
-                Email = registerCredentials.Email,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = registerCredentials.Username,
-                FirstName = registerCredentials.FirstName,
-                LastName = registerCredentials.LastName
-            };
-
-            // Try and create a user
-            var result = await _userManager.CreateAsync(user, registerCredentials.Password);
-
-            if(!result.Succeeded)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-        }
-
-        /// <summary>
         /// Tries to register for an admin account on the server
         /// </summary>
         /// <param name="registerCredentials">The registration details</param>

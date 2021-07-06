@@ -116,6 +116,35 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public bool UserManagerIsOpen { get; set; }
 
+        /// <summary>
+        /// Username of a new user
+        /// </summary>
+        public string Username { get; set; }
+
+        /// <summary>
+        /// First name of a new user
+        /// </summary>
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Last name of a new user
+        /// </summary>
+        public string LastName { get; set; }
+
+        /// <summary>
+        /// Email of a new user
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// A role choosen for a new user
+        /// </summary>
+        public string NewUserRoleSelected { get; set; }
+
+        /// <summary>
+        /// Indicates that a new user is being created
+        /// </summary>
+        public bool CreateIsRunning { get; set; }
         #endregion
 
         #region Public Commands
@@ -150,6 +179,11 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public ICommand CancelCommand { get; set; }
 
+        /// <summary>
+        /// The command to create a new user
+        /// </summary>
+        public ICommand CreateCommand { get; set; }
+
         #endregion
 
         #region Constructor
@@ -165,6 +199,7 @@ namespace DogsPowerDesktop.Library
             RemoveRoleCommand = new RelayCommand(RemoveRole);
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
+            CreateCommand = new RelayParameterizedCommand(async (parameter) => await CreateAsync(parameter));
         }
 
         public UserManagerViewModel(IUserEndpoint userEndpoint) : this()
@@ -279,7 +314,9 @@ namespace DogsPowerDesktop.Library
 
         }
 
-        // Cancel add or delete a role action
+        /// <summary>
+        /// Cancel add or delete a role action
+        /// </summary>
         public void Cancel()
         {
             Editing = false;
@@ -287,7 +324,10 @@ namespace DogsPowerDesktop.Library
             RemovingRole = false;
         }
 
-        // Load data after successful login
+        /// <summary>
+        /// Load data after successful login
+        /// </summary>
+        /// <returns></returns>
         public async Task LoadAsync()
         {
             // Load users
@@ -295,6 +335,78 @@ namespace DogsPowerDesktop.Library
 
             // Load roles
             Roles = await _userEndpoint.GetAllRoles();
+        }
+
+        /// <summary>
+        /// Attempts to create a new user
+        /// </summary>
+        /// <param name="parameter">The <see cref="SecureString"/> passed in from the view for the users password</param>
+        /// <returns></returns>
+        public async Task CreateAsync(object parameter)
+        {
+            await RunCommandAsync(() => CreateIsRunning, async () =>
+            {
+                try
+                {
+                    // Call the server and attempt to register with credentials
+                    ApiResponse response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
+
+                    // If there was no response, bad data, or  a response with a error message...
+                    if (response.ErrorMessage != null || (response as ApiResponse)?.Successful == false)
+                    {
+                        // Default error message
+                        // TODO: Localize strings
+                        var message = "";
+
+                        // If we got a response from the server...
+                        if (response.ErrorMessage != null)
+                            // Set message to servers response
+                            message = response.ErrorMessage;
+                        // If we have a result but no server response details at all...
+                        else if (response.ErrorMessage == null && response.Response == null)
+                            message = "Unknown error from server call";
+                        else
+                            message = "Unable to create a new user, try again later";
+
+                        // Display error
+                        await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                        {
+                            // TODO: Localize strings
+                            Title = "Creation Failed",
+                            Message = message,
+                            OkText = "Ok",
+                            NotOkText = "Back"
+                        });
+
+                        // We are done
+                        return;
+                    }
+
+                    // All is OK
+                    // Display a message
+                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                    {
+                        // TODO: Localize strings
+                        Title = "Creation Succeded",
+                        Message = "A new user's been created!",
+                        OkText = "Ok",
+                        NotOkText = "Back"
+                    });
+                }
+                catch (Exception ex)
+                {
+                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                    {
+                        // TODO: Localize strings
+                        Title = "Creation Failed",
+                        Message = ex.Message,
+                        OkText = "Ok",
+                        NotOkText = "Back"
+                    });
+                    return;
+
+                }
+            });
         }
 
         #endregion

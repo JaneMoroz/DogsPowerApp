@@ -36,6 +36,11 @@ namespace DogsPowerAPI
         /// </summary>
         public string Password { get; set; }
 
+        /// <summary>
+        /// The user's role
+        /// </summary>
+        public string Role { get; set; }
+
         #endregion
 
         #region Constructor

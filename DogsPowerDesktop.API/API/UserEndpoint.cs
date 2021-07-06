@@ -71,5 +71,16 @@ namespace DogsPowerDesktop.API
                 }
             }
         }
+
+        public async Task<ApiResponse> Create(string username, string firstName, string lastName, string email, string password, string role)
+        {
+            var data = new { username, firstName, lastName, email, password, role };
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/UserManager/Create", data))
+            {
+                var result = await response.Content.ReadAsAsync<ApiResponse>();
+                return result;
+            }
+        }
     }
 }

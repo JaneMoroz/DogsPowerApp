@@ -57,9 +57,6 @@ namespace DogsPowerDesktop.Library
         {
             await RunCommandAsync(() => LoginIsRunning, async () =>
             {
-                // TODO: Fake a login...
-                await Task.Delay(1000);
-
                 try
                 {
                     // Call the server and attempt to login with credentials
@@ -80,7 +77,7 @@ namespace DogsPowerDesktop.Library
                         else if (response.ErrorMessage == null && response.Response == null)
                             message = "Unknown error from server call";
                         else
-                            message = "Unable to login, tru again later";
+                            message = "Unable to login, try again later";
 
                         // Display error
                         await IoC.UI.ShowMessage(new MessageBoxDialogViewModel

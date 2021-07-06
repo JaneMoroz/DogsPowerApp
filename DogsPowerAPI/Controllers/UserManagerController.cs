@@ -135,5 +135,78 @@ namespace DogsPowerAPI.Controllers
 
         #endregion
 
+        #region Create a new User
+
+        /// <summary>
+        /// Tries to register for a new account on the server
+        /// </summary>
+        /// <param name="registerCredentials">The registration details</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Create")]
+        public async Task<ApiResponse> Create([FromBody] RegisterCredentialsApiModel registerCredentials)
+        {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "The user with this username or email already exists";
+
+            // The error response for a failed login
+            var errorResponse = new ApiResponse
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            // Check for the existence of username and email
+            // if such user exists, return error message
+            var usernameExists = await _userManager.FindByNameAsync(registerCredentials.Username);
+            var emailExists = await _userManager.FindByEmailAsync(registerCredentials.Username);
+
+            if (usernameExists != null)
+                return errorResponse;
+            else if (emailExists != null)
+                return errorResponse;
+
+            // Create the desired user from the given details
+            ApplicationUser user = new ApplicationUser()
+            {
+                Email = registerCredentials.Email,
+                SecurityStamp = Guid.NewGuid().ToString(),
+                UserName = registerCredentials.Username,
+                FirstName = registerCredentials.FirstName,
+                LastName = registerCredentials.LastName
+            };
+
+            // Try and create a user
+            var result = await _userManager.CreateAsync(user, registerCredentials.Password);
+
+            if (!result.Succeeded)
+            {
+                return new ApiResponse
+                {
+                    ErrorMessage = "User creation failed! Please check user details and try again."
+                };
+            }
+
+            // Create a role if it does't already exist
+            if (!await _roleManager.RoleExistsAsync(registerCredentials.Role))
+                await _roleManager.CreateAsync(new IdentityRole(registerCredentials.Role));
+
+            // Assign a choosen role to the user
+            if(await _roleManager.RoleExistsAsync(registerCredentials.Role))
+                result = await _userManager.AddToRoleAsync(user, registerCredentials.Role);
+
+            if (!result.Succeeded)
+            {
+                return new ApiResponse
+                {
+                    ErrorMessage = "Couldn's assign a choosen role to a new user. Try to do it manually."
+                };
+            }
+
+            return new ApiResponse();
+        }
+
+        #endregion
     }
 }

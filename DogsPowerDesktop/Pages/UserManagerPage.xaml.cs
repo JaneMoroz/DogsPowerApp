@@ -18,7 +18,7 @@ namespace DogsPowerDesktop
     /// <summary>
     /// Логика взаимодействия для UserManagerPage.xaml
     /// </summary>
-    public partial class UserManagerPage : BasePage<UserManagerViewModel>
+    public partial class UserManagerPage : BasePage<UserManagerViewModel>, IHavePassword
     {
         public UserManagerPage()
         {
@@ -33,9 +33,6 @@ namespace DogsPowerDesktop
             InitializeComponent();
         }
 
-        /// <summary>
-        /// The secure password for this user manager page to register a new user
-        /// </summary>
-        public SecureString SecurePassword => PasswordText.SecurePassword;
+        public SecureString SecurePassword => Password.SecurePassword;
     }
 }

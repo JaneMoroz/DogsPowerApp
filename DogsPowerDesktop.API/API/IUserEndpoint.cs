@@ -9,5 +9,6 @@ namespace DogsPowerDesktop.API
         Task<List<UserDetailsModel>> GetAll();
         Task<List<string>> GetAllRoles();
         Task RemoveUserFromRole(string userId, string roleName);
+        Task<ApiResponse> Create(string username, string firstName, string lastName, string email, string password, string role);
     }
 }
