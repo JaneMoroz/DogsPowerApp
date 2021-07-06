@@ -17,34 +17,53 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <!--Today's date-->
+            <!--Title-->
             <RowDefinition Height="Auto" />
             <!--List of users and register a new user form-->
-            <RowDefinition Height="Auto" />
-            <!--Back button-->
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--Today's date-->
-        <Grid Grid.Row="0" Margin="50 20 0 0">
-            <Border CornerRadius="7">
-                <!--Background color and its opacity-->
-                <Border.Background>
-                    <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
-                </Border.Background>
-            </Border>
-            <TextBlock Text="User Administration"
+        <!--Title and back button-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Back button-->
+            <Button Grid.Column="0" 
+                    Style="{StaticResource MaterialDesignFlatButton}" 
+                    Width="45" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Command="{Binding CloseUserManagerCommand}">
+                <materialDesign:PackIcon Kind="ArrowBack" Height="20" Width="20"
+                                         Foreground="{StaticResource DarkGreenBrush}"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+            
+            <!--Title-->
+            <Grid Grid.Column="1">
+                <Border CornerRadius="7">
+                    <!--Background color and its opacity-->
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="User Administration"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="20" Margin="0 5"/>
+            </Grid>
         </Grid>
+        
         <!--List of users and register a new user form-->
         <Grid Grid.Row="1" Margin="50 20 0 0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            
+
             <!--List of users-->
             <StackPanel Width="200" Grid.Column="0" Orientation="Vertical">
                 <TextBlock Text="Users:" FontSize="20" />
@@ -63,10 +82,10 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <!--Roles and add role button-->
                     <TextBlock Grid.Column="0" Text="Roles:" FontSize="20" Margin="0 5 0 5" />
-                    <!--Add and delete role button-->
+                    <!--Add and remove role button-->
                     <StackPanel Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}}" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                         <!--Add role button-->
                         <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
@@ -80,7 +99,7 @@
                         Command="{Binding AddRoleCommand}">
                             <materialDesign:PackIcon Kind="Add" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
-                        <!--Delete role button-->
+                        <!--Remove role button-->
                         <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}"
                         Background="{StaticResource MaterialDesignPaper}"
                         BorderBrush="{StaticResource MainGreyBrush}"
@@ -88,9 +107,9 @@
                         Width="30"
                         HorizontalAlignment="Right"
                         Margin="0 0 10 0"
-                        Visibility="{Binding CanDeleteRole, Converter={local:BooleanToVisiblityConverter}}"
-                        Command="{Binding DeleteRoleCommand}">
-                            <materialDesign:PackIcon Kind="Delete" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        Visibility="{Binding CanRemoveRole, Converter={local:BooleanToVisiblityConverter}}"
+                        Command="{Binding RemoveRoleCommand}">
+                            <materialDesign:PackIcon Kind="Minus" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </Button>
                     </StackPanel>
                     <!--Confirm and cancel button-->
@@ -119,25 +138,64 @@
                         </Button>
                     </StackPanel>
                 </Grid>
-                
+
                 <!--List of user roles or role combo box with buttons-->
                 <!--List of user roles-->
                 <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=UserRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
                 <!--Combo box of available roles to add-->
-                <ComboBox Visibility="{Binding AddingRole, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding AvailableRoles}" SelectedItem="{Binding Path=SelectedRoleToAdd, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
-                <!--Combo box of user roles to delete-->
-                <ComboBox Visibility="{Binding DeletingRole, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding UserRoles}" SelectedItem="{Binding Path=SelectedRoleToDelete, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
+                <ComboBox Visibility="{Binding AddingRole, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding Path=AvailableRoles}" SelectedItem="{Binding Path=SelectedRoleToAdd, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
+                <!--Combo box of user roles to remove-->
+                <ComboBox Visibility="{Binding RemovingRole, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding UserRoles}" SelectedItem="{Binding Path=SelectedRoleToRemove, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
 
-                 <!--Available roles-->
+                <!--Available roles-->
                 <TextBlock Text="Available Roles:" FontSize="20" Margin="0 5 0 5" />
                 <!--List of availbale roles-->
-                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailbaleRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailableRolesList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
             </StackPanel>
-        </Grid>
-        <!--Back to todat's schedule button-->
-        <Button Grid.Row="2" Content="Back" Margin="50 20 0 0" 
+
+            <!--Create a new user-->
+            <StackPanel Grid.Column="1" Margin="50 0 0 0" Orientation="Vertical">
+                <!--Create a new user-->
+                <TextBlock Text="Create a new user" FontSize="20" />
+                <!--Username-->
+                <TextBox materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
+                         materialDesign:HintAssist.Hint="Username"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--First name-->
+                <TextBox materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
+                         materialDesign:HintAssist.Hint="First name"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Last name-->
+                <TextBox materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
+                         materialDesign:HintAssist.Hint="Last name"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Email name-->
+                <TextBox materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
+                         materialDesign:HintAssist.Hint="Email"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Password-->
+                <PasswordBox x:Name="PasswordText"
+                             materialDesign:HintAssist.Foreground="{StaticResource MainGreyBrush}"
+                             materialDesign:HintAssist.Hint="Password"
+                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                             VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Choose Role-->
+                <TextBlock Text="Choose a role" FontSize="20" Margin="0 5 0 0" />
+                <!--Combo box of available roles-->
+                <ComboBox ItemsSource="{Binding Roles}"
+                          SelectedIndex="0" 
+                          Width="200"
+                          HorizontalAlignment="Left" Margin="0 5 0 0"/>
+                <!--Create button-->
+                <Button Content="Create" Margin="0 10 0 0"
                         Style="{StaticResource RegularButton}" 
                         Command="{Binding CloseUserManagerCommand}" 
                         HorizontalAlignment="Left"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </local:BasePage>

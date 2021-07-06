@@ -61,13 +61,13 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of available roles to user in one line
         /// </summary>
-        public string AvailbaleRolesList
+        public string AvailableRolesList
         {
             get
             {
                 if (AvailableRoles.Count > 0)
                     return string.Join(", ", AvailableRoles);
-                else return "No roles availble left";
+                else return "No roles availble";
             }
         }
 
@@ -79,7 +79,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// True if selected user's roles list is not empty
         /// </summary>
-        public bool CanDeleteRole => UserRoles.Count > 0; 
+        public bool CanRemoveRole => UserRoles.Count > 0; 
 
         /// <summary>
         /// Selected role to add to selected user's roles
@@ -87,9 +87,9 @@ namespace DogsPowerDesktop.Library
         public string SelectedRoleToAdd { get; set; }
 
         /// <summary>
-        /// Selected role to delete from selected user's roles
+        /// Selected role to remove from selected user's roles
         /// </summary>
-        public string SelectedRoleToDelete { get; set; }
+        public string SelectedRoleToRemove { get; set; }
 
         /// <summary>
         /// Indicates if the user's role list is in edit mode
@@ -107,9 +107,9 @@ namespace DogsPowerDesktop.Library
         public bool AddingRole { get; set; }
 
         /// <summary>
-        /// Indicates if the user wants to delete role
+        /// Indicates if the user wants to remove role
         /// </summary>
-        public bool DeletingRole { get; set; }
+        public bool RemovingRole { get; set; }
 
         /// <summary>
         /// Indicates if the user manager page is opened already
@@ -136,9 +136,9 @@ namespace DogsPowerDesktop.Library
         public ICommand AddRoleCommand { get; set; }
 
         /// <summary>
-        /// The command to delete role
+        /// The command to remove role
         /// </summary>
-        public ICommand DeleteRoleCommand { get; set; }
+        public ICommand RemoveRoleCommand { get; set; }
 
         /// <summary>
         /// The command to confirm action
@@ -162,7 +162,7 @@ namespace DogsPowerDesktop.Library
             OpenUserManagerCommand = new RelayCommand(OpenUserManager);
             CloseUserManagerCommand = new RelayCommand(CloseUserManager);
             AddRoleCommand = new RelayCommand(AddRole);
-            DeleteRoleCommand = new RelayCommand(DeleteRole);
+            RemoveRoleCommand = new RelayCommand(RemoveRole);
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
         }
@@ -190,11 +190,13 @@ namespace DogsPowerDesktop.Library
                 // Set boolean to true
                 UserManagerIsOpen = true;
             }
-            // Else../
+            // Else...
             else
             {
-                // Do nothing
-                return;
+                // Close user manager page
+                IoC.Application.GoToPage(ApplicationPage.Main);
+                // Set boolean to false
+                UserManagerIsOpen = false;
             }
             
         }
@@ -214,21 +216,27 @@ namespace DogsPowerDesktop.Library
             }
         }
 
-        // Start adding a role
+        /// <summary>
+        /// Start adding a role
+        /// </summary>
         public void AddRole()
         {
             Editing = true;
             AddingRole = true;
         }
 
-        // Start deleting role
-        public void DeleteRole()
+        /// <summary>
+        /// Start removing role
+        /// </summary>
+        public void RemoveRole()
         {
             Editing = true;
-            DeletingRole = true;
+            RemovingRole = true;
         }
 
-        // Confirm add or delete a role action
+        /// <summary>
+        /// Confirm adding or removing a role 
+        /// </summary>
         public void Confirm()
         {
             Editing = false;
@@ -241,24 +249,32 @@ namespace DogsPowerDesktop.Library
 
                 SelectedUser.Roles.Add(roleToAdd);
 
+                OnPropertyChanged(nameof(UserRoles));
+                OnPropertyChanged(nameof(AvailableRoles));
                 OnPropertyChanged(nameof(UserRolesList));
-                OnPropertyChanged(nameof(AvailbaleRolesList));
+                OnPropertyChanged(nameof(AvailableRolesList));
+                OnPropertyChanged(nameof(CanAddRole));
+                OnPropertyChanged(nameof(CanRemoveRole));
 
                 AddingRole = false;
             }
             else
             {
                 var selectedUser = SelectedUser;
-                var roleToDelete = SelectedRoleToDelete;
+                var roleToDelete = SelectedRoleToRemove;
 
                 _userEndpoint.RemoveUserFromRole(selectedUser.Id, roleToDelete);
 
                 SelectedUser.Roles.Remove(roleToDelete);
 
+                OnPropertyChanged(nameof(UserRoles));
+                OnPropertyChanged(nameof(AvailableRoles));
                 OnPropertyChanged(nameof(UserRolesList));
-                OnPropertyChanged(nameof(AvailbaleRolesList));
+                OnPropertyChanged(nameof(AvailableRolesList));
+                OnPropertyChanged(nameof(CanAddRole));
+                OnPropertyChanged(nameof(CanRemoveRole));
 
-                DeletingRole = false;
+                RemovingRole = false;
             }
 
         }
@@ -268,7 +284,7 @@ namespace DogsPowerDesktop.Library
         {
             Editing = false;
             AddingRole = false;
-            DeletingRole = false;
+            RemovingRole = false;
         }
 
         // Load data after successful login

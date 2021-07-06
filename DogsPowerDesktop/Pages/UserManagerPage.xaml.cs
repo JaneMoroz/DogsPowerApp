@@ -1,6 +1,7 @@
 ﻿using DogsPowerDesktop.Library;
 using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,5 +32,10 @@ namespace DogsPowerDesktop
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// The secure password for this user manager page to register a new user
+        /// </summary>
+        public SecureString SecurePassword => PasswordText.SecurePassword;
     }
 }
