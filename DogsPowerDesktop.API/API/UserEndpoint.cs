@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,13 +16,17 @@ namespace DogsPowerDesktop.API
             _apiHelper = apiHelper;
         }
 
-        public async Task<List<UserDetailsModel>> GetAll()
+        /// <summary>
+        /// Get all users
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ObservableCollection<UserDetailsModel>> GetAll()
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/UserManager/GetAllUsers"))
             {
                 if (response.IsSuccessStatusCode)
                 {
-                    var result = await response.Content.ReadAsAsync<List<UserDetailsModel>>();
+                    var result = await response.Content.ReadAsAsync<ObservableCollection<UserDetailsModel>>();
                     return result;
                 }
                 else
@@ -31,6 +36,10 @@ namespace DogsPowerDesktop.API
             }
         }
 
+        /// <summary>
+        /// Get all roles
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<string>> GetAllRoles()
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/UserManager/GetAllRoles"))
@@ -46,6 +55,13 @@ namespace DogsPowerDesktop.API
                 }
             }
         }
+
+        /// <summary>
+        /// Add a role to a user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         public async Task AddUserToRole(string userId, string roleName)
         {
             var data = new { userId, roleName };
@@ -59,6 +75,12 @@ namespace DogsPowerDesktop.API
             }
         }
 
+        /// <summary>
+        /// Remove a role from a user 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
         public async Task RemoveUserFromRole(string userId, string roleName)
         {
             var data = new { userId, roleName };
@@ -72,13 +94,23 @@ namespace DogsPowerDesktop.API
             }
         }
 
-        public async Task<ApiResponse> Create(string username, string firstName, string lastName, string email, string password, string role)
+        /// <summary>
+        /// Create a new user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        /// <returns></returns>
+        public async Task<ApiResponse<UserDetailsModel>> Create(string username, string firstName, string lastName, string email, string password, string role)
         {
             var data = new { username, firstName, lastName, email, password, role };
 
             using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/UserManager/Create", data))
             {
-                var result = await response.Content.ReadAsAsync<ApiResponse>();
+                var result = await response.Content.ReadAsAsync<ApiResponse<UserDetailsModel>>();
                 return result;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using DogsPowerDesktop.API;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of users
         /// </summary>
-        public List<UserDetailsModel> Users { get; set; } = new List<UserDetailsModel>();
+        public ObservableCollection<UserDetailsModel> Users { get; set; } = new ObservableCollection<UserDetailsModel>();
 
         /// <summary>
         /// Selected user
@@ -349,10 +350,10 @@ namespace DogsPowerDesktop.Library
                 try
                 {
                     // Call the server and attempt to register with credentials
-                    ApiResponse response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
+                    ApiResponse<UserDetailsModel> response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
 
                     // If there was no response, bad data, or  a response with a error message...
-                    if (response.ErrorMessage != null || (response as ApiResponse)?.Successful == false)
+                    if (response == null || response.ErrorMessage != null || (response as ApiResponse)?.Successful == false)
                     {
                         // Default error message
                         // TODO: Localize strings
@@ -383,6 +384,15 @@ namespace DogsPowerDesktop.Library
                     }
 
                     // All is OK
+                    // Update user listbox
+                    UpdateUsers(response.Response);
+
+                    // Clear all fields
+                    Username = "";
+                    FirstName = "";
+                    LastName = "";
+                    Email = "";
+
                     // Display a message
                     await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
                     {
@@ -407,6 +417,32 @@ namespace DogsPowerDesktop.Library
 
                 }
             });
+        }
+
+        #endregion
+
+        #region Private Helpers
+
+        /// <summary>
+        /// Update all fields, responsible for users, their roles and adding/removing roles
+        /// </summary>
+        /// <param name="newUser"></param>
+        private void UpdateUsers(UserDetailsModel newUser)
+        {
+            // Add a new user to users list
+            Users.Add(newUser);
+
+            // Get new user's roles
+            var newUserRoles = newUser.Roles;
+
+            // Check if there are new roles
+            foreach(var role in newUserRoles)
+            {
+                if (!Roles.Contains(role))
+                {
+                    Roles.Add(role);
+                }
+            }
         }
 
         #endregion

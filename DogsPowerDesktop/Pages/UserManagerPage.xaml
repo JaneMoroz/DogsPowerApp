@@ -69,7 +69,7 @@
             <StackPanel Width="200" Grid.Column="0" Orientation="Vertical">
                 <TextBlock Text="Users:" FontSize="20" />
                 <ListBox x:Name="UsersList" IsEnabled="{Binding NotEditing}" SelectedItem="{Binding Path=SelectedUser, Mode=TwoWay}" SelectedIndex="0"
-                         ItemsSource="{Binding Users}"
+                         ItemsSource="{Binding Path=Users, Mode=TwoWay, NotifyOnSourceUpdated=True}"
                          MaxHeight="200" 
                          ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>

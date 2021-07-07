@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -56,9 +57,9 @@ namespace DogsPowerAPI.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetAllUsers")]
-        public async Task<List<UserDetailsModel>> GetAllUsers()
+        public async Task<ObservableCollection<UserDetailsModel>> GetAllUsers()
         {
-            List<UserDetailsModel> output = new List<UserDetailsModel>();
+            var output = new ObservableCollection<UserDetailsModel>();
 
             var users = await _userManager.Users.ToListAsync();
 
@@ -144,14 +145,14 @@ namespace DogsPowerAPI.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("Create")]
-        public async Task<ApiResponse> Create([FromBody] RegisterCredentialsApiModel registerCredentials)
+        public async Task<ApiResponse<UserDetailsModel>> Create([FromBody] RegisterCredentialsApiModel registerCredentials)
         {
             // TODO: Localize all strings
             // The message when we fail to login
             var invalidErrorMessage = "The user with this username or email already exists";
 
             // The error response for a failed login
-            var errorResponse = new ApiResponse
+            var errorResponse = new ApiResponse<UserDetailsModel>
             {
                 // Set error message
                 ErrorMessage = invalidErrorMessage
@@ -182,13 +183,13 @@ namespace DogsPowerAPI.Controllers
 
             if (!result.Succeeded)
             {
-                return new ApiResponse
+                return new ApiResponse<UserDetailsModel>
                 {
                     ErrorMessage = "User creation failed! Please check user details and try again."
                 };
             }
 
-            // Create a role if it does't already exist
+            // Create a role if it doesn't already exist
             if (!await _roleManager.RoleExistsAsync(registerCredentials.Role))
                 await _roleManager.CreateAsync(new IdentityRole(registerCredentials.Role));
 
@@ -198,13 +199,26 @@ namespace DogsPowerAPI.Controllers
 
             if (!result.Succeeded)
             {
-                return new ApiResponse
+                return new ApiResponse<UserDetailsModel>
                 {
                     ErrorMessage = "Couldn's assign a choosen role to a new user. Try to do it manually."
                 };
             }
 
-            return new ApiResponse();
+            // Find just created user by email
+            var newUser = await _userManager.FindByEmailAsync(user.Email);
+            var newUserRoles = await _userManager.GetRolesAsync(newUser);
+
+            return new ApiResponse<UserDetailsModel>
+            {
+                Response = new UserDetailsModel
+                {
+                    Id = newUser.Id,
+                    FirstName = newUser.FirstName,
+                    LastName = newUser.LastName,
+                    Roles = newUserRoles.ToList()
+                }
+            };
         }
 
         #endregion

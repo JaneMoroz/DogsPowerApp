@@ -1,6 +1,7 @@
 ﻿using DogsPowerDesktop.API;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace DogsPowerDesktop.Library
@@ -26,7 +27,7 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public UserManagerDesignModel()
         {
-            Users = new List<UserDetailsModel>
+            Users = new ObservableCollection<UserDetailsModel>
             {
                 new UserDetailsModel
                 {
