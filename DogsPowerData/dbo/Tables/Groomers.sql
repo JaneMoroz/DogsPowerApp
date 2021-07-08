@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Groomers]
+(
+	[Id] NVARCHAR(128) NOT NULL PRIMARY KEY, 
+    [FirstName] NVARCHAR(50) NOT NULL, 
+    [LastName] NVARCHAR(50) NOT NULL, 
+    [Username] NVARCHAR(50) NOT NULL, 
+    [Email] NVARCHAR(256) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 0
+)

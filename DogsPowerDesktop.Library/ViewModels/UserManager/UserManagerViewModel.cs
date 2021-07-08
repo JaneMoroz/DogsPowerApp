@@ -392,6 +392,7 @@ namespace DogsPowerDesktop.Library
                     FirstName = "";
                     LastName = "";
                     Email = "";
+                    (parameter as IHavePassword).SecurePassword.Clear();
 
                     // Display a message
                     await IoC.UI.ShowMessage(new MessageBoxDialogViewModel

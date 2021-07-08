@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="a4b444e8-b555-4f99-9ba1-f90b8cd3642f" ChangeDateTime="07/07/2021 12:03:47">
+    <Property Name="ElementName" Value="[dbo].[Pets].[Kind]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Pets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Name" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bcf81752-e2a8-4297-b31e-25e6b4ba6c00" ChangeDateTime="07/07/2021 12:09:39">
+    <Property Name="ElementName" Value="[dbo].[Appointments].[Date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Appointments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DateAndTime" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="05a70b98-da09-4be5-95e5-a2c8840d9600" ChangeDateTime="07/07/2021 12:18:02">
+    <Property Name="ElementName" Value="[dbo].[Pets].[Weight]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Pets]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WeightId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="12843452-97ec-4663-88da-f0616a9fc231" ChangeDateTime="07/07/2021 12:21:53">
+    <Property Name="ElementName" Value="[dbo].[Services].[Weight]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Services]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WeightId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fc24fab4-889c-4822-a8fb-a35ab198e7fc" ChangeDateTime="07/07/2021 12:25:36">
+    <Property Name="ElementName" Value="[dbo].[Appointments].[DateAndTime]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Appointments]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Date" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e035d13a-acbe-4767-9a54-f4795f76d5e6" ChangeDateTime="07/08/2021 09:57:34">
+    <Property Name="ElementName" Value="[dbo].[Workdays].[Workdays]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Workdays]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Workday" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b6c23d1e-e620-4e54-be07-4796aacec517" ChangeDateTime="07/08/2021 09:59:55">
+    <Property Name="ElementName" Value="[dbo].[WorkSchedule].[WorkdaysId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkSchedule]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WorkdayId" />
+  </Operation>
+</Operations>

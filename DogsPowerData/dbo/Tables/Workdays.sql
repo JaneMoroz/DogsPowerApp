@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Workdays]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Workday] NVARCHAR(50) NOT NULL
+)
