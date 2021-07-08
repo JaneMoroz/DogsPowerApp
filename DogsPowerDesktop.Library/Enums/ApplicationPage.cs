@@ -23,5 +23,10 @@ namespace DogsPowerDesktop.Library
         /// The user manager page
         /// </summary>
         UserManager = 2,
+
+        /// <summary>
+        /// The user manager page
+        /// </summary>
+        Groomers = 3,
     }
 }

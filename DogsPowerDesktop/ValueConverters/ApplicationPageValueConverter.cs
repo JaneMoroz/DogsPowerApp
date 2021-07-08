@@ -23,6 +23,9 @@ namespace DogsPowerDesktop
                 case ApplicationPage.Main:
                     return new MainPage();
 
+                case ApplicationPage.Groomers:
+                    return new GroomersPage();
+
                 default:
                     Debugger.Break();
                     return null;

@@ -31,6 +31,9 @@ namespace DogsPowerDesktop
                 case ApplicationPage.UserManager:
                     return new UserManagerPage(viewModel as UserManagerViewModel);
 
+                case ApplicationPage.Groomers:
+                    return new GroomersPage(viewModel as GroomersViewModel);
+
                 default:
                     Debugger.Break();
                     return null;
@@ -53,6 +56,9 @@ namespace DogsPowerDesktop
 
             if (page is UserManagerPage)
                 return ApplicationPage.UserManager;
+
+            if (page is GroomersPage)
+                return ApplicationPage.Groomers;
 
             // Alert developer of issue
             Debugger.Break();

@@ -1,0 +1,205 @@
+﻿<local:BasePage x:TypeArguments="library:GroomersViewModel" x:Class="DogsPowerDesktop.GroomersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DogsPowerDesktop"
+      xmlns:library="clr-namespace:DogsPowerDesktop.Library;assembly=DogsPowerDesktop.Library"
+      mc:Ignorable="d"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.FontWeight="Medium"
+      TextElement.FontSize="13"
+      TextElement.Foreground="{StaticResource MainGreyBrush}"
+      FontFamily="{materialDesign:MaterialDesignFont}"          
+      d:DesignHeight="700" d:DesignWidth="700"          
+      x:Name="Page"          
+      Title="GroomersPage"
+      d:DataContext="{x:Static library:GroomersDesignModel.Instance}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Title-->
+            <RowDefinition Height="Auto" />
+            <!--List of grromers and selected groomer details-->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Title and back button-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Back button-->
+            <Button Grid.Column="0" 
+                    Style="{StaticResource MaterialDesignFlatButton}" 
+                    Width="45" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Command="{Binding CloseGroomersCommand}">
+                <materialDesign:PackIcon Kind="ArrowBack" Height="20" Width="20"
+                                         Foreground="{StaticResource DarkGreenBrush}"
+                                         HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+
+            <!--Title-->
+            <Grid Grid.Column="1">
+                <Border CornerRadius="7">
+                    <!--Background color and its opacity-->
+                    <Border.Background>
+                        <SolidColorBrush Color="{StaticResource DarkGreen}" Opacity="0.4" />
+                    </Border.Background>
+                </Border>
+                <TextBlock Text="Groomers"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="20" Margin="0 5"/>
+            </Grid>
+        </Grid>
+
+        <!--List of groomers and selected groomer details-->
+        <Grid Grid.Row="1" Margin="50 20 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!--List of groomers-->
+            <StackPanel Width="200" Grid.Column="0" Orientation="Vertical">
+                <TextBlock Text="Groomers:" FontSize="20" />
+                <ListBox x:Name="GroomersList" SelectedItem="{Binding Path=SelectedGroomer}" SelectedIndex="0"
+                         ItemsSource="{Binding Path=Groomers}"
+                         MaxHeight="400" 
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <!--Selected groomer details-->
+            <StackPanel Grid.Column="1" Margin="50 0 0 0" Orientation="Vertical">
+                <!--Create a new user-->
+                <TextBlock Text="Selected groomer details:" FontSize="20" />
+                <!--Username-->
+                <TextBlock Text="Username:"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <TextBlock Text="{Binding Username}"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--First name-->
+                <TextBlock Text="First Name:"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <TextBlock Text="{Binding FirstName}"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Last name-->
+                <TextBlock Text="Last Name:"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <TextBlock Text="{Binding LastName}"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <!--Email name-->
+                <TextBlock Text="Email:"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                <TextBlock Text="{Binding Email}"
+                         Style="{StaticResource MaterialDesignBody1TextBlock}"
+                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+
+                <!--Workdays-->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!--Workdays and add a workday button-->
+                    <TextBlock Grid.Column="0" Text="Workdays:" FontSize="20" Margin="0 5 0 5" />
+                    <!--Add and remove workday button-->
+                    <StackPanel Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}}" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <!--Add workday button-->
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}"
+                        Height="30"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Visibility="{Binding CanAddWorkday, Converter={local:BooleanToVisiblityConverter}}"
+                        Command="{Binding AddWorkdayCommand}">
+                            <materialDesign:PackIcon Kind="Add" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                        <!--Remove workday button-->
+                        <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}"
+                        Height="30"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Visibility="{Binding CanRemoveWorkday, Converter={local:BooleanToVisiblityConverter}}"
+                        Command="{Binding RemoveWorkdayCommand}">
+                            <materialDesign:PackIcon Kind="Minus" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                    </StackPanel>
+                    <!--Confirm and cancel button-->
+                    <StackPanel Visibility="{Binding Editing, Converter={local:BooleanToVisiblityConverter}}" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <!--Confirm button-->
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}"
+                        Height="30"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Command="{Binding ConfirmCommand}">
+                            <materialDesign:PackIcon Kind="Check" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                        <!--Cancel button-->
+                        <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        Background="{StaticResource MaterialDesignPaper}"
+                        BorderBrush="{StaticResource MainGreyBrush}"
+                        Height="30"
+                        Width="30"
+                        HorizontalAlignment="Right"
+                        Margin="0 0 10 0"
+                        Command="{Binding CancelCommand}">
+                            <materialDesign:PackIcon Kind="Close" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!--List of groomer workdays or workdays combo box with buttons-->
+                <!--List of groomer workdays-->
+                <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=GroomerWorkdaysList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                <!--Combo box of available workdays to add-->
+                <ComboBox Visibility="{Binding AddingWorkday, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding Path=AvailableWorkdays}" SelectedItem="{Binding Path=SelectedWorkdayToAdd, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
+                <!--Combo box of groomer workdays to remove-->
+                <ComboBox Visibility="{Binding RemovingWorkday, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding GroomerWorkdays}" SelectedItem="{Binding Path=SelectedWorkdayToRemove, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
+
+                <!--Available Workdays-->
+                <TextBlock Text="Available Workdays:" FontSize="20" Margin="0 5 0 5" />
+                <!--List of availbale workdays-->
+                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailableWorkdaysList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                
+                <!--Is Active-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Is Active:" FontSize="20"
+                         VerticalAlignment="Center" Margin="0 5 0 0" />
+                    <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                  Margin="10 5 0 0" VerticalAlignment="Center"
+                                  Command="{Binding SetStatusCommand}"
+                                  IsEnabled="{Binding IsActive, Mode=TwoWay}"
+                                  />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</local:BasePage>
