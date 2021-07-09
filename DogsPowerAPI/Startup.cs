@@ -34,7 +34,7 @@ namespace DogsPowerAPI
             services.AddControllers();
 
             // For Entity Framework
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DPAuthDb")));
 
             // For Identity
             // AddIdentity adds cookie based authentication

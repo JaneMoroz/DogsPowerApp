@@ -28,8 +28,6 @@ namespace DogsPowerAPI.Controllers
         /// </summary>
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        private readonly IConfiguration _configuration;
-
         #endregion
 
         #region Constructor
@@ -40,11 +38,10 @@ namespace DogsPowerAPI.Controllers
         /// <param name="userManager"></param>
         /// <param name="roleManager"></param>
         /// <param name="configuration"></param>
-        public UserManagerController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public UserManagerController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _configuration = configuration;
         }
 
         #endregion

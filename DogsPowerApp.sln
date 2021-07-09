@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsPowerAPI", "DogsPowerAP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsPowerDataManager.Library", "DogsPowerAPI.Library\DogsPowerDataManager.Library.csproj", "{7ECDDAFB-5AF6-48E9-9FD3-61B64C1BF9B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DogsPowerDesktop.API", "DogsPowerDesktop.API\DogsPowerDesktop.API.csproj", "{EFA5D107-19C8-41BB-A4B2-9887D2F746C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DogsPowerDesktop.API", "DogsPowerDesktop.API\DogsPowerDesktop.API.csproj", "{EFA5D107-19C8-41BB-A4B2-9887D2F746C0}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DogsPowerData", "DogsPowerData\DogsPowerData.sqlproj", "{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{EFA5D107-19C8-41BB-A4B2-9887D2F746C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA5D107-19C8-41BB-A4B2-9887D2F746C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA5D107-19C8-41BB-A4B2-9887D2F746C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C06A8BB-066C-4E37-9BD1-E93EBBA1EABD}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
