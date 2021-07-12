@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Input;
 
-namespace DogsPowerDesktop.API
+namespace DogsPowerDataManager.Library
 {
     /// <summary>
     /// Groomer's details
@@ -24,11 +23,6 @@ namespace DogsPowerDesktop.API
         /// Groomer's last name
         /// </summary>
         public string LastName { get; set; }
-
-        /// <summary>
-        /// Groomer's full name
-        /// </summary>
-        public string FullName => $"{FirstName} {LastName}";
 
         /// <summary>
         /// Groomer's username

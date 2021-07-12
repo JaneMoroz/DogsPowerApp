@@ -14,10 +14,18 @@ namespace DogsPowerDesktop.Library
     /// </summary>
     public class GroomersViewModel : BaseViewModel
     {
+        #region Private Properties
+
+        private readonly IGroomersEndpoint _groomersEndpoint;
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// List of groomers
         /// </summary>
-        public ObservableCollection<GroomerDetailsModel> Groomers { get; set; } = new ObservableCollection<GroomerDetailsModel>();
+        public List<GroomerDetailsModel> Groomers { get; set; } = new List<GroomerDetailsModel>();
 
         /// <summary>
         /// Selected groomer
@@ -32,22 +40,22 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// Username of a selected groomer
         /// </summary>
-        public string Username { get; set; }
+        public string Username => SelectedGroomer.Username;
 
         /// <summary>
         /// First name of a selected groomer
         /// </summary>
-        public string FirstName { get; set; }
+        public string FirstName => SelectedGroomer.FirstName;
 
         /// <summary>
         /// Last name of a selected groomer
         /// </summary>
-        public string LastName { get; set; }
+        public string LastName => SelectedGroomer.LastName;
 
         /// <summary>
         /// Email of a selected groomer
         /// </summary>
-        public string Email { get; set; }
+        public string Email => SelectedGroomer.Email;
 
         /// <summary>
         /// Indicates weather a groomer is active or not
@@ -57,6 +65,25 @@ namespace DogsPowerDesktop.Library
             get
             {
                 return SelectedGroomer.IsActive;
+            }
+            set
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Indicates if the groomer has a profile picture
+        /// </summary>
+        public bool HasProfilePicture
+        {
+            get
+            {
+                if (SelectedGroomer.ProfilePicture != null)
+                {
+                    return true;
+                }
+                return false;
             }
             set
             {
@@ -76,7 +103,9 @@ namespace DogsPowerDesktop.Library
         {
             get
             {
-                if (GroomerWorkdays.Count > 0)
+                if (GroomerWorkdays.Count > 1)
+                    return string.Join(", ", GroomerWorkdays);
+                else if (GroomerWorkdays.Count == 1 && !string.IsNullOrEmpty(GroomerWorkdays[0]))
                     return string.Join(", ", GroomerWorkdays);
                 else return "Workdays not set";
             }
@@ -144,11 +173,21 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public bool GroomersIsOpen { get; set; }
 
+        #endregion
+
+        #region Transactional Properties
+
+        /// <summary>
+        /// Indicates if the groomers page is in the process of opening
+        /// </summary>
+        public bool GroomersIsOpening { get; set; }
+
         /// <summary>
         /// Indicates that status changes is in proccess of saving
         /// </summary>
         public bool StatusIsSaving { get; set; }
 
+        #endregion
 
         #region Public Commands
 
@@ -189,20 +228,25 @@ namespace DogsPowerDesktop.Library
 
         #endregion
 
-        #region Constructor
+        #region Constructors
         /// <summary>
         /// Default constructor for design model
         /// </summary>
         public GroomersViewModel()
         {
             // Create the commands
-            OpenGroomersCommand = new RelayCommand(OpenGroomers);
+            OpenGroomersCommand = new RelayParameterizedCommand(async async => await OpenGroomersAsync());
             CloseGroomersCommand = new RelayCommand(CloseGroomers);
             AddWorkdayCommand = new RelayCommand(AddWorkday);
             RemoveWorkdayCommand = new RelayCommand(RemoveWorkday);
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
             SetStatusCommand = new RelayCommand(SetStatusAsync);
+        }
+
+        public GroomersViewModel(IGroomersEndpoint groomersEndpoint) : this()
+        {
+            _groomersEndpoint = groomersEndpoint;
         }
 
         #endregion
@@ -212,15 +256,20 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// Open groomers page
         /// </summary>
-        public void OpenGroomers()
+        public async Task OpenGroomersAsync()
         {
             // If groomers is not opened
             if (GroomersIsOpen == false)
             {
-                // Open groomers page
-                IoC.Application.GoToPage(ApplicationPage.Groomers);
-                // Set boolean to true
-                GroomersIsOpen = true;
+                await RunCommandAsync(() => GroomersIsOpening, async () =>
+                {
+                    // Load data
+                    await LoadAsync();
+                    // Open groomers page
+                    IoC.Application.GoToPage(ApplicationPage.Groomers);
+                    // Set boolean to true
+                    GroomersIsOpen = true;
+                });
             }
             // Else...
             else
@@ -348,18 +397,16 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
-        /// Load data after successful login
+        /// Load data when the groomers page is being open
         /// </summary>
         /// <returns></returns>
-        public void LoadAsync()
+        public async Task LoadAsync()
         {
-            // Load users
-            //Groomers = await _userEndpoint.GetAll();
-
-            // Load roles
-            //Workdays = await _userEndpoint.GetAllRoles();
+            Groomers = await _groomersEndpoint.GetAllGroomersAllDetails();
         }
 
         #endregion
+
+
     }
 }

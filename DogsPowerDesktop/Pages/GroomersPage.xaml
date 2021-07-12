@@ -59,7 +59,7 @@
         </Grid>
 
         <!--List of groomers and selected groomer details-->
-        <Grid Grid.Row="1" Margin="50 20 0 0">
+        <Grid Grid.Row="1" Margin="50 20 0 0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
@@ -68,7 +68,7 @@
             <!--List of groomers-->
             <StackPanel Width="200" Grid.Column="0" Orientation="Vertical">
                 <TextBlock Text="Groomers:" FontSize="20" />
-                <ListBox x:Name="GroomersList" SelectedItem="{Binding Path=SelectedGroomer}" SelectedIndex="0"
+                <ListBox x:Name="GroomersList" SelectedItem="{Binding Path=SelectedGroomer, Mode=TwoWay}" SelectedIndex="0"
                          ItemsSource="{Binding Path=Groomers}"
                          MaxHeight="400" 
                          ScrollViewer.VerticalScrollBarVisibility="Auto">
@@ -81,37 +81,35 @@
             </StackPanel>
 
             <!--Selected groomer details-->
-            <StackPanel Grid.Column="1" Margin="50 0 0 0" Orientation="Vertical">
-                <!--Create a new user-->
-                <TextBlock Text="Selected groomer details:" FontSize="20" />
+            <StackPanel Grid.Column="1" Margin="50 0 0 0" Orientation="Vertical" >
                 <!--Username-->
                 <TextBlock Text="Username:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
                 <TextBlock Text="{Binding Username}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" />
                 <!--First name-->
                 <TextBlock Text="First Name:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
                 <TextBlock Text="{Binding FirstName}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" />
                 <!--Last name-->
                 <TextBlock Text="Last Name:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
                 <TextBlock Text="{Binding LastName}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" />
                 <!--Email name-->
                 <TextBlock Text="Email:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
                 <TextBlock Text="{Binding Email}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" Margin="0 5 0 0" />
+                         VerticalAlignment="Center" Width="250" />
 
                 <!--Workdays-->
                 <Grid>
@@ -121,7 +119,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!--Workdays and add a workday button-->
-                    <TextBlock Grid.Column="0" Text="Workdays:" FontSize="20" Margin="0 5 0 5" />
+                    <TextBlock Grid.Column="0" Text="Workdays:" FontSize="20" />
                     <!--Add and remove workday button-->
                     <StackPanel Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}}" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
                         <!--Add workday button-->
@@ -178,16 +176,16 @@
 
                 <!--List of groomer workdays or workdays combo box with buttons-->
                 <!--List of groomer workdays-->
-                <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=GroomerWorkdaysList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                <TextBlock Visibility="{Binding Editing, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=GroomerWorkdaysList}" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" />
                 <!--Combo box of available workdays to add-->
                 <ComboBox Visibility="{Binding AddingWorkday, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding Path=AvailableWorkdays}" SelectedItem="{Binding Path=SelectedWorkdayToAdd, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
                 <!--Combo box of groomer workdays to remove-->
                 <ComboBox Visibility="{Binding RemovingWorkday, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" ItemsSource="{Binding GroomerWorkdays}" SelectedItem="{Binding Path=SelectedWorkdayToRemove, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True" Width="200" />
 
                 <!--Available Workdays-->
-                <TextBlock Text="Available Workdays:" FontSize="20" Margin="0 5 0 5" />
+                <TextBlock Text="Available Workdays:" FontSize="20" Margin="0 5 0 0" />
                 <!--List of availbale workdays-->
-                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailableWorkdaysList}" MaxWidth="150" TextWrapping="Wrap" Margin="0 5 0 5" HorizontalAlignment="Left" />
+                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Path=AvailableWorkdaysList}" MaxWidth="250" TextWrapping="Wrap" HorizontalAlignment="Left" />
                 
                 <!--Is Active-->
                 <StackPanel Orientation="Horizontal">
@@ -199,6 +197,27 @@
                                   IsEnabled="{Binding IsActive, Mode=TwoWay}"
                                   />
                 </StackPanel>
+                
+                <!--Profile Picture-->
+                <!--Ellipse-->
+                <Ellipse Visibility="{Binding HasProfilePicture, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}" Margin="0 10 0 0" x:Name="ellipse" Height="80" Width="80" Stroke="{StaticResource MainTextBrush}" StrokeThickness="5">
+                    <!--Image-->
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill" />
+                    </Ellipse.Fill>
+                </Ellipse>
+                <!--Add Picture Button-->
+                <Button Visibility="{Binding HasProfilePicture, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}" 
+                        Style="{StaticResource MaterialDesignOutlinedButton}" 
+                        Width="80" Height="80" 
+                        BorderBrush="{StaticResource MainTextBrush}" 
+                        Margin="0 10 0 0"
+                        Command="">
+                    <materialDesign:PackIcon Kind="ImageAdd" Width="40" Height="40" Foreground="{StaticResource MainTextBrush}" />
+                </Button>
+                
+                <!--Save Button-->
+                <Button Style="{StaticResource RegularButton}" Content="Save" Margin="0 5 0 0" Width="150" Height="30" />
             </StackPanel>
         </Grid>
     </Grid>

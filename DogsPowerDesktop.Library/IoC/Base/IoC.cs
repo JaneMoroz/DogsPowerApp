@@ -29,6 +29,11 @@ namespace DogsPowerDesktop.Library
         public static UserManagerViewModel UserManager => Get<UserManagerViewModel>();
 
         /// <summary>
+        /// A shortcut to access the <see cref="GroomersViewModel"/>
+        /// </summary>
+        public static GroomersViewModel Groomers => Get<GroomersViewModel>();
+
+        /// <summary>
         /// A shortcut to access the <see cref="IUIManager"/>
         /// </summary>
         public static IUIManager UI => Get<IUIManager>();
@@ -42,6 +47,11 @@ namespace DogsPowerDesktop.Library
         /// A shortcut to access the <see cref="IUserEndpoint"/>
         /// </summary>
         public static IUserEndpoint UserEndpoint => Get<IUserEndpoint>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="IGroomersEndpoint"/>
+        /// </summary>
+        public static IGroomersEndpoint GroomersEndpoint => Get<IGroomersEndpoint>();
         #endregion
 
         #region Construction
@@ -66,7 +76,9 @@ namespace DogsPowerDesktop.Library
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel()); // .ToSelf().InSingletonScope();
             Kernel.Bind<IAPIHelper>().ToConstant(new APIHelper());
             Kernel.Bind<IUserEndpoint>().ToConstant(new UserEndpoint(APIHelper));
-            Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel(UserEndpoint));
+            Kernel.Bind<IGroomersEndpoint>().ToConstant(new GroomersEndpoint(APIHelper));
+            Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel(UserEndpoint, GroomersEndpoint));
+            Kernel.Bind<GroomersViewModel>().ToConstant(new GroomersViewModel(GroomersEndpoint));
         }
 
         #endregion

@@ -27,7 +27,7 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public GroomersDesignModel()
         {
-            Groomers = new ObservableCollection<GroomerDetailsModel>
+            Groomers = new List<GroomerDetailsModel>
             {
                 new GroomerDetailsModel
                 {
@@ -36,7 +36,8 @@ namespace DogsPowerDesktop.Library
                     LastName = "Shepard",
                     Email = "contact@shepard.com",
                     Workdays = new List<string>{"Monday", "Wednesday"},
-                    IsActive = true
+                    IsActive = true,
+                    ProfilePicture = null
                 },
                 new GroomerDetailsModel
                 {
@@ -45,7 +46,8 @@ namespace DogsPowerDesktop.Library
                     LastName = "Eyre",
                     Email = "contact@eyre.com",
                     Workdays = new List<string>{"Thursday", "Friday", "Saturday", "Sunday"},
-                    IsActive = false
+                    IsActive = false,
+                    ProfilePicture = null
                 },
                 new GroomerDetailsModel
                 {
@@ -54,7 +56,8 @@ namespace DogsPowerDesktop.Library
                     LastName = "Redfield",
                     Email = "contact@redfield.com",
                     Workdays = new List<string>{"Monday", "Tuesday", "Thursday", "Friday"},
-                    IsActive = true
+                    IsActive = true,
+                    ProfilePicture = null
                 },
                 new GroomerDetailsModel
                 {
@@ -63,7 +66,8 @@ namespace DogsPowerDesktop.Library
                     LastName = "Liu",
                     Email = "contact@liu.com",
                     Workdays = new List<string>{"Friday", "Sunday"},
-                    IsActive = true
+                    IsActive = true,
+                    ProfilePicture = null
                 },
                 new GroomerDetailsModel
                 {
@@ -72,7 +76,8 @@ namespace DogsPowerDesktop.Library
                     LastName = "Potter",
                     Email = "contact@potter.com",
                     Workdays = new List<string>{"Tuesday", "Saturday", "Sunday"},
-                    IsActive = false
+                    IsActive = false,
+                    ProfilePicture = null
                 }
             };
         }

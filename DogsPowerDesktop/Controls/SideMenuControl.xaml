@@ -43,6 +43,9 @@
                     </ListViewItem>
                     <!--Groomers-->
                     <ListViewItem Margin="0 5">
+                        <ListViewItem.InputBindings>
+                            <MouseBinding MouseAction="LeftClick" Command="{Binding GroomersViewModel.OpenGroomersCommand, Source={x:Static library:ViewModelLocator.Instance}}" />
+                        </ListViewItem.InputBindings>
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Accounts" VerticalAlignment="Bottom" Margin="5" Height="30" Width="30" Foreground="{StaticResource MainTextBrush}"/>
                             <TextBlock Text="Groomers" VerticalAlignment="Bottom" FontSize="17" Margin="0 0 0 7" Foreground="{StaticResource MainGreyBrush}" />

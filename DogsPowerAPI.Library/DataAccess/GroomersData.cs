@@ -29,9 +29,62 @@ namespace DogsPowerDataManager.Library
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        public Task<List<GroomerDbModel>> GetAllGroomers()
+        public async Task<List<GroomerDbModel>> GetAllGroomers()
         {
-            return _sql.LoadData<GroomerDbModel, dynamic>("dbo.spGroomers_GetAllGroomers", new { }, "DPDataDb");
+            return await _sql.LoadData<GroomerDbModel, dynamic>("dbo.spGroomers_GetAllGroomers", new { }, "DPDataDb");
+        }
+
+        /// <summary>
+        /// Get all groomers and their details from groomers/workshedule/profile pictures tables
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns></returns>
+        public async Task<List<GroomerDetailsModel>> GetAllGroomersAllDetails()
+        {
+            // Get groomers, all their details
+            var groomers = await _sql.LoadData<GroomersDetailsDbModel, dynamic>("dbo.spGroomers_GetAllGroomersAllDetails", new { }, "DPDataDb");
+
+            var output = new List<GroomerDetailsModel>();
+
+            // Go through each groomer and create list of workdays for each
+            foreach (var g in groomers)
+            {
+                // If a groomer doesn't exist, create new one
+                if (output.FindIndex(x => x.Id == g.Id) == -1)
+                {
+                    var groomer = new GroomerDetailsModel
+                    {
+                        Id = g.Id,
+                        Username = g.Username,
+                        FirstName = g.FirstName,
+                        LastName = g.LastName,
+                        Email = g.Email,
+                        IsActive = g.IsActive,
+                        ProfilePicture = g.Picture,
+                        Workdays = new List<string>()
+                    };
+
+                    groomer.Workdays.Add(g.Workday);
+                    output.Add(groomer);
+                }
+                else
+                {
+                    // If he/she exists, just add workdays to his/het list of workdays
+                    var groomer = output.Find(x => x.Id == g.Id);
+                    groomer.Workdays.Add(g.Workday);
+                }
+            }
+
+            return output;
+        }
+
+        /// <summary>
+        /// Add a new groomer to a Groomers table
+        /// </summary>
+        /// <returns></returns>
+        public Task AddAGroomer(NewGroomerModel groomer)
+        {
+            return _sql.SaveData("dbo.spGroomers_AddAGroomer", groomer, "DPDataDb");
         }
     }
 }

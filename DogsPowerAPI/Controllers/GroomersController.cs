@@ -30,12 +30,37 @@ namespace DogsPowerAPI.Controllers
 
         #region Groomers
 
+        /// <summary>
+        /// Get all groomers from a groomers table
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetAllGroomers")]
         public async Task<List<GroomerDbModel>> GetAllGroomers()
         {
             return await _groomersData.GetAllGroomers();
+        }
 
+        /// <summary>
+        /// Get all groomers and their details from groomers/workshedule/profile pictures tables
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetAllGroomersAllDetails")]
+        public async Task<List<GroomerDetailsModel>> GetAllGroomersAllDetails()
+        {
+            return await _groomersData.GetAllGroomersAllDetails();
+        }
+
+        /// <summary>
+        /// Get all groomers from a groomers table
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("AddAGroomer")]
+        public async Task AddAGroomer(NewGroomerModel groomer)
+        {
+            await _groomersData.AddAGroomer(groomer);
         }
 
         #endregion

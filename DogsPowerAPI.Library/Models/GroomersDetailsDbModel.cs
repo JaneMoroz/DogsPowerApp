@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Input;
 
-namespace DogsPowerDesktop.API
+namespace DogsPowerDataManager.Library
 {
     /// <summary>
-    /// Groomer's details
+    /// A model for a groomer which we get from database
     /// </summary>
-    public class GroomerDetailsModel
+    public class GroomersDetailsDbModel
     {
         /// <summary>
         /// Groomer's id
@@ -26,11 +25,6 @@ namespace DogsPowerDesktop.API
         public string LastName { get; set; }
 
         /// <summary>
-        /// Groomer's full name
-        /// </summary>
-        public string FullName => $"{FirstName} {LastName}";
-
-        /// <summary>
         /// Groomer's username
         /// </summary>
         public string Username { get; set; }
@@ -41,9 +35,9 @@ namespace DogsPowerDesktop.API
         public string Email { get; set; }
 
         /// <summary>
-        /// Groomer's workdays
+        /// Groomer's workday
         /// </summary>
-        public List<string> Workdays { get; set; }
+        public string Workday { get; set; }
 
         /// <summary>
         /// Indicates weather a groomer is active or not
@@ -53,6 +47,6 @@ namespace DogsPowerDesktop.API
         /// <summary>
         /// Groomer's profile picture
         /// </summary>
-        public byte[] ProfilePicture { get; set; }
+        public byte[] Picture { get; set; }
     }
 }

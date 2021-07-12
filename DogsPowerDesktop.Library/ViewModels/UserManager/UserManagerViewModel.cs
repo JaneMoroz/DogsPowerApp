@@ -17,6 +17,7 @@ namespace DogsPowerDesktop.Library
         #region Private Properties
 
         private readonly IUserEndpoint _userEndpoint;
+        private readonly IGroomersEndpoint _groomersEndpoint;
 
         #endregion
 
@@ -146,6 +147,11 @@ namespace DogsPowerDesktop.Library
         /// Indicates that a new user is being created
         /// </summary>
         public bool CreateIsRunning { get; set; }
+
+        /// <summary>
+        /// A new role to create
+        /// </summary>
+        public string NewRoleToCreate { get; set; }
         #endregion
 
         #region Public Commands
@@ -203,10 +209,10 @@ namespace DogsPowerDesktop.Library
             CreateCommand = new RelayParameterizedCommand(async (parameter) => await CreateAsync(parameter));
         }
 
-        public UserManagerViewModel(IUserEndpoint userEndpoint) : this()
+        public UserManagerViewModel(IUserEndpoint userEndpoint, IGroomersEndpoint groomersEndpoint) : this()
         {
-
             _userEndpoint = userEndpoint;
+            _groomersEndpoint = groomersEndpoint;
         }
 
         #endregion
@@ -350,7 +356,7 @@ namespace DogsPowerDesktop.Library
                 try
                 {
                     // Call the server and attempt to register with credentials
-                    ApiResponse<UserDetailsModel> response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
+                    ApiResponse<UserDetailsModel> response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: !string.IsNullOrEmpty(NewRoleToCreate) ? NewRoleToCreate : NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
 
                     // If there was no response, bad data, or  a response with a error message...
                     if (response == null || response.ErrorMessage != null || (response as ApiResponse)?.Successful == false)
@@ -384,6 +390,28 @@ namespace DogsPowerDesktop.Library
                     }
 
                     // All is OK
+                    // Check if a new user has a role of "Groomer"
+                    if (NewUserRoleSelected == "Groomer")
+                    {
+                        try
+                        {
+                            // Add a new groomer to "Groomers" table
+                            await _groomersEndpoint.AddAGroomer(response.Response.Id, FirstName, LastName, Username, Email);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Display error
+                            await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                            {
+                                // TODO: Localize strings
+                                Title = "Creation of a groomer failed",
+                                Message = ex.Message,
+                                OkText = "Ok",
+                                NotOkText = "Back"
+                            });
+                        }
+                    }
+
                     // Update user listbox
                     UpdateUsers(response.Response);
 
@@ -392,6 +420,7 @@ namespace DogsPowerDesktop.Library
                     FirstName = "";
                     LastName = "";
                     Email = "";
+                    NewRoleToCreate = "";
                     (parameter as IHavePassword).SecurePassword.Clear();
 
                     // Display a message
