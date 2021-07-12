@@ -4,7 +4,10 @@ using System.Text;
 
 namespace DogsPowerDataManager.Library
 {
-    public class GroomerDetailsModel
+    /// <summary>
+    /// Model for a groomer from Groomers table
+    /// </summary>
+    public class GroomerDbModel
     {
         /// <summary>
         /// Groomer's id
@@ -22,11 +25,6 @@ namespace DogsPowerDataManager.Library
         public string LastName { get; set; }
 
         /// <summary>
-        /// Groomer's full name
-        /// </summary>
-        public string FullName => $"{FirstName} {LastName}";
-
-        /// <summary>
         /// Groomer's username
         /// </summary>
         public string Username { get; set; }
@@ -35,11 +33,6 @@ namespace DogsPowerDataManager.Library
         /// Groomer's email
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// Groomer's workdays
-        /// </summary>
-        public List<string> Workdays { get; set; }
 
         /// <summary>
         /// Indicates weather a groomer is active or not

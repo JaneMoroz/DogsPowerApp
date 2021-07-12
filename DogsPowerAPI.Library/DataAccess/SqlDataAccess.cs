@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DogsPowerDataManager.Library
 {
@@ -31,33 +32,53 @@ namespace DogsPowerDataManager.Library
 
         #endregion
 
-
-
-        public List<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
+        /// <summary>
+        /// Load data from Db
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="storedProcedure">Stored procedure</param>
+        /// <param name="parameters">Parameters</param>
+        /// <param name="connectionStringName">The name of Db</param>
+        /// <returns></returns>
+        public async Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                List<T> rows = connection.Query<T>(storedProcedure,
+                var rows = await connection.QueryAsync<T>(storedProcedure,
                                                    parameters,
-                                                   commandType: CommandType.StoredProcedure).ToList();
-                return rows;
+                                                   commandType: CommandType.StoredProcedure);
+                return rows.ToList();
             }
         }
 
-        public void SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
+        /// <summary>
+        /// Save data to db
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storedProcedure">Stored Procedure</param>
+        /// <param name="parameters">Parameters</param>
+        /// <param name="connectionStringName">The name of Db</param>
+        /// <returns></returns>
+        public async Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
         {
             string connectionString = GetConnectionString(connectionStringName);
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
         #region Private helpers
 
+        /// <summary>
+        /// Shortcut to get a connection string
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private string GetConnectionString(string name)
         {
             return _config.GetConnectionString(name);

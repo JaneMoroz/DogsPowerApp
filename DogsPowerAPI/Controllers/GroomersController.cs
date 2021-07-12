@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DogsPowerDataManager.Library;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,15 +14,29 @@ namespace DogsPowerAPI.Controllers
     public class GroomersController : ControllerBase
     {
         #region Private Members
-        /// <summary>
-        /// The manager for handling user creation, deletion, searching, roles etc...
-        /// </summary>
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        /// <summary>
-        /// The manager for handling roles management
-        /// </summary>
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IGroomersData _groomersData;
+
+        #endregion
+
+        #region Constructor
+
+        public GroomersController(IGroomersData groomersData)
+        {
+            _groomersData = groomersData;
+        }
+
+        #endregion
+
+        #region Groomers
+
+        [HttpGet]
+        [Route("GetAllGroomers")]
+        public async Task<List<GroomerDbModel>> GetAllGroomers()
+        {
+            return await _groomersData.GetAllGroomers();
+
+        }
 
         #endregion
     }

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DogsPowerDataManager.Library
 {
     public interface ISqlDataAccess
     {
-        List<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName);
-        void SaveData<T>(string storedProcedure, T parameters, string connectionStringName);
+        Task<List<T>> LoadData<T, U>(string storedProcedure, U parameters, string connectionStringName);
+        Task SaveData<T>(string storedProcedure, T parameters, string connectionStringName);
     }
 }

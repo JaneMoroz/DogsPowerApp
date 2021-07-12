@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DogsPowerDataManager.Library
 {
-    public class GroomersData
+    public class GroomersData : IGroomersData
     {
         #region Private Members
 
@@ -24,43 +25,13 @@ namespace DogsPowerDataManager.Library
         #endregion
 
         /// <summary>
-        /// Get all groomers with the list of theit workdays
+        /// Get all groomers from groomers table only
         /// </summary>
+        /// <param name="customerId"></param>
         /// <returns></returns>
-        public List<GroomerDetailsModel> GetAllGroomers()
+        public Task<List<GroomerDbModel>> GetAllGroomers()
         {
-            // Get all groomers
-            var listOfGroomers = _sql.LoadData<GroomerDetailsDbModel, dynamic>("dbo.spGroomers_GetAll", new { }, "DPDataDb");
-
-            var output = new List<GroomerDetailsModel>();
-
-            // Go through each groomer and create list of workdays fro each
-            foreach (var g in listOfGroomers)
-            {
-                if (output.FindIndex(x => x.Id == g.Id) == -1)
-                {
-                    var groomer = new GroomerDetailsModel
-                    {
-                        Id = g.Id,
-                        Username = g.Username,
-                        FirstName = g.FirstName,
-                        LastName = g.LastName,
-                        Email = g.Email,
-                        IsActive = g.IsActive,
-                        Workdays = new List<string>()
-                    };
-
-                    groomer.Workdays.Add(g.Workday);
-                    output.Add(groomer);
-                }
-                else
-                {
-                    var groomer = output.Find(x => x.Id == g.Id);
-                    groomer.Workdays.Add(g.Workday);
-                }  
-            }
-
-            return output;
+            return _sql.LoadData<GroomerDbModel, dynamic>("dbo.spGroomers_GetAllGroomers", new { }, "DPDataDb");
         }
     }
 }

@@ -16,6 +16,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using DogsPowerDataManager.Library;
 
 namespace DogsPowerAPI
 {
@@ -113,6 +114,9 @@ namespace DogsPowerAPI
                 });
             });
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddTransient<ISqlDataAccess, SqlDataAccess>();
+            services.AddTransient<IGroomersData, GroomersData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
