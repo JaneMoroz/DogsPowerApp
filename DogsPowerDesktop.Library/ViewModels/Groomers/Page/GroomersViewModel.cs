@@ -183,9 +183,9 @@ namespace DogsPowerDesktop.Library
         public bool GroomersIsOpening { get; set; }
 
         /// <summary>
-        /// Indicates that status changes is in proccess of saving
+        /// Indicates that saving is in progress
         /// </summary>
-        public bool StatusIsSaving { get; set; }
+        public bool SavingChanges { get; set; }
 
         #endregion
 
@@ -224,7 +224,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// The command to choose whether a groomer is active or not
         /// </summary>
-        public ICommand SetStatusCommand { get; set; }
+        public ICommand SaveCommand { get; set; }
 
         #endregion
 
@@ -241,7 +241,7 @@ namespace DogsPowerDesktop.Library
             RemoveWorkdayCommand = new RelayCommand(RemoveWorkday);
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
-            SetStatusCommand = new RelayCommand(SetStatusAsync);
+            SaveCommand = new RelayParameterizedCommand(async async => await SaveAsync());
         }
 
         public GroomersViewModel(IGroomersEndpoint groomersEndpoint) : this()
@@ -326,8 +326,6 @@ namespace DogsPowerDesktop.Library
                 var selectedGroomer = SelectedGroomer;
                 var workdayToAdd = SelectedWorkdayToAdd;
 
-                //_userEndpoint.AddUserToRole(selectedGroomer.Id, workdayToAdd);
-
                 selectedGroomer.Workdays.Add(workdayToAdd);
 
                 OnPropertyChanged(nameof(GroomerWorkdays));
@@ -343,8 +341,6 @@ namespace DogsPowerDesktop.Library
             {
                 var selectedGroomer = SelectedGroomer;
                 var workdayToDelete = SelectedWorkdayToRemove;
-
-                //_userEndpoint.RemoveUserFromRole(selectedGroomer.Id, workdayToDelete);
 
                 selectedGroomer.Workdays.Remove(workdayToDelete);
 
@@ -371,29 +367,15 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
-        /// Choose whether a groomer is active or not
+        /// Save all changes to database
         /// </summary>
-        public void SetStatusAsync()
+        /// <returns></returns>
+        public async Task SaveAsync()
         {
-            //await RunCommandAsync(() => StatusIsSaving, async () =>
-            //{
-            //    if (IsActive)
-            //    {
-            //        IsActive = false;
-            //    }
-            //    else
-            //        IsActive = true;
-
-            //    //TODO: Save changes (workdays and isActive to database)
-
-            //    // Update fields
-            //    var selectedGroomer = SelectedGroomer;
-
-            //    selectedGroomer.IsActive = IsActive;
-            //});
-            
-
-            
+            await RunCommandAsync(() => SavingChanges, async () =>
+            {
+                await _groomersEndpoint.UpdateWorkdays(SelectedGroomer.Id, SelectedGroomer.Workdays);
+            });
         }
 
         /// <summary>

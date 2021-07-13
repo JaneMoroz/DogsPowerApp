@@ -5,9 +5,9 @@ namespace DogsPowerDataManager.Library
 {
     public interface IGroomersData
     {
-        Task<List<GroomerDbModel>> GetAllGroomers();
         Task AddAGroomer(NewGroomerModel groomer);
-
+        Task<List<GroomerDbModel>> GetAllGroomers();
         Task<List<GroomerDetailsModel>> GetAllGroomersAllDetails();
+        Task UpdateWorkdays(UpdateWorkdaysModel model);
     }
 }

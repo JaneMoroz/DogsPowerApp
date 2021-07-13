@@ -70,5 +70,26 @@ namespace DogsPowerDesktop.API
                 }
             }
         }
+
+        public async Task UpdateWorkdays(string groomerId, List<string> groomerWorkdays)
+        {
+            var data = new UpdateWorkdaysModel
+            {
+                GroomerId = groomerId,
+                GroomerWorkdays = groomerWorkdays
+            };
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Groomers/UpdateWorkdays", data))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }

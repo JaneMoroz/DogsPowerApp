@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -85,6 +86,32 @@ namespace DogsPowerDataManager.Library
         public Task AddAGroomer(NewGroomerModel groomer)
         {
             return _sql.SaveData("dbo.spGroomers_AddAGroomer", groomer, "DPDataDb");
+        }
+
+        /// <summary>
+        /// Update a groomer's workdays
+        /// </summary>
+        /// <returns></returns>
+        public async Task UpdateWorkdays(UpdateWorkdaysModel model)
+        {
+            // Get currently saved workdays from WorkSchedule by groomer Id
+            var workdays = await _sql.LoadData<string, dynamic>("dbo.spWorkSchedule_GetById", new { GroomerId = model.GroomerId }, "DPDataDb");
+
+            // Compare current list of workdays with changed one, add/remove workdays to/from current list of workdays
+            foreach (var gw in model.GroomerWorkdays)
+            {
+                if (!workdays.Contains(gw))
+                {
+                    await _sql.SaveData("dbo.spWorkSchedule_Add", new { GroomerId = model.GroomerId, Workday = gw }, "DPDataDb");
+                }
+            }
+
+            var removedWorkdays = workdays.Except(model.GroomerWorkdays).ToList();
+
+            foreach (var rw in removedWorkdays)
+            {
+                await _sql.SaveData("dbo.spWorkSchedule_Remove", new { GroomerId = model.GroomerId, Workday = rw }, "DPDataDb");
+            }
         }
     }
 }

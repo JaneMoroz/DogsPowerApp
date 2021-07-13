@@ -63,6 +63,16 @@ namespace DogsPowerAPI.Controllers
             await _groomersData.AddAGroomer(groomer);
         }
 
+        /// <summary>
+        /// Update a groomer's workdays
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("UpdateWorkdays")]
+        public async Task UpdateWorkdays(UpdateWorkdaysModel model)
+        {
+            await _groomersData.UpdateWorkdays(model);
+        }
         #endregion
     }
 }
