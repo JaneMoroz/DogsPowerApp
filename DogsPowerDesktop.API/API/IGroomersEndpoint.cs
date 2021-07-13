@@ -8,5 +8,6 @@ namespace DogsPowerDesktop.API
         Task AddAGroomer(string id, string firstName, string lastName, string username, string email);
         Task<List<GroomerDetailsModel>> GetAllGroomersAllDetails();
         Task UpdateWorkdays(string groomerId, List<string> groomerWorkdays);
+        Task UploadPicture(string groomerId, byte[] picture);
     }
 }

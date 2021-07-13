@@ -12,6 +12,7 @@
     <None Remove="Images\Logo\icon.png" />
     <None Remove="Images\Logo\newIcon.png" />
     <None Remove="Images\Logo\NewLogo.png" />
+    <None Remove="Images\Samples\Catisimo.jpg" />
     <None Remove="Images\Samples\Groomer1.png" />
     <None Remove="Images\Samples\Groomer2.png" />
     <None Remove="Images\Samples\Groomer3.png" />
@@ -39,6 +40,7 @@
     <Resource Include="Images\Logo\icon.png" />
     <Resource Include="Images\Logo\newIcon.png" />
     <Resource Include="Images\Logo\newLogo.png" />
+    <Resource Include="Images\Samples\Catisimo.jpg" />
     <Resource Include="Images\Samples\Groomer1.png" />
     <Resource Include="Images\Samples\Groomer2.png" />
     <Resource Include="Images\Samples\Groomer3.png" />

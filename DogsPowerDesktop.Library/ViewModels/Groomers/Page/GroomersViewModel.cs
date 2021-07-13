@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -73,23 +75,24 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
-        /// Indicates if the groomer has a profile picture
+        /// Profile Picture
         /// </summary>
-        public bool HasProfilePicture
-        {
-            get
+        public byte[] ProfilePicture
+        { 
+            get 
             {
                 if (SelectedGroomer.ProfilePicture != null)
-                {
-                    return true;
-                }
-                return false;
+                    return SelectedGroomer.ProfilePicture;
+                else
+                    return null;
             }
             set
             {
 
             }
         }
+
+        public byte[] ProfilePictureToSave { get; set; }
 
         /// <summary>
         /// Selected groomer list of workdays
@@ -378,6 +381,7 @@ namespace DogsPowerDesktop.Library
                 {
                     // Try to save changes to database
                     await _groomersEndpoint.UpdateWorkdays(SelectedGroomer.Id, SelectedGroomer.Workdays);
+                    await _groomersEndpoint.UploadPicture(SelectedGroomer.Id, ProfilePictureToSave);
 
                     // All is well
                     // Show message
@@ -414,7 +418,5 @@ namespace DogsPowerDesktop.Library
         }
 
         #endregion
-
-
     }
 }

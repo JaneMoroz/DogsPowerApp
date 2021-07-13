@@ -71,6 +71,12 @@ namespace DogsPowerDesktop.API
             }
         }
 
+        /// <summary>
+        /// Update workdays
+        /// </summary>
+        /// <param name="groomerId"></param>
+        /// <param name="groomerWorkdays"></param>
+        /// <returns></returns>
         public async Task UpdateWorkdays(string groomerId, List<string> groomerWorkdays)
         {
             var data = new UpdateWorkdaysModel
@@ -80,6 +86,33 @@ namespace DogsPowerDesktop.API
             };
 
             using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Groomers/UpdateWorkdays", data))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Upload Picture
+        /// </summary>
+        /// <param name="groomerId"></param>
+        /// <param name="picture"></param>
+        /// <returns></returns>
+        public async Task UploadPicture(string groomerId, byte[] picture)
+        {
+            var data = new UploadProfilePictureModel
+            {
+                GroomerId = groomerId,
+                Picture = picture
+            };
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Groomers/UploadPicture", data))
             {
                 if (response.IsSuccessStatusCode)
                 {

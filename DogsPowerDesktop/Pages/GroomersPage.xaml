@@ -200,16 +200,19 @@
                 <!--Profile Picture-->
                 <!--Ellipse-->
                 <StackPanel Orientation="Horizontal">
-                    <StackPanel Visibility="{Binding HasProfilePicture, Converter={local:InvertBooleanToVisiblityConverter}}" Orientation="Vertical" Margin="0 10 0 0">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
+                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                        <Button Click="Browse_Click" Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
                             <materialDesign:PackIcon Kind="FolderImage" Height="20" Width="20" />
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
                             <materialDesign:PackIcon Kind="Downloads" Height="20" Width="20" />
                         </Button>
                     </StackPanel>
-                    <Ellipse Visibility="{Binding HasProfilePicture, Converter={local:BooleanToVisiblityConverter}}" Margin="30 10 0 0" x:Name="ellipse" Height="80" Width="80" Stroke="{StaticResource MainTextBrush}" StrokeThickness="5">
+                    <Ellipse Margin="30 10 0 0" x:Name="ellipse" Height="80" Width="80" Stroke="{StaticResource MainTextBrush}" StrokeThickness="5">
                         <!--Image-->
+                        <Ellipse.Fill>
+                            <ImageBrush x:Name="ProfilePicture" ImageSource="{Binding ProfilePicture, Converter={local:ByteToBitMapConverter}}" Stretch="UniformToFill" />
+                        </Ellipse.Fill>
                     </Ellipse>
                 </StackPanel>
                 

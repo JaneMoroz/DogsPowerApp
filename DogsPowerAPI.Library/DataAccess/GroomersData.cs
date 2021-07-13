@@ -115,5 +115,26 @@ namespace DogsPowerDataManager.Library
                 await _sql.SaveData("dbo.spWorkSchedule_Remove", new { GroomerId = model.GroomerId, Workday = rw }, "DPDataDb");
             }
         }
+
+        /// <summary>
+        /// Upload profile picture to database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task UploadPicture(UploadProfilePictureModel model)
+        {
+            // Check wether the groomer has a profile picture already
+            var groomerHasPicture = await _sql.LoadData<int, dynamic>("dbo.spProfilePictures_GetByGroomerId", new { GroomerId = model.GroomerId }, "DPDataDb");
+
+            // If he/she has
+            if(groomerHasPicture.Count != 0)
+            {
+                // Delete current picture
+                await _sql.SaveData("dbo.spProfilePictures_Delete", new { GroomerId = model.GroomerId }, "DPDataDb");
+            }
+
+            // Add new picture
+            await _sql.SaveData("dbo.spProfilePictures_Add", new { GroomerId = model.GroomerId, Picture = model.Picture }, "DPDataDb");
+        }
     }
 }

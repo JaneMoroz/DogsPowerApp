@@ -81,6 +81,9 @@
     <Build Include="dbo\StoredProcedures\spWorkSchedule_Add.sql" />
     <Build Include="dbo\StoredProcedures\spWorkSchedule_Remove.sql" />
     <Build Include="dbo\StoredProcedures\spWorkSchedule_GetById.sql" />
+    <Build Include="dbo\StoredProcedures\spProfilePictures_Add.sql" />
+    <Build Include="dbo\StoredProcedures\spProfilePicture_Delete.sql" />
+    <Build Include="dbo\StoredProcedures\spProfilePictures_GetByGroomerId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DogsPowerData.refactorlog" />

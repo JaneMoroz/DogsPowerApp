@@ -73,6 +73,18 @@ namespace DogsPowerAPI.Controllers
         {
             await _groomersData.UpdateWorkdays(model);
         }
+
+        /// <summary>
+        /// Upload Picture to database
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("UploadPicture")]
+        public async Task UploadPicture(UploadProfilePictureModel model)
+        {
+            await _groomersData.UploadPicture(model);
+        }
         #endregion
     }
 }
