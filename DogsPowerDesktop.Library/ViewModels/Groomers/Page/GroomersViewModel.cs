@@ -94,7 +94,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// Selected groomer list of workdays
         /// </summary>
-        public List<string> GroomerWorkdays => SelectedGroomer.Workdays;
+        public ObservableCollection<string> GroomerWorkdays => new ObservableCollection<string>(SelectedGroomer.Workdays);
 
         /// <summary>
         /// List of groomer workdays in one line
@@ -114,7 +114,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of other available workdays to groomer
         /// </summary>
-        public List<string> AvailableWorkdays => Workdays.Except(GroomerWorkdays).ToList();
+        public ObservableCollection<string> AvailableWorkdays => new ObservableCollection<string>(Workdays.Except(GroomerWorkdays).ToList());
         /// <summary>
         /// List of available workdays to groomer in one line
         /// </summary>
@@ -374,7 +374,33 @@ namespace DogsPowerDesktop.Library
         {
             await RunCommandAsync(() => SavingChanges, async () =>
             {
-                await _groomersEndpoint.UpdateWorkdays(SelectedGroomer.Id, SelectedGroomer.Workdays);
+                try
+                {
+                    // Try to save changes to database
+                    await _groomersEndpoint.UpdateWorkdays(SelectedGroomer.Id, SelectedGroomer.Workdays);
+
+                    // All is well
+                    // Show message
+                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                    {
+                        // TODO: Localize strings
+                        Title = "Saving changes",
+                        Message = "Changes are saved to database.",
+                        OkText = "Ok",
+                        NotOkText = "Back"
+                    });
+                }
+                catch (Exception ex)
+                {
+                    await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                    {
+                        // TODO: Localize strings
+                        Title = "Saving failed",
+                        Message = ex.Message,
+                        OkText = "Ok",
+                        NotOkText = "Back"
+                    });
+                }
             });
         }
 

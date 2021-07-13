@@ -64,8 +64,10 @@ namespace DogsPowerDataManager.Library
                         ProfilePicture = g.Picture,
                         Workdays = new List<string>()
                     };
-
-                    groomer.Workdays.Add(g.Workday);
+                    if (g.Workday != null)
+                    {
+                        groomer.Workdays.Add(g.Workday);
+                    }
                     output.Add(groomer);
                 }
                 else

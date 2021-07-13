@@ -41,7 +41,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of selected user roles
         /// </summary>
-        public List<string> UserRoles => SelectedUser.Roles;
+        public ObservableCollection<string> UserRoles => new ObservableCollection<string>(SelectedUser.Roles);
 
         /// <summary>
         /// List of user roles to user in one line
@@ -59,7 +59,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// List of other available roles to user
         /// </summary>
-        public List<string> AvailableRoles => Roles.Except(UserRoles).ToList();
+        public ObservableCollection<string> AvailableRoles => new ObservableCollection<string>(Roles.Except(UserRoles).ToList());
         /// <summary>
         /// List of available roles to user in one line
         /// </summary>
@@ -356,7 +356,7 @@ namespace DogsPowerDesktop.Library
                 try
                 {
                     // Call the server and attempt to register with credentials
-                    ApiResponse<UserDetailsModel> response = await IoC.UserEndpoint.Create(Username, FirstName, LastName, Email, role: !string.IsNullOrEmpty(NewRoleToCreate) ? NewRoleToCreate : NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
+                    ApiResponse<UserDetailsModel> response = await _userEndpoint.Create(Username, FirstName, LastName, Email, role: !string.IsNullOrEmpty(NewRoleToCreate) ? NewRoleToCreate : NewUserRoleSelected, password: (parameter as IHavePassword).SecurePassword.Unsecure());
 
                     // If there was no response, bad data, or  a response with a error message...
                     if (response == null || response.ErrorMessage != null || (response as ApiResponse)?.Successful == false)
