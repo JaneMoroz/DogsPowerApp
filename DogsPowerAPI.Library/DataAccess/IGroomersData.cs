@@ -10,5 +10,6 @@ namespace DogsPowerDataManager.Library
         Task<List<GroomerDetailsModel>> GetAllGroomersAllDetails();
         Task UpdateWorkdays(UpdateWorkdaysModel model);
         Task UploadPicture(UploadProfilePictureModel model);
+        Task UpdateStatus(UpdateStatusModel model);
     }
 }

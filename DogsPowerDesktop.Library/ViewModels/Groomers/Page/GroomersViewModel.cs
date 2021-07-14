@@ -74,6 +74,7 @@ namespace DogsPowerDesktop.Library
             }
         }
 
+
         /// <summary>
         /// Profile Picture
         /// </summary>
@@ -88,11 +89,9 @@ namespace DogsPowerDesktop.Library
             }
             set
             {
-
+                OnPropertyChanged(nameof(ProfilePicture));
             }
         }
-
-        public byte[] ProfilePictureToSave { get; set; }
 
         /// <summary>
         /// Selected groomer list of workdays
@@ -229,6 +228,11 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public ICommand SaveCommand { get; set; }
 
+        /// <summary>
+        /// The command to choose whether a groomer is active or not
+        /// </summary>
+        public ICommand SetStatusCommand { get; set; }
+
         #endregion
 
         #region Constructors
@@ -245,6 +249,7 @@ namespace DogsPowerDesktop.Library
             ConfirmCommand = new RelayCommand(Confirm);
             CancelCommand = new RelayCommand(Cancel);
             SaveCommand = new RelayParameterizedCommand(async async => await SaveAsync());
+            SetStatusCommand = new RelayCommand(SetStatus);
         }
 
         public GroomersViewModel(IGroomersEndpoint groomersEndpoint) : this()
@@ -370,6 +375,23 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
+        /// Set status to active or mot
+        /// </summary>
+        public void SetStatus()
+        {
+            if(IsActive == false)
+            {
+                SelectedGroomer.IsActive = true;
+                OnPropertyChanged(nameof(IsActive));
+            }
+            else
+            {
+                SelectedGroomer.IsActive = false;
+                OnPropertyChanged(nameof(IsActive));
+            }
+        }
+
+        /// <summary>
         /// Save all changes to database
         /// </summary>
         /// <returns></returns>
@@ -381,7 +403,11 @@ namespace DogsPowerDesktop.Library
                 {
                     // Try to save changes to database
                     await _groomersEndpoint.UpdateWorkdays(SelectedGroomer.Id, SelectedGroomer.Workdays);
-                    await _groomersEndpoint.UploadPicture(SelectedGroomer.Id, ProfilePictureToSave);
+                    await _groomersEndpoint.UploadPicture(SelectedGroomer.Id, SelectedGroomer.ProfilePicture);
+                    await _groomersEndpoint.UpdateStatus(SelectedGroomer.Id, SelectedGroomer.IsActive);
+
+                    // Update UI
+
 
                     // All is well
                     // Show message

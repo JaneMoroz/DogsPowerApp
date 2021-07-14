@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spProfilePicture_Delete]
+﻿CREATE PROCEDURE [dbo].[spProfilePictures_Delete]
 	@GroomerId nvarchar(128)
 AS
 BEGIN

@@ -136,5 +136,16 @@ namespace DogsPowerDataManager.Library
             // Add new picture
             await _sql.SaveData("dbo.spProfilePictures_Add", new { GroomerId = model.GroomerId, Picture = model.Picture }, "DPDataDb");
         }
+
+        /// <summary>
+        /// Update groomers's status
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public async Task UpdateStatus(UpdateStatusModel model)
+        {
+            // Update status
+            await _sql.SaveData("dbo.spGroomers_UpdateStatus", new { Id = model.GroomerId, IsActive = model.IsActive }, "DPDataDb");
+        }
     }
 }

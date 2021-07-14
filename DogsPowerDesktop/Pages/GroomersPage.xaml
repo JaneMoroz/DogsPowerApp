@@ -82,35 +82,50 @@
 
             <!--Selected groomer details-->
             <StackPanel Grid.Column="1" Margin="50 0 0 0" Orientation="Vertical" >
-                <!--Username-->
-                <TextBlock Text="Username:"
+                <TextBlock Text="Selected groomer details:" FontSize="20" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <!--Username-->
+                        <TextBlock Text="Username:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
-                <TextBlock Text="{Binding Username}"
+                         VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" FontWeight="Bold" />
+                        <!--First name-->
+                        <TextBlock Text="First Name:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" />
-                <!--First name-->
-                <TextBlock Text="First Name:"
+                         VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" FontWeight="Bold" />
+                        <!--Last name-->
+                        <TextBlock Text="Last Name:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
-                <TextBlock Text="{Binding FirstName}"
+                         VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" FontWeight="Bold" />
+                        <!--Email name-->
+                        <TextBlock Text="Email:"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" />
-                <!--Last name-->
-                <TextBlock Text="Last Name:"
+                         VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <!--Username-->
+                        <TextBlock Text="{Binding Username}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
-                <TextBlock Text="{Binding LastName}"
+                         VerticalAlignment="Center" Width="220" TextWrapping="Wrap" />
+                        <!--First name-->
+                        <TextBlock Text="{Binding FirstName}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" />
-                <!--Email name-->
-                <TextBlock Text="Email:"
+                         VerticalAlignment="Center" Width="220" TextWrapping="Wrap" />
+                        <!--Last name-->
+                        <TextBlock Text="{Binding LastName}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" FontWeight="Bold" />
-                <TextBlock Text="{Binding Email}"
+                         VerticalAlignment="Center" Width="220" TextWrapping="Wrap" />
+                        <!--Email name-->
+                        <TextBlock Text="{Binding Email}"
                          Style="{StaticResource MaterialDesignBody1TextBlock}"
-                         VerticalAlignment="Center" Width="250" />
-
+                         VerticalAlignment="Center" Width="220" TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+                
                 <!--Workdays-->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -193,29 +208,25 @@
                          VerticalAlignment="Center" Margin="0 5 0 0" />
                     <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
                                   Margin="10 5 0 0" VerticalAlignment="Center"
-                                  IsEnabled="{Binding IsActive, Mode=TwoWay}"
+                                  Command="{Binding SetStatusCommand}"
+                                  IsChecked="{Binding IsActive, Mode=TwoWay}"
                                   />
                 </StackPanel>
                 
                 <!--Profile Picture-->
-                <!--Ellipse-->
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                        <Button Click="Browse_Click" Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
-                            <materialDesign:PackIcon Kind="FolderImage" Height="20" Width="20" />
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
-                            <materialDesign:PackIcon Kind="Downloads" Height="20" Width="20" />
-                        </Button>
-                    </StackPanel>
-                    <Ellipse Margin="30 10 0 0" x:Name="ellipse" Height="80" Width="80" Stroke="{StaticResource MainTextBrush}" StrokeThickness="5">
-                        <!--Image-->
-                        <Ellipse.Fill>
-                            <ImageBrush x:Name="ProfilePicture" ImageSource="{Binding ProfilePicture, Converter={local:ByteToBitMapConverter}}" Stretch="UniformToFill" />
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </StackPanel>
-                
+                <GroupBox Style="{StaticResource RegularGroupBox}" Height="160" Width="140" Margin="0 10 0 0" >
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <Button Click="Browse_Click" Style="{StaticResource MaterialDesignFlatButton}" Width="50" Foreground="{StaticResource MainGreyBrush}" HorizontalAlignment="Left" >
+                                <materialDesign:PackIcon Kind="FolderImage" Height="20" Width="20" />
+                            </Button>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Image x:Name="ProfilePicture" 
+                               Source="{Binding ProfilePicture, Converter={local:ByteToBitMapConverter}, Mode=TwoWay }" 
+                               Stretch="UniformToFill" />
+                </GroupBox>
+
 
                 <!--Save Button-->
                 <Button Style="{StaticResource RegularButton}" 

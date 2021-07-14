@@ -124,5 +124,32 @@ namespace DogsPowerDesktop.API
                 }
             }
         }
+
+        /// <summary>
+        /// Update status
+        /// </summary>
+        /// <param name="groomerId"></param>
+        /// <param name="isActive"></param>
+        /// <returns></returns>
+        public async Task UpdateStatus(string groomerId, bool isActive)
+        {
+            var data = new UpdateStatusModel
+            {
+                GroomerId = groomerId,
+                IsActive = isActive
+            };
+
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Groomers/UpdateStatus", data))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }
