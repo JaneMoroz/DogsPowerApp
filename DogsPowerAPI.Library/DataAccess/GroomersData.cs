@@ -127,14 +127,16 @@ namespace DogsPowerDataManager.Library
             var groomerHasPicture = await _sql.LoadData<int, dynamic>("dbo.spProfilePictures_GetByGroomerId", new { GroomerId = model.GroomerId }, "DPDataDb");
 
             // If he/she has
-            if(groomerHasPicture.Count != 0)
+            if (groomerHasPicture.Count != 0)
             {
-                // Delete current picture
-                await _sql.SaveData("dbo.spProfilePictures_Delete", new { GroomerId = model.GroomerId }, "DPDataDb");
+                // UpdatePicture
+                await _sql.SaveData("dbo.spProfilePictures_Update", new { GroomerId = model.GroomerId, Picture = model.Picture }, "DPDataDb");
             }
-
-            // Add new picture
-            await _sql.SaveData("dbo.spProfilePictures_Add", new { GroomerId = model.GroomerId, Picture = model.Picture }, "DPDataDb");
+            else
+            {
+                // Add new picture
+                await _sql.SaveData("dbo.spProfilePictures_Add", new { GroomerId = model.GroomerId, Picture = model.Picture }, "DPDataDb");
+            }
         }
 
         /// <summary>
