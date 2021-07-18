@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Services]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] NVARCHAR(50) NOT NULL, 
+    [ServiceName] NVARCHAR(50) NOT NULL, 
     [WeightId] INT NULL, 
     [Duration] TIME NOT NULL, 
     [Price] MONEY NOT NULL, 

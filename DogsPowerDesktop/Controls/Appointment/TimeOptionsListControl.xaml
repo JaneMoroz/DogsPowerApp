@@ -12,46 +12,32 @@
              TextElement.Foreground="{StaticResource MainGreyBrush}"
              Background="{StaticResource MaterialDesignPaper}"
              FontFamily="{materialDesign:MaterialDesignFont}">
-    <Grid DataContext="{x:Static library:TimeOptionsListDesignModel.Instance}" Background="Transparent">
-        <ItemsControl ItemsSource="{Binding List}">
-            <ItemsControl.ItemsPanel>
+    <Grid d:DataContext="{x:Static library:TimeOptionsListDesignModel.Instance}" Background="Transparent">
+        <ListBox ItemsSource="{Binding List}" SelectedItem="{Binding SelectedOption}" SelectionMode="Single">
+            <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <!--Uniform Grid Design-->
-                    <UniformGrid Rows="4">
+                    <UniformGrid Columns="6">
                         <UniformGrid.LayoutTransform>
                             <TransformGroup>
-                                <RotateTransform Angle="-90" />
-                                <ScaleTransform ScaleY="-1" />
                             </TransformGroup>
                         </UniformGrid.LayoutTransform>
                     </UniformGrid>
                 </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="LayoutTransform">
-                        <Setter.Value>
-                            <TransformGroup>
-                                <ScaleTransform ScaleY="-1" />
-                                <RotateTransform Angle="90" />
-                            </TransformGroup>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
+            </ListBox.ItemsPanel>
             <!-- Scroll Bar -->
-            <ItemsControl.Template>
+            <ListBox.Template>
                 <ControlTemplate TargetType="ItemsControl">
                     <ScrollViewer VerticalScrollBarVisibility="Visible">
-                        <ItemsPresenter/>
+                        <ItemsPresenter Margin="0 0 10 0"/>
                     </ScrollViewer>
                 </ControlTemplate>
-            </ItemsControl.Template>
-            <ItemsControl.ItemTemplate>
+            </ListBox.Template>
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <local:TimeOptionsListItemControl />
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

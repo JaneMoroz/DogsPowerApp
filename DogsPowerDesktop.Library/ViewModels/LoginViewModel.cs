@@ -96,6 +96,10 @@ namespace DogsPowerDesktop.Library
                     // All is OK
                     // Load User Manager data
                     await IoC.UserManager.LoadAsync();
+
+                    // Load new appointmant services and options
+                    await IoC.Appointment.LoadAsync();
+
                     // Go to main page
                     IoC.Application.GoToPage(ApplicationPage.Main);
                 }

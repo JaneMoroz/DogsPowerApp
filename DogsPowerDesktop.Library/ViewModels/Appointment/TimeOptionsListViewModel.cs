@@ -13,5 +13,19 @@ namespace DogsPowerDesktop.Library
         ///  List of appointments
         /// </summary>
         public List<TimeOptionsListItemViewModel> List { get; set; }
+
+        private TimeOptionsListItemViewModel _selectedOption;
+        public TimeOptionsListItemViewModel SelectedOption
+        {
+            get
+            {
+                return _selectedOption;
+            }
+            set
+            {
+                _selectedOption = value;
+                IoC.Appointment.Time = _selectedOption.AvailableTime;
+            }
+        }
     }
 }

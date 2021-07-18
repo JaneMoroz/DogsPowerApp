@@ -24,7 +24,7 @@ END
 
 IF not exists (SELECT * FROM dbo.Weights)
 BEGIN
-    INSERT INTO dbo.Weights([Name])
+    INSERT INTO dbo.Weights(WeightName)
     VALUES ('14.9 lbs. & Under'),
     ('15.0 - 29.9 lbs.'),
     ('30.0 - 44.9 lbs.'),
@@ -62,7 +62,7 @@ BEGIN
     ('19:30:00')
 END
 
-IF not exists (SELECT * FROM dbo.Services)
+IF not exists (SELECT * FROM dbo.[Services])
 BEGIN
 
      DECLARE @weightId1 int;
@@ -79,21 +79,21 @@ BEGIN
      DECLARE @weightId12 int;
      DECLARE @weightId13 int;
 
-     SELECT @weightId1 = Id FROM dbo.Weights WHERE [Name] = '14.9 lbs. & Under';
-     SELECT @weightId2 = Id FROM dbo.Weights WHERE [Name] = '15.0 - 29.9 lbs.';
-     SELECT @weightId3 = Id FROM dbo.Weights WHERE [Name] = '30.0 - 44.9 lbs.';
-     SELECT @weightId4 = Id FROM dbo.Weights WHERE [Name] = '45.0 - 59.9 lbs.';
-     SELECT @weightId5 = Id FROM dbo.Weights WHERE [Name] = '60.0 - 74.9 lbs.';
-     SELECT @weightId6 = Id FROM dbo.Weights WHERE [Name] = '75.0 - 89.9 lbs.';
-     SELECT @weightId7 = Id FROM dbo.Weights WHERE [Name] = '90.0 - 104.9 lbs.';
-     SELECT @weightId8 = Id FROM dbo.Weights WHERE [Name] = '105.0 - 119.9 lbs.';
-     SELECT @weightId9 = Id FROM dbo.Weights WHERE [Name] = '120.0 - 134.9 lbs.';
-     SELECT @weightId10 = Id FROM dbo.Weights WHERE [Name] = '135.0 - 149.9 lbs.';
-     SELECT @weightId11 = Id FROM dbo.Weights WHERE [Name] = '150.0 - 174.9 lbs.';
-     SELECT @weightId12 = Id FROM dbo.Weights WHERE [Name] = '175.0 - 189.9 lbs.';
-     SELECT @weightId13 = Id FROM dbo.Weights WHERE [Name] = '190.0 - 204.9 lbs.';
+     SELECT @weightId1 = Id FROM dbo.Weights WHERE [WeightName] = '14.9 lbs. & Under';
+     SELECT @weightId2 = Id FROM dbo.Weights WHERE [WeightName] = '15.0 - 29.9 lbs.';
+     SELECT @weightId3 = Id FROM dbo.Weights WHERE [WeightName] = '30.0 - 44.9 lbs.';
+     SELECT @weightId4 = Id FROM dbo.Weights WHERE [WeightName] = '45.0 - 59.9 lbs.';
+     SELECT @weightId5 = Id FROM dbo.Weights WHERE [WeightName] = '60.0 - 74.9 lbs.';
+     SELECT @weightId6 = Id FROM dbo.Weights WHERE [WeightName] = '75.0 - 89.9 lbs.';
+     SELECT @weightId7 = Id FROM dbo.Weights WHERE [WeightName] = '90.0 - 104.9 lbs.';
+     SELECT @weightId8 = Id FROM dbo.Weights WHERE [WeightName] = '105.0 - 119.9 lbs.';
+     SELECT @weightId9 = Id FROM dbo.Weights WHERE [WeightName] = '120.0 - 134.9 lbs.';
+     SELECT @weightId10 = Id FROM dbo.Weights WHERE [WeightName] = '135.0 - 149.9 lbs.';
+     SELECT @weightId11 = Id FROM dbo.Weights WHERE [WeightName] = '150.0 - 174.9 lbs.';
+     SELECT @weightId12 = Id FROM dbo.Weights WHERE [WeightName] = '175.0 - 189.9 lbs.';
+     SELECT @weightId13 = Id FROM dbo.Weights WHERE [WeightName] = '190.0 - 204.9 lbs.';
 
-    INSERT INTO dbo.Services([Name], WeightId, Duration, Price)
+    INSERT INTO dbo.[Services](ServiceName, WeightId, Duration, Price)
     VALUES ('Basic Full Groom', @weightId1, '1:15:00', 60),
     ('Basic Full Groom', @weightId2, '1:15:00', 65),
     ('Basic Full Groom', @weightId3, '1:30:00', 70),
@@ -122,6 +122,6 @@ BEGIN
     ('Just A Bath', @weightId12, '3:00:00', 170),
     ('Just A Bath', @weightId13, '3:00:00', 185)
 
-    INSERT INTO dbo.Services([Name], Duration, Price)
+    INSERT INTO dbo.[Services](ServiceName, Duration, Price)
     VALUES ('A La Carte Nail Trim/File', '00:20:00', 25)
 END

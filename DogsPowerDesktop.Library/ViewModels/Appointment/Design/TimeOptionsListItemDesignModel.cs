@@ -25,8 +25,7 @@ namespace DogsPowerDesktop.Library
         /// </summary>
         public TimeOptionsListItemDesignModel()
         {
-            var dateNow = DateTime.Now;
-            AvailableTime = new DateTimeOffset(dateNow.Year, dateNow.Month, dateNow.Day, 9, 30, 0, TimeSpan.Zero);
+            AvailableTime = new TimeSpan(09, 00, 00);
         }
 
         #endregion

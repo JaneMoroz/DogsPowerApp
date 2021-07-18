@@ -85,6 +85,14 @@
     <Build Include="dbo\StoredProcedures\spProfilePictures_Delete.sql" />
     <Build Include="dbo\StoredProcedures\spProfilePictures_GetByGroomerId.sql" />
     <Build Include="dbo\StoredProcedures\spGroomers_UpdateStatus.sql" />
+    <Build Include="dbo\StoredProcedures\spCustomers_AddACustomer.sql" />
+    <Build Include="dbo\StoredProcedures\spPets_AddAPet.sql" />
+    <Build Include="dbo\StoredProcedures\spServices_GetServicesAndWeightOptions.sql" />
+    <Build Include="dbo\StoredProcedures\spProfilePictures_Update.sql" />
+    <Build Include="dbo\StoredProcedures\spWorkSchedule_FindAvailableGroomersByWorkday.sql" />
+    <Build Include="dbo\StoredProcedures\spAppointments_GetByGroomerIdAndDate.sql" />
+    <Build Include="dbo\StoredProcedures\spTimeOptions_GetAll.sql" />
+    <Build Include="dbo\StoredProcedures\spAppointments_Add.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DogsPowerData.refactorlog" />

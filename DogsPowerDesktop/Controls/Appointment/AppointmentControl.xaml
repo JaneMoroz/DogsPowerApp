@@ -58,31 +58,35 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <!--Service-->
-                    <ComboBox x:Name="service" Grid.Column="0" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10 5 0 0">
-                        <ComboBoxItem IsSelected="True" Content="Basic Full Groom" />
-                        <ComboBoxItem Content="Just A Bath (Coat Length 1''-4'')" />
-                        <ComboBoxItem Content="Just A Bath (Coat Length 5''+)" />
-                        <ComboBoxItem Content="Premium Full Groom" />
+                    <ComboBox ItemsSource="{Binding Path=Services}"
+                              SelectedItem="{Binding Path=SelectedService, Mode=TwoWay}" SelectedIndex="0"
+                              Grid.Column="0" Width="256" 
+                              HorizontalAlignment="Left" 
+                              VerticalAlignment="Center" 
+                              Margin="10 5 0 0"
+                              >
                     </ComboBox>
                     <!--Other details and price-->
-                    <ComboBox x:Name="weight" Grid.Column="1" Width="256" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20 5 0 0">
-                        <ComboBoxItem IsSelected="True" Content="14.9 lbs. And Under" />
-                        <ComboBoxItem Content="15.0-29.9 lbs." />
-                        <ComboBoxItem Content="30-44.9 lbs." />
-                        <ComboBoxItem Content="45.0 - 59.9 lbs." />
+                    <ComboBox ItemsSource="{Binding Path=Options}"
+                              SelectedItem="{Binding Path=SelectedOption, Mode=TwoWay}" SelectedIndex="0" IsSynchronizedWithCurrentItem="True"
+                              Grid.Column="1" 
+                              Width="256" 
+                              HorizontalAlignment="Left" VerticalAlignment="Center" 
+                              Margin="20 5 0 0">
                     </ComboBox>
                     <!--Price and time-->
                     <StackPanel Grid.Column="2" Orientation="Vertical" Margin="20 5 0 0" VerticalAlignment="Center">
-                        <TextBlock Text="$60" />
-                        <TextBlock Text="1 hr 15 mins" />
+                        <TextBlock Text="{Binding Path=DisplayPrice}" Width="70" />
+                        <TextBlock Text="{Binding Path=DisplayDuration}" Width="70" />
                     </StackPanel>
                     <!--Date-->
                     <Grid Grid.Column="3">
-                        <DatePicker materialDesign:HintAssist.Hint="Pick Date"
+                        <DatePicker SelectedDate="{Binding DisplayDate, TargetNullValue=''}"
+                                    materialDesign:HintAssist.Hint="Pick Date"
                                     HorizontalAlignment="Left"
                                     MaxWidth="300"
                                     Margin="15 0 0 0" 
-                                    VerticalAlignment="Center"/>
+                                    VerticalAlignment="Center" />
                     </Grid>
                 </Grid>
                 
@@ -101,14 +105,29 @@
                     <!--Choose time:-->
                     <TextBlock Grid.Row="0" Text="Choose time:" Margin="10 10 0 0" />
                     <!--Availbale Time-->
-                    <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="10 5 0 0">
-                        <local:TimeOptionsListControl />
+                    <Grid Height="150" Visibility="{Binding SearchIsDone, Converter={local:BooleanToVisiblityConverter}, ConverterParameter=True}"
+                          Grid.Row="1" HorizontalAlignment="Left" Margin="10 5 0 0">
+                        <local:TimeOptionsListControl DataContext="{Binding Path=TimeOptions, Mode=TwoWay}" 
+                                                      HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    </Grid>
+                    <!--Search Button-->
+                    <Grid Grid.Row="1" Height="150" Width="830" HorizontalAlignment="Left" Margin="10 5 0 0">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                Background="{StaticResource MaterialDesignPaper}"
+                                BorderBrush="{StaticResource MainGreyBrush}"
+                                Height="100"
+                                Width="100"
+                                Margin="0 0 10 0"
+                                Visibility="{Binding SearchIsDone, Converter={local:InvertBooleanToVisiblityConverter}, ConverterParameter=True}"
+                                Command="{Binding SearchTimeOptionsCommand}">
+                            <materialDesign:PackIcon Kind="Search" Foreground="{StaticResource MainGreyBrush}" VerticalAlignment="Center" HorizontalAlignment="Center" Height="60" Width="60" />
+                        </Button>
                     </Grid>
                 </Grid>
                 
                 <!--Enter details:-->
                 <Grid Grid.Row="3">
-                    <local:CustomerDetailsControl Margin="10 10 5 10"/>
+                    <local:CustomerDetailsControl DataContext="{Binding CustomerDetails}" Margin="10 10 5 10"/>
                 </Grid>
                 
                 <!--Button-->

@@ -29,28 +29,28 @@ namespace DogsPowerDesktop.Library
             {
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 9, 30, 0, TimeSpan.Zero)
+                    AvailableTime = new TimeSpan(09, 30, 00)
                 },
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 10, 30, 0, TimeSpan.Zero)
+                    AvailableTime = new TimeSpan(10, 30, 00)
                 },
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 12, 00, 0, TimeSpan.Zero)
+                    AvailableTime = new TimeSpan(12, 30, 00)
                 },
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 15, 30, 0, TimeSpan.Zero)
+                    AvailableTime = new TimeSpan(13, 00, 00)
                 },
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 16, 30, 0, TimeSpan.Zero)
+                    AvailableTime = new TimeSpan(15, 00, 00)
                 },
                 new TimeOptionsListItemViewModel
                 {
-                    AvailableTime = new DateTimeOffset(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 17, 45, 0, TimeSpan.Zero)
-                }
+                    AvailableTime = new TimeSpan(18, 30, 00)
+                },
             };
         }
 

@@ -34,6 +34,11 @@ namespace DogsPowerDesktop.Library
         public static GroomersViewModel Groomers => Get<GroomersViewModel>();
 
         /// <summary>
+        /// A shortcut to access the <see cref="AppointmentViewModel"/>
+        /// </summary>
+        public static AppointmentViewModel Appointment => Get<AppointmentViewModel>();
+
+        /// <summary>
         /// A shortcut to access the <see cref="IUIManager"/>
         /// </summary>
         public static IUIManager UI => Get<IUIManager>();
@@ -52,6 +57,11 @@ namespace DogsPowerDesktop.Library
         /// A shortcut to access the <see cref="IGroomersEndpoint"/>
         /// </summary>
         public static IGroomersEndpoint GroomersEndpoint => Get<IGroomersEndpoint>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="IAppointmentEndpoint"/>
+        /// </summary>
+        public static IAppointmentEndpoint AppointmentEndpoint => Get<IAppointmentEndpoint>();
         #endregion
 
         #region Construction
@@ -77,8 +87,10 @@ namespace DogsPowerDesktop.Library
             Kernel.Bind<IAPIHelper>().ToConstant(new APIHelper());
             Kernel.Bind<IUserEndpoint>().ToConstant(new UserEndpoint(APIHelper));
             Kernel.Bind<IGroomersEndpoint>().ToConstant(new GroomersEndpoint(APIHelper));
+            Kernel.Bind<IAppointmentEndpoint>().ToConstant(new AppointmentEndpoint(APIHelper));
             Kernel.Bind<UserManagerViewModel>().ToConstant(new UserManagerViewModel(UserEndpoint, GroomersEndpoint));
             Kernel.Bind<GroomersViewModel>().ToConstant(new GroomersViewModel(GroomersEndpoint));
+            Kernel.Bind<AppointmentViewModel>().ToConstant(new AppointmentViewModel(AppointmentEndpoint));
         }
 
         #endregion

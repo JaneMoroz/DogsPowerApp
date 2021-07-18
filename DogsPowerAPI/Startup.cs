@@ -117,6 +117,7 @@ namespace DogsPowerAPI
 
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
             services.AddTransient<IGroomersData, GroomersData>();
+            services.AddTransient<IAppointmentData, AppointmentData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

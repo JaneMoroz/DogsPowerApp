@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[Weights]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Name] NVARCHAR(50) NOT NULL
+    [WeightName] NVARCHAR(50) NOT NULL
 )

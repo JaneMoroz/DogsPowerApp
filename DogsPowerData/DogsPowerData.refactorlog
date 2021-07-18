@@ -56,4 +56,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="Picture" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="f2af4db8-eadd-497d-8759-cf0c86c68f2e" ChangeDateTime="07/14/2021 14:23:17">
+    <Property Name="ElementName" Value="[dbo].[Weights].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Weights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ServiceName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6807d6be-d9ba-4713-9c71-3ef0c04547f0" ChangeDateTime="07/14/2021 14:23:28">
+    <Property Name="ElementName" Value="[dbo].[Weights].[ServiceName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Weights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WeightName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="31458318-055b-4335-b813-8f9f3d582325" ChangeDateTime="07/14/2021 14:23:34">
+    <Property Name="ElementName" Value="[dbo].[Services].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Services]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ServiceName" />
+  </Operation>
 </Operations>

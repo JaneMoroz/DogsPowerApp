@@ -70,7 +70,7 @@
             </TextBox>
             <TextBox 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Width="256" 
+                     Width="170" 
                      Margin="30 10 10 0"
                      materialDesign:HintAssist.Hint="Pet's name"
                      materialDesign:HintAssist.Foreground="{StaticResource MainTextBrush}"

@@ -22,8 +22,6 @@ namespace DogsPowerDesktop
         public CustomerDetailsControl()
         {
             InitializeComponent();
-
-            DataContext = new CustomerDetailsViewModel();
         }
     }
 }

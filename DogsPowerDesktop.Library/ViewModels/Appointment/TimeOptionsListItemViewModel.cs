@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace DogsPowerDesktop.Library
 {
@@ -9,11 +10,14 @@ namespace DogsPowerDesktop.Library
     /// </summary>
     public class TimeOptionsListItemViewModel : BaseViewModel
     {
+        #region Public Properties
         /// <summary>
         /// Availbale time option
         /// </summary>
-        public DateTimeOffset AvailableTime { get; set; }
+        public TimeSpan AvailableTime { get; set; }
 
-        public string Time => $"{AvailableTime.UtcDateTime:HH:mm}";
+        public string Time => string.Format("{0:00}:{1:00}", AvailableTime.Hours, AvailableTime.Minutes);
+
+        #endregion
     }
 }

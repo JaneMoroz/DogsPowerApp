@@ -1,6 +1,7 @@
 ﻿using DogsPowerDesktop.Library;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,7 +24,12 @@ namespace DogsPowerDesktop
         {
             InitializeComponent();
 
-            DataContext = new AppointmentViewModel();
+            // If we are in design mode...
+            if (DesignerProperties.GetIsInDesignMode(this))
+                // Create new instance of appointment view model
+                DataContext = new AppointmentViewModel(IoC.AppointmentEndpoint);
+            else
+                DataContext = IoC.Appointment;
         }
     }
 }
