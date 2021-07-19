@@ -50,24 +50,12 @@ namespace DogsPowerDataManager.Library
                         Options = new List<WeightPriceDurationModel>()
                     };
 
-                    if (s.WeightName != null)
+                    service.Options.Add(new WeightPriceDurationModel
                     {
-                        service.Options.Add(new WeightPriceDurationModel
-                        {
-                            WeightName = s.WeightName,
-                            Price = s.Price,
-                            Duration = s.Duration
-                        });
-                    }
-                    else
-                    {
-                        service.Options.Add(new WeightPriceDurationModel
-                        {
-                            WeightName = "All weights",
-                            Price = s.Price,
-                            Duration = s.Duration
-                        });
-                    }
+                        WeightName = s.WeightName,
+                        Price = s.Price,
+                        Duration = s.Duration
+                    });
                     output.Add(service);
                 }
                 else

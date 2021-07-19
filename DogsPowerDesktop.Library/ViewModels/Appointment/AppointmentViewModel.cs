@@ -319,9 +319,9 @@ namespace DogsPowerDesktop.Library
             {
                 try
                 {
-                    if (!string.IsNullOrEmpty(CustomerDetails.FirstName) || !string.IsNullOrEmpty(CustomerDetails.LastName) 
-                        || !string.IsNullOrEmpty(CustomerDetails.Phone) || !string.IsNullOrEmpty(CustomerDetails.Email)
-                        || !string.IsNullOrEmpty(CustomerDetails.PetName) || !(SelectedDate < DateTimeOffset.Now.AddHours(1)))
+                    if (!string.IsNullOrEmpty(CustomerDetails.FirstName) && !string.IsNullOrEmpty(CustomerDetails.LastName) 
+                        && !string.IsNullOrEmpty(CustomerDetails.Phone) && !string.IsNullOrEmpty(CustomerDetails.Email)
+                        && !string.IsNullOrEmpty(CustomerDetails.PetName) && !(SelectedDate < DateTimeOffset.Now.AddHours(1)))
                     {
                         var groomerId = GroomersTimeOptions.Where(x => x.AvailableTimeOptions.Contains(Time)).FirstOrDefault().GroomerId;
 

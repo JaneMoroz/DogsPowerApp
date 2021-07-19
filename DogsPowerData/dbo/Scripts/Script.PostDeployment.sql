@@ -92,6 +92,7 @@ BEGIN
      SELECT @weightId11 = Id FROM dbo.Weights WHERE [WeightName] = '150.0 - 174.9 lbs.';
      SELECT @weightId12 = Id FROM dbo.Weights WHERE [WeightName] = '175.0 - 189.9 lbs.';
      SELECT @weightId13 = Id FROM dbo.Weights WHERE [WeightName] = '190.0 - 204.9 lbs.';
+     SELECT @weightId14 = Id FROM dbo.Weights WHERE [WeightName] = 'All weights';
 
     INSERT INTO dbo.[Services](ServiceName, WeightId, Duration, Price)
     VALUES ('Basic Full Groom', @weightId1, '1:15:00', 60),
@@ -120,8 +121,7 @@ BEGIN
     ('Just A Bath', @weightId10, '2:30:00', 140),
     ('Just A Bath', @weightId11, '2:30:00', 155),
     ('Just A Bath', @weightId12, '3:00:00', 170),
-    ('Just A Bath', @weightId13, '3:00:00', 185)
+    ('Just A Bath', @weightId13, '3:00:00', 185),
 
-    INSERT INTO dbo.[Services](ServiceName, Duration, Price)
-    VALUES ('A La Carte Nail Trim/File', '00:20:00', 25)
+    ('A La Carte Nail Trim/File', @weightId14, '00:20:00', 25)
 END
