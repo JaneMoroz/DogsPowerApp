@@ -53,6 +53,18 @@ namespace DogsPowerAPI
             return await _appointmentData.GetAvailableTimeOptions(date, duration);
         }
 
+        /// <summary>
+        /// Create new appointment
+        /// </summary>
+        /// <param name="details"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("CreateAppointment")]
+        public async Task CreateAppointment(NewAppointmentDetails details)
+        {
+            await _appointmentData.CreateAppointment(details);
+        }
+
         #endregion
     }
 }

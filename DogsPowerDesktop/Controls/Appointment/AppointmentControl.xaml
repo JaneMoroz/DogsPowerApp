@@ -81,7 +81,7 @@
                     </StackPanel>
                     <!--Date-->
                     <Grid Grid.Column="3">
-                        <DatePicker SelectedDate="{Binding DisplayDate, TargetNullValue=''}"
+                        <DatePicker SelectedDate="{Binding DisplayDate, TargetNullValue='', Mode=TwoWay}"
                                     materialDesign:HintAssist.Hint="Pick Date"
                                     HorizontalAlignment="Left"
                                     MaxWidth="300"
@@ -132,6 +132,7 @@
                 
                 <!--Button-->
                 <Button Grid.Row="4" Style="{StaticResource RegularButton}"
+                        Command="{Binding BookAppointmentCommand}"
                         Width="200"
                         Height="50"
                         Content="Book appointment" FontSize="20"

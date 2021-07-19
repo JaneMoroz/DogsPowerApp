@@ -1,11 +1,17 @@
 ﻿CREATE PROCEDURE [dbo].[spPets_AddAPet]
-	@Id int output,
 	@CustomerId int,
 	@PetName nvarchar(50),
 	@WeightName nvarchar(50)
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	IF exists (SELECT 1 FROM dbo.Pets WHERE CustomerId = @CustomerId AND [Name] = @PetName)
+	BEGIN
+		UPDATE dbo.Pets
+		SET WeightId = (Select [Id] FROM dbo.Weights WHERE WeightName = @WeightName)
+		WHERE CustomerId = @CustomerId AND [Name] = @PetName;
+	END
 
 	IF not exists (SELECT 1 FROM dbo.Pets WHERE CustomerId = @CustomerId AND [Name] = @PetName)
 	BEGIN
@@ -15,9 +21,7 @@ BEGIN
 										WHERE WeightName = @WeightName));
 	END
 
-	SELECT TOP 1 [Id], [CustomerId], [Name], [WeightId]
+	SELECT TOP 1 [Id]
 	FROM dbo.Pets
 	WHERE CustomerId = @CustomerId AND [Name] = @PetName;
-
-	SELECT @Id = SCOPE_IDENTITY();
 END

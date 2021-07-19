@@ -29,7 +29,7 @@
 
         <!--Phone and email-->
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <TextBox 
+            <TextBox Text="{Binding Phone}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256"
                      Margin="0 10 0 0"
@@ -38,7 +38,7 @@
                      TextWrapping="Wrap">
                 
             </TextBox>
-            <TextBox 
+            <TextBox Text="{Binding Email}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256"
                      Margin="30 10 0 0"
@@ -50,7 +50,7 @@
         </StackPanel>
         <!--Names-->
         <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <TextBox 
+            <TextBox Text="{Binding FirstName}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      MinWidth="256"
                      Margin="0 10 0 0"
@@ -59,7 +59,7 @@
                      TextWrapping="Wrap">
 
             </TextBox>
-            <TextBox 
+            <TextBox Text="{Binding LastName}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="256" 
                      Margin="30 10 0 0"
@@ -68,7 +68,7 @@
                      TextWrapping="Wrap">
 
             </TextBox>
-            <TextBox 
+            <TextBox Text="{Binding PetName}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      Width="170" 
                      Margin="30 10 10 0"

@@ -8,5 +8,6 @@ namespace DogsPowerDesktop.API
     {
         Task<List<ServiceModel>> GetServicesAndWeightOptions();
         Task<List<GroomerTimeOptions>> GetAvailableTimeOptions(DateTimeOffset date, TimeSpan duration);
+        Task CreateAppointment(NewAppointmentDetails details);
     }
 }

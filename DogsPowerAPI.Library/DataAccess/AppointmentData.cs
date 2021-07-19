@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -196,9 +198,50 @@ namespace DogsPowerDataManager.Library
             return availableTimeOptions;
         }
 
-        public async Task CreateAppointment()
+        /// <summary>
+        /// Create new appointment
+        /// </summary>
+        /// <param name="details"></param>
+        /// <returns></returns>
+        public async Task CreateAppointment(NewAppointmentDetails details)
         {
+            // Create new customer if he/she doesn't exists
+            DynamicParameters customerParameter = new DynamicParameters();
 
+            customerParameter.Add("FirstName", details.FirstName);
+            customerParameter.Add("LastName", details.LastName);
+            customerParameter.Add("PhoneNumber", details.Phone);
+            customerParameter.Add("Email", details.Email);
+
+            var customerRecs = await _sql.LoadData<int, dynamic>("dbo.spCustomers_AddACustomer", customerParameter, "DPDataDb");
+
+            // Get CustomerId
+            var customerId = customerRecs.First();
+
+            // Create new pet if it doesn't exist
+            DynamicParameters petParameter = new DynamicParameters();
+
+            petParameter.Add("CustomerId", customerId);
+            petParameter.Add("PetName", details.PetName);
+            petParameter.Add("WeightName", details.WeightOption);
+
+            var petsRecs = await _sql.LoadData<int, dynamic>("dbo.spPets_AddAPet", petParameter, "DPDataDb");
+
+            // Get PetId
+            var petId = petsRecs.First();
+
+            // Create new appointment
+            DynamicParameters appointmentParameter = new DynamicParameters();
+
+            appointmentParameter.Add("CustomerId", customerId);
+            appointmentParameter.Add("GroomerId", details.GroomerId);
+            appointmentParameter.Add("PetId", petId);
+            appointmentParameter.Add("ServiceName", details.ServiceName);
+            appointmentParameter.Add("WeightName", details.WeightOption);
+            appointmentParameter.Add("Date", details.Date);
+            appointmentParameter.Add("StartTime", details.Time);
+
+            await _sql.SaveData("dbo.spAppointments_Add", appointmentParameter, "DPDataDb");
         }
     }
 }

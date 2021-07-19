@@ -173,6 +173,11 @@ namespace DogsPowerDesktop.Library
         public bool SearchIsDone { get; set; } = false;
 
         /// <summary>
+        /// List of groomers with their available time options
+        /// </summary>
+        public List<GroomerTimeOptions> GroomersTimeOptions { get; set; }
+
+        /// <summary>
         /// Time options
         /// </summary>
         private TimeOptionsListViewModel _timeOptions;
@@ -197,7 +202,7 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// Customer details
         /// </summary>
-        public CustomerDetailsViewModel CustomerDetails { get; set; }
+        public CustomerDetailsViewModel CustomerDetails { get; set; } = new CustomerDetailsViewModel();
 
         #endregion
 
@@ -274,6 +279,7 @@ namespace DogsPowerDesktop.Library
                     }
                     else
                     {
+                        SearchIsDone = true;
                         await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
                         {
                             // TODO: Localize strings
@@ -282,11 +288,13 @@ namespace DogsPowerDesktop.Library
                             OkText = "Ok",
                             NotOkText = "Back"
                         });
+                        SearchIsDone = false;
                     }
                     
                 }
                 catch (Exception ex)
                 {
+                    SearchIsDone = true;
                     await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
                     {
                         // TODO: Localize strings
@@ -295,6 +303,8 @@ namespace DogsPowerDesktop.Library
                         OkText = "Ok",
                         NotOkText = "Back"
                     });
+
+                    SearchIsDone = false;
                 }
             });
         }
@@ -309,7 +319,45 @@ namespace DogsPowerDesktop.Library
             {
                 try
                 {
+                    if (!string.IsNullOrEmpty(CustomerDetails.FirstName) || !string.IsNullOrEmpty(CustomerDetails.LastName) 
+                        || !string.IsNullOrEmpty(CustomerDetails.Phone) || !string.IsNullOrEmpty(CustomerDetails.Email)
+                        || !string.IsNullOrEmpty(CustomerDetails.PetName) || !(SelectedDate < DateTimeOffset.Now.AddHours(1)))
+                    {
+                        var groomerId = GroomersTimeOptions.Where(x => x.AvailableTimeOptions.Contains(Time)).FirstOrDefault().GroomerId;
 
+                        await _appointmentEndpoint.CreateAppointment(new NewAppointmentDetails
+                        {
+                            FirstName = CustomerDetails.FirstName,
+                            LastName = CustomerDetails.LastName,
+                            Phone = CustomerDetails.Phone,
+                            Email = CustomerDetails.Email,
+                            PetName = CustomerDetails.PetName,
+                            ServiceName = SelectedService,
+                            WeightOption = SelectedOption,
+                            Date = SelectedDate,
+                            Time = Time,
+                            GroomerId = groomerId
+                        });
+
+                        // Clear all fields
+                        CustomerDetails.FirstName = "";
+                        CustomerDetails.LastName = "";
+                        CustomerDetails.Phone = "";
+                        CustomerDetails.Email = "";
+                        CustomerDetails.PetName = "";
+                        SearchIsDone = false;
+                    }
+                    else
+                    {
+                        await IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+                        {
+                            // TODO: Localize strings
+                            Title = "Check details",
+                            Message = "All fields must be provided, booking can't be made less than one hour in advance.",
+                            OkText = "Ok",
+                            NotOkText = "Back"
+                        });
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -352,13 +400,13 @@ namespace DogsPowerDesktop.Library
             var availableTimeOptions = new List<TimeSpan>();
 
             // Call the database to get groomersId's and their available time options
-            var groomersTimeOptions = await _appointmentEndpoint.GetAvailableTimeOptions(date, duration);
+            GroomersTimeOptions = await _appointmentEndpoint.GetAvailableTimeOptions(date, duration);
 
             // Order the list by the number of appoitments the groomers already has
-            groomersTimeOptions.Sort((x, y) => x.NumberOfAppointments.CompareTo(y.NumberOfAppointments));
+            GroomersTimeOptions.Sort((x, y) => x.NumberOfAppointments.CompareTo(y.NumberOfAppointments));
 
             // Go through the list and get rid of dublicate time options
-            foreach (var groomer in groomersTimeOptions)
+            foreach (var groomer in GroomersTimeOptions)
             {
                 if (availableTimeOptions.Count != 0)
                 {

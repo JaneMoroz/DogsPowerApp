@@ -1,5 +1,4 @@
 ﻿CREATE PROCEDURE [dbo].[spCustomers_AddACustomer]
-    @Id int output,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),
 	@PhoneNumber nvarchar(50),
@@ -14,9 +13,7 @@ BEGIN
 		VALUES (@FirstName, @LastName, @PhoneNumber, @Email);
 	END
 
-	SELECT TOP 1 [Id], [FirstName], [LastName], [PhoneNumber], [Email]
+	SELECT TOP 1 [Id]
 	FROM dbo.Customers
 	WHERE PhoneNumber = @PhoneNumber;
-
-	SELECT @Id = SCOPE_IDENTITY();
 END

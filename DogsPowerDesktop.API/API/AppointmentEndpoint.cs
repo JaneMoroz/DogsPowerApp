@@ -62,5 +62,24 @@ namespace DogsPowerDesktop.API
                 }
             }
         }
+
+        /// <summary>
+        /// Create a new appointment
+        /// </summary>
+        /// <returns></returns>
+        public async Task CreateAppointment(NewAppointmentDetails details)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/Appointment/CreateAppointment", details))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
     }
 }
