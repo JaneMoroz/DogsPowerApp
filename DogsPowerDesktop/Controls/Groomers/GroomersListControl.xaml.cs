@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DogsPowerDesktop.Library;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +23,13 @@ namespace DogsPowerDesktop
         public GroomersListControl()
         {
             InitializeComponent();
+
+            // If we are in design mode...
+            if (DesignerProperties.GetIsInDesignMode(this))
+                // Create new instance of appointment view model
+                DataContext = new GroomersListViewModel();
+            else
+                DataContext = IoC.TodayGroomersList;
         }
     }
 }

@@ -29,7 +29,7 @@ namespace DogsPowerDesktop.Library
         {
             FirstName = "Sarah";
             LastName = "Moretz";
-            Image = "/Images/Samples/Groomer1.png";
+            Image = null;
         }
 
         #endregion

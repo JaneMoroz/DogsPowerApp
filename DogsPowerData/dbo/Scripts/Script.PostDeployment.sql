@@ -78,6 +78,7 @@ BEGIN
      DECLARE @weightId11 int;
      DECLARE @weightId12 int;
      DECLARE @weightId13 int;
+     DECLARE @weightId14 int;
 
      SELECT @weightId1 = Id FROM dbo.Weights WHERE [WeightName] = '14.9 lbs. & Under';
      SELECT @weightId2 = Id FROM dbo.Weights WHERE [WeightName] = '15.0 - 29.9 lbs.';

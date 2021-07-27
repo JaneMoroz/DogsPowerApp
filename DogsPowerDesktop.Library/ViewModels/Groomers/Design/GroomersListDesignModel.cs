@@ -33,19 +33,19 @@ namespace DogsPowerDesktop.Library
                 {
                     FirstName = "Mary",
                     LastName = "Parker",
-                    Image = "/Images/Samples/Groomer1.png"
+                    Image = null
                 },
                 new GroomersListItemViewModel
                 {
                     FirstName = "Rick",
                     LastName = "Martines",
-                    Image = "/Images/Samples/Groomer2.png"
+                    Image = null
                 },
                 new GroomersListItemViewModel
                 {
                     FirstName = "Terry",
                     LastName = "Johnes",
-                    Image = "/Images/Samples/Groomer3.png"
+                    Image = null
                 },
             };
         }

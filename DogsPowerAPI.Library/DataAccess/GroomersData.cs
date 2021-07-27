@@ -82,6 +82,27 @@ namespace DogsPowerDataManager.Library
         }
 
         /// <summary>
+        /// Get list of available groomers on choosen day of the week
+        /// </summary>
+        /// <param name="weelkday"></param>
+        /// <returns></returns>
+        public async Task<List<GroomerMinimumDetailsModel>> GetGroomersByWeekday(string weekday)
+        {
+            return await _sql.LoadData<GroomerMinimumDetailsModel, dynamic>("dbo.spGroomers_GetGroomersByWeekday", new { Weekday = weekday }, "DPDataDb");
+        }
+
+        /// <summary>
+        /// Gets groomer's appointments for choosen date
+        /// </summary>
+        /// <param name="groomerId"></param>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public async Task<List<GroomerAppointmentsModel>> GetGroomerAppointments(string groomerId, DateTimeOffset date)
+        {
+            return await _sql.LoadData<GroomerAppointmentsModel, dynamic>("dbo.spAppointments_GetAllDetailsByGroomerIdAndDate", new { GroomerId = groomerId, Date = date }, "DPDataDb");
+        }
+
+        /// <summary>
         /// Add a new groomer to a Groomers table
         /// </summary>
         /// <returns></returns>

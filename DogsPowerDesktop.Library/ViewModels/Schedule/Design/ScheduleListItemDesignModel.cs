@@ -26,7 +26,7 @@ namespace DogsPowerDesktop.Library
         public ScheduleListItemDesignModel()
         {
             var dateNow = DateTime.Now.ToLocalTime();
-            StartTime = new DateTimeOffset(dateNow.Year, dateNow.Month, dateNow.Day, 9, 0, 0, TimeSpan.Zero);
+            StartTime = new TimeSpan(9, 30, 0);
             ServiceDuration = new TimeSpan(1, 30, 0);
             FirstName = "Lucy";
             LastName = "King";

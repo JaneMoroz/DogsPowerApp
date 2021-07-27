@@ -443,6 +443,62 @@ namespace DogsPowerDesktop.Library
             Groomers = await _groomersEndpoint.GetAllGroomersAllDetails();
         }
 
+        /// <summary>
+        /// Load groomers who work today
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadTodayGroomers()
+        {
+            IoC.TodayGroomersList.Groomers = new List<GroomersListItemViewModel>();
+
+            // Get todays day of the week
+            var todayWeekday = DateTimeOffset.Now.AddDays(1).DayOfWeek.ToString();
+
+            // Get all groomers who work this day
+            var groomers = await _groomersEndpoint.GetGroomersByWeekday(todayWeekday);
+
+
+            foreach (var g in groomers)
+            {
+                var groomer = new GroomersListItemViewModel
+                {
+                    Id = g.Id,
+                    FirstName = g.FirstName,
+                    LastName = g.LastName,
+                    Image = g.Picture
+                };
+                IoC.TodayGroomersList.Groomers.Add(groomer);
+            }
+        }
+
+        public async Task LoadSelectedGroomerSchedule(string groomerId)
+        {
+            IoC.GroomerScheduleList.List = new List<ScheduleListItemViewModel>();
+            // Get today's date
+            var today = DateTimeOffset.Now.AddDays(1);
+            var todayDate = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
+            // Get groomer's schedule
+            var schedule = await _groomersEndpoint.GetGroomerAppointments(groomerId, todayDate);
+            if (schedule.Count != 0)
+            {
+                foreach (var s in schedule)
+                {
+                    var appointment = new ScheduleListItemViewModel
+                    {
+                        Id = s.Id,
+                        StartTime = s.StartTime,
+                        ServiceDuration = s.Duration,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName,
+                        PetName = s.Name,
+                        ServiceName = s.ServiceName,
+                        Weight = s.WeightName
+                    };
+                    IoC.GroomerScheduleList.List.Add(appointment);
+                }
+            }
+        }
+
         #endregion
     }
 }

@@ -72,6 +72,46 @@ namespace DogsPowerDesktop.API
         }
 
         /// <summary>
+        /// Get list of available groomers on choosen day of the week
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<GroomerMinimumDetailsModel>> GetGroomersByWeekday(string weekday)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Groomers/GetGroomersByWeekday?weekday={weekday}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<GroomerMinimumDetailsModel>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets groomer's appointments for choosen date
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<GroomerAppointmentsModel>> GetGroomerAppointments(string groomerId, DateTimeOffset date)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync($"/api/Groomers/GetGroomerAppointments?groomerId={groomerId}&date={date.ToString(("yyyy-MM-dd"))}"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<GroomerAppointmentsModel>>();
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+        /// <summary>
         /// Update workdays
         /// </summary>
         /// <param name="groomerId"></param>

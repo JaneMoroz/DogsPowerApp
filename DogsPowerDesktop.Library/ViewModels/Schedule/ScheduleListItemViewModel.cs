@@ -13,9 +13,14 @@ namespace DogsPowerDesktop.Library
         #region Public Properties
 
         /// <summary>
+        /// Appointment Id from db
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
         /// Start time of the appointment
         /// </summary>
-        public DateTimeOffset StartTime { get; set; }
+        public TimeSpan StartTime { get; set; }
 
         /// <summary>
         /// Duration of the service Choosen
@@ -25,9 +30,9 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// End time of the appointment
         /// </summary>
-        public DateTimeOffset EndTime => StartTime.Add(ServiceDuration);
+        public TimeSpan EndTime => StartTime.Add(ServiceDuration);
 
-        public string Time => $"{StartTime.UtcDateTime:HH:mm} - {EndTime.UtcDateTime:HH:mm}";
+        public string Time => string.Format("{0:00}:{1:00}-{2:00}:{3:00}", StartTime.Hours, StartTime.Minutes, EndTime.Hours, EndTime.Minutes);
 
         /// <summary>
         /// Time Now
@@ -37,14 +42,14 @@ namespace DogsPowerDesktop.Library
         /// <summary>
         /// Determines whether the appointment is being taken place
         /// </summary>
-        public bool InProgress => ((CurrentTime.Hour == StartTime.Hour && CurrentTime.Minute > StartTime.Minute) || (CurrentTime.Hour >= StartTime.Hour))
-            && ((CurrentTime.Hour == EndTime.Hour && CurrentTime.Minute < EndTime.Minute) || CurrentTime.Hour < EndTime.Hour);
+        public bool InProgress => ((CurrentTime.Hour == StartTime.Hours && CurrentTime.Minute > StartTime.Minutes) || (CurrentTime.Hour >= StartTime.Hours))
+            && ((CurrentTime.Hour == EndTime.Hours && CurrentTime.Minute < EndTime.Minutes) || CurrentTime.Hour < EndTime.Hours);
 
         /// <summary>
         /// Determines whether the appointment has finished 
         /// </summary>
-        public bool IsOver => (CurrentTime.Hour == EndTime.Hour && CurrentTime.Minute > EndTime.Minute)
-            || (CurrentTime.Hour > EndTime.Hour);
+        public bool IsOver => (CurrentTime.Hour == EndTime.Hours && CurrentTime.Minute > EndTime.Minutes)
+            || (CurrentTime.Hour > EndTime.Hours);
 
         /// <summary>
         /// The RGB values (in hex) for the background color of the appointment
@@ -61,15 +66,6 @@ namespace DogsPowerDesktop.Library
                     return "80D9C2";
             }
         }
-
-        private int myVar;
-
-        public int MyProperty
-        {
-            get { return myVar; }
-            set { myVar = value; }
-        }
-
 
         /// <summary>
         /// Customers first name

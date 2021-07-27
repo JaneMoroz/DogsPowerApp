@@ -185,8 +185,13 @@ namespace DogsPowerDesktop
         /// </summary>
         public BasePage() : base()
         {
-            // Create a default view model
-            ViewModel = IoC.Get<VM>();
+            // If in design time mode...
+            if (DesignerProperties.GetIsInDesignMode(this))
+                // Just use a new instance of the VM
+                ViewModel = new VM();
+            else
+                // Create a default view model
+                ViewModel = IoC.Get<VM>() ?? new VM();
         }
 
         /// <summary>
@@ -200,7 +205,15 @@ namespace DogsPowerDesktop
                 ViewModel = specificViewModel;
             else
             {
-                ViewModel = IoC.Get<VM>();
+                // If in design time mode...
+                if (DesignerProperties.GetIsInDesignMode(this))
+                    // Just use a new instance of the VM
+                    ViewModel = new VM();
+                else
+                {
+                    // Create a default view model
+                    ViewModel = IoC.Get<VM>() ?? new VM();
+                }
             }
         }
 

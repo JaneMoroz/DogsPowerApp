@@ -93,6 +93,8 @@
     <Build Include="dbo\StoredProcedures\spAppointments_GetByGroomerIdAndDate.sql" />
     <Build Include="dbo\StoredProcedures\spTimeOptions_GetAll.sql" />
     <Build Include="dbo\StoredProcedures\spAppointments_Add.sql" />
+    <Build Include="dbo\StoredProcedures\spGroomers_GetGroomersByWeekday.sql" />
+    <Build Include="dbo\StoredProcedures\spAppointments_GetAllDetailsByGroomerIdAndDate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DogsPowerData.refactorlog" />

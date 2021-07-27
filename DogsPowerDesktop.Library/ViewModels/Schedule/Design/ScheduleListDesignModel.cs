@@ -29,7 +29,7 @@ namespace DogsPowerDesktop.Library
             {
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 9, 0, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(9, 30, 0),
                     ServiceDuration = new TimeSpan(1, 30, 0),
                     FirstName = "Lucy",
                     LastName = "King",
@@ -39,7 +39,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 11, 0, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(11, 0, 0),
                     ServiceDuration = new TimeSpan(1, 15, 0),
                     FirstName = "Peter",
                     LastName = "Clark",
@@ -49,7 +49,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 13, 0, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(12, 30, 0),
                     ServiceDuration = new TimeSpan(2, 0, 0),
                     FirstName = "Anna",
                     LastName = "Florance",
@@ -59,7 +59,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 15, 0, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(14, 30, 0),
                     ServiceDuration = new TimeSpan(2, 30, 0),
                     FirstName = "Ted",
                     LastName = "O'Conel",
@@ -69,7 +69,7 @@ namespace DogsPowerDesktop.Library
                 },
                  new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 17, 40, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(17, 00, 0),
                     ServiceDuration = new TimeSpan(1, 30, 0),
                     FirstName = "Jay",
                     LastName = "Smith",
@@ -79,7 +79,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 19, 30, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(18, 30, 0),
                     ServiceDuration = new TimeSpan(1, 15, 0),
                     FirstName = "Carry",
                     LastName = "Russel",
@@ -89,7 +89,7 @@ namespace DogsPowerDesktop.Library
                 },
                 new ScheduleListItemViewModel
                 {
-                    StartTime = new DateTimeOffset(DateTimeOffset.Now.Year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 20, 50, 0, TimeSpan.Zero),
+                    StartTime = new TimeSpan(20, 0, 0),
                     ServiceDuration = new TimeSpan(2, 0, 0),
                     FirstName = "Matt",
                     LastName = "Mattews",

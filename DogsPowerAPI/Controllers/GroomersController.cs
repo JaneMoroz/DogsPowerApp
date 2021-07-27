@@ -53,6 +53,28 @@ namespace DogsPowerAPI.Controllers
         }
 
         /// <summary>
+        /// Get list of available groomers on choosen day of the week
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetGroomersByWeekday")]
+        public async Task<List<GroomerMinimumDetailsModel>> GetGroomersByWeekday(string weekday)
+        {
+            return await _groomersData.GetGroomersByWeekday(weekday);
+        }
+
+        /// <summary>
+        /// Gets groomer's appointments for choosen date
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetGroomerAppointments")]
+        public async Task<List<GroomerAppointmentsModel>> GetGroomerAppointments(string groomerId, DateTimeOffset date)
+        {
+            return await _groomersData.GetGroomerAppointments(groomerId, date);
+        }
+
+        /// <summary>
         /// Get all groomers from a groomers table
         /// </summary>
         /// <returns></returns>

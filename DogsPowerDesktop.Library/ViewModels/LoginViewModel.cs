@@ -100,6 +100,9 @@ namespace DogsPowerDesktop.Library
                     // Load new appointmant services and options
                     await IoC.Appointment.LoadAsync();
 
+                    // Load today's groomers
+                    await IoC.Groomers.LoadTodayGroomers();
+
                     // Go to main page
                     IoC.Application.GoToPage(ApplicationPage.Main);
                 }

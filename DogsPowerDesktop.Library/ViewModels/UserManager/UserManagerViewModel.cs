@@ -332,19 +332,6 @@ namespace DogsPowerDesktop.Library
         }
 
         /// <summary>
-        /// Load data after successful login
-        /// </summary>
-        /// <returns></returns>
-        public async Task LoadAsync()
-        {
-            // Load users
-            Users = await _userEndpoint.GetAll();
-
-            // Load roles
-            Roles = await _userEndpoint.GetAllRoles();
-        }
-
-        /// <summary>
         /// Attempts to create a new user
         /// </summary>
         /// <param name="parameter">The <see cref="SecureString"/> passed in from the view for the users password</param>
@@ -452,6 +439,19 @@ namespace DogsPowerDesktop.Library
         #endregion
 
         #region Private Helpers
+
+        /// <summary>
+        /// Load data after successful login
+        /// </summary>
+        /// <returns></returns>
+        public async Task LoadAsync()
+        {
+            // Load users
+            Users = await _userEndpoint.GetAll();
+
+            // Load roles
+            Roles = await _userEndpoint.GetAllRoles();
+        }
 
         /// <summary>
         /// Update all fields, responsible for users, their roles and adding/removing roles
