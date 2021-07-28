@@ -74,89 +74,34 @@ namespace DogsPowerDesktop.Library
         public async Task OpenScheduleAsync()
         {
             //Load selected groomer schedule
-            await IoC.Groomers.LoadSelectedGroomerSchedule(Id);
+            var groomerSchedule = await IoC.Groomers.LoadSelectedGroomerSchedule(Id);
 
-            IoC.Application.GoToPage(ApplicationPage.Main, IoC.GroomerScheduleList);
+            // Create new schedule list
+            var scheduleList = new ScheduleListViewModel
+            {
+                List = new List<ScheduleListItemViewModel>()
+            };
 
-        //    if (FirstName == "Terry")
-        //    {
-        //        IoC.Application.GoToPage(ApplicationPage.Main, new ScheduleListViewModel
-        //        {
-        //            List = new List<ScheduleListItemViewModel>
-        //            {
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(9, 30, 0),
-        //                    ServiceDuration = new TimeSpan(1, 30, 0),
-        //                    FirstName = "Jay",
-        //                    LastName = "Smith",
-        //                    PetName = "Sunny",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "120.0 - 134.9"
-        //                },
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(12, 30, 0),
-        //                    ServiceDuration = new TimeSpan(1, 15, 0),
-        //                    FirstName = "Carry",
-        //                    LastName = "Russel",
-        //                    PetName = "Chanel",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "15 - 29.9"
-        //                },
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(15, 30, 0),
-        //                    ServiceDuration = new TimeSpan(2, 0, 0),
-        //                    FirstName = "Matt",
-        //                    LastName = "Mattews",
-        //                    PetName = "Ro",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "60.0 - 74.9"
-        //                }
-        //            }
-        //        });
-        //    }
+            if (groomerSchedule.Count != 0)
+            {
+                // Add each appointment to schedule list
+                foreach (var s in groomerSchedule)
+                {
+                    var appointment = new ScheduleListItemViewModel
+                    {
+                        StartTime = s.StartTime,
+                        ServiceDuration = s.Duration,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName,
+                        PetName = s.Name,
+                        ServiceName = s.ServiceName,
+                        Weight = s.WeightName
+                    };
+                    scheduleList.List.Add(appointment);
+                }
+            }
 
-        //    else
-        //    {
-        //        IoC.Application.GoToPage(ApplicationPage.Main, new ScheduleListViewModel
-        //        {
-        //            List = new List<ScheduleListItemViewModel>
-        //            {
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(10, 30, 0),
-        //                    ServiceDuration = new TimeSpan(1, 30, 0),
-        //                    FirstName = "Kate",
-        //                    LastName = "King",
-        //                    PetName = "Rocky",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "120.0 - 134.9"
-        //                },
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(12, 30, 0),
-        //                    ServiceDuration = new TimeSpan(1, 15, 0),
-        //                    FirstName = "Mark",
-        //                    LastName = "Clark",
-        //                    PetName = "Coco",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "15 - 29.9"
-        //                },
-        //                new ScheduleListItemViewModel
-        //                {
-        //                    StartTime = new TimeSpan(17, 30, 0),
-        //                    ServiceDuration = new TimeSpan(2, 0, 0),
-        //                    FirstName = "Cathy",
-        //                    LastName = "Florance",
-        //                    PetName = "Zeus",
-        //                    ServiceName = "Basic Full Groom",
-        //                    Weight = "60.0 - 74.9"
-        //                }
-        //            }
-        //        });
-        //    }
+            IoC.Application.GoToPage(ApplicationPage.Main, scheduleList);
         }
 
         #endregion

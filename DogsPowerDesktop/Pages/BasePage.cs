@@ -48,7 +48,7 @@ namespace DogsPowerDesktop
             get => _viewModel;
             set
             {
-                // If nothing has changed, return
+                //If nothing has changed, return
                 if (_viewModel == value)
                     return;
 

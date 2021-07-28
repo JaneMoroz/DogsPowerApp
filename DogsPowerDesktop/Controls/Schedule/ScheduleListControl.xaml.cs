@@ -23,13 +23,6 @@ namespace DogsPowerDesktop
         public ScheduleListControl()
         {
             InitializeComponent();
-
-            // If we are in design mode...
-            if (DesignerProperties.GetIsInDesignMode(this))
-                // Create new instance of appointment view model
-                DataContext = new ScheduleListViewModel();
-            else
-                DataContext = IoC.GroomerScheduleList;
         }
     }
 }

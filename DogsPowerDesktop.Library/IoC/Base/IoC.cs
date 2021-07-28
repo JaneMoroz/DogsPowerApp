@@ -67,11 +67,6 @@ namespace DogsPowerDesktop.Library
         /// A shortcut to access the <see cref="GroomersListViewModel"/>
         /// </summary>
         public static GroomersListViewModel TodayGroomersList => Get<GroomersListViewModel>();
-
-        /// <summary>
-        /// A shortcut to access the <see cref="ScheduleListViewModel"/>
-        /// </summary>
-        public static ScheduleListViewModel GroomerScheduleList => Get<ScheduleListViewModel>();
         #endregion
 
         #region Construction
@@ -102,7 +97,6 @@ namespace DogsPowerDesktop.Library
             Kernel.Bind<GroomersViewModel>().ToConstant(new GroomersViewModel(GroomersEndpoint));
             Kernel.Bind<AppointmentViewModel>().ToConstant(new AppointmentViewModel(AppointmentEndpoint));
             Kernel.Bind<GroomersListViewModel>().ToConstant(new GroomersListViewModel());
-            Kernel.Bind<ScheduleListViewModel>().ToConstant(new ScheduleListViewModel());
         }
 
         #endregion

@@ -432,6 +432,9 @@ namespace DogsPowerDesktop.Library
                     });
                 }
             });
+
+            // Update Groomers on Main Page
+            await LoadTodayGroomers();
         }
 
         /// <summary>
@@ -452,7 +455,9 @@ namespace DogsPowerDesktop.Library
             IoC.TodayGroomersList.Groomers = new List<GroomersListItemViewModel>();
 
             // Get todays day of the week
-            var todayWeekday = DateTimeOffset.Now.AddDays(1).DayOfWeek.ToString();
+            // TODO: changed for fixed date for testing, need to be changed back when done
+            //var todayWeekday = DateTimeOffset.Now.AddDays(1).DayOfWeek.ToString();
+            var todayWeekday = new DateTimeOffset(2021, 7, 29, 0, 0, 0, TimeSpan.Zero).DayOfWeek.ToString();
 
             // Get all groomers who work this day
             var groomers = await _groomersEndpoint.GetGroomersByWeekday(todayWeekday);
@@ -471,32 +476,20 @@ namespace DogsPowerDesktop.Library
             }
         }
 
-        public async Task LoadSelectedGroomerSchedule(string groomerId)
+        /// <summary>
+        /// Load selected groomer schedule
+        /// </summary>
+        /// <param name="groomerId"></param>
+        /// <returns></returns>
+        public async Task<List<GroomerAppointmentsModel>> LoadSelectedGroomerSchedule(string groomerId)
         {
-            IoC.GroomerScheduleList.List = new List<ScheduleListItemViewModel>();
             // Get today's date
-            var today = DateTimeOffset.Now.AddDays(1);
-            var todayDate = new DateTimeOffset(today.Year, today.Month, today.Day, 0, 0, 0, TimeSpan.Zero);
+            // TODO: changed for fixed date for testing, need to be changed back when done
+            var todayDate = new DateTimeOffset(2021, 7, 29, 0, 0, 0, TimeSpan.Zero);
             // Get groomer's schedule
             var schedule = await _groomersEndpoint.GetGroomerAppointments(groomerId, todayDate);
-            if (schedule.Count != 0)
-            {
-                foreach (var s in schedule)
-                {
-                    var appointment = new ScheduleListItemViewModel
-                    {
-                        Id = s.Id,
-                        StartTime = s.StartTime,
-                        ServiceDuration = s.Duration,
-                        FirstName = s.FirstName,
-                        LastName = s.LastName,
-                        PetName = s.Name,
-                        ServiceName = s.ServiceName,
-                        Weight = s.WeightName
-                    };
-                    IoC.GroomerScheduleList.List.Add(appointment);
-                }
-            }
+
+            return schedule;
         }
 
         #endregion

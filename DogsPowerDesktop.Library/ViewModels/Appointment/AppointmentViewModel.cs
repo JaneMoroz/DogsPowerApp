@@ -137,13 +137,9 @@ namespace DogsPowerDesktop.Library
         {
             get
             {
-                if (DisplayDate != null)
-                {
-                    string[] array = DisplayDate.Split("/");
-                    return new DateTimeOffset(Int32.Parse("2021"), Int32.Parse(array[0]), Int32.Parse(array[1]), 0, 0, 0, TimeSpan.Zero);
-                }
-                else
-                    return DateTimeOffset.Now.AddDays(1);
+                string[] array = DisplayDate.Split("/");
+                // TODO: year will cause bugs when making appointment in december for january next year, need fix
+                return new DateTimeOffset(int.Parse(DateTime.Now.Year.ToString()), int.Parse(array[0]), int.Parse(array[1]), 0, 0, 0, TimeSpan.Zero);
             }
         }
 
@@ -155,7 +151,12 @@ namespace DogsPowerDesktop.Library
         {
             get
             {
-                return _displayDate;
+                if (_displayDate != null)
+                {
+                    return _displayDate;
+                }
+                else 
+                    return DateTimeOffset.Now.ToString("MM'/'dd'/'yyyy");
             }
             set
             {
@@ -274,6 +275,10 @@ namespace DogsPowerDesktop.Library
                             });
                         }
 
+                        // Sort time options first
+                        var orderedList = _timeOptions.List.OrderBy(x => x.AvailableTime.Hours).ThenBy(x => x.AvailableTime.Minutes).ToList();
+                        _timeOptions.List = orderedList;
+
                         OnPropertyChanged(nameof(TimeOptions));
                         SearchIsDone = true;
                     }
@@ -315,13 +320,17 @@ namespace DogsPowerDesktop.Library
         /// <returns></returns>
         public async Task BookAppointment()
         {
+            // Appointment can be made not less than one hout an advance
+            // TODO: Fix selectedDate giveing only year/momth/day => makes booean determination value impossible
+            var timeLimit = DateTimeOffset.Now;
+            bool time = SelectedDate >= timeLimit;
             await RunCommandAsync(() => BookingIsSaving, async () =>
             {
                 try
                 {
                     if (!string.IsNullOrEmpty(CustomerDetails.FirstName) && !string.IsNullOrEmpty(CustomerDetails.LastName) 
                         && !string.IsNullOrEmpty(CustomerDetails.Phone) && !string.IsNullOrEmpty(CustomerDetails.Email)
-                        && !string.IsNullOrEmpty(CustomerDetails.PetName) && !(SelectedDate < DateTimeOffset.Now.AddHours(1)))
+                        && !string.IsNullOrEmpty(CustomerDetails.PetName) && time)
                     {
                         var groomerId = GroomersTimeOptions.Where(x => x.AvailableTimeOptions.Contains(Time)).FirstOrDefault().GroomerId;
 
